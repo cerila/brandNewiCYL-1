@@ -157,3 +157,19 @@ a.center-block {
 /*	max-height: 200px;*/
 	z-index: 99;
 }
+
+.tabs-striped.tabs-background-positive .tabs-secondary {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddd;
+	background-color: #fff;
+	/*color: #444;*/
+}
+.tabs-striped.tabs-light .tabs-secondary .tab-item {
+	color: #444;
+	opacity: .7;
+}
+
+.tabs-top.tabs-striped .tabs-secondary .tab-item.activated, .tabs-top.tabs-striped .tabs-secondary .tab-item.active, .tabs-top.tabs-striped .tabs-secondary .tab-item.tab-item-active {
+	opacity: 1;
+}
