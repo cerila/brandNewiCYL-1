@@ -1,7 +1,7 @@
 angular.module('demo.controllers', [])
 
 
-.controller('mainTest', ['$scope', '$ionicPopover', '$ionicPopup', function($scope, $ionicPopover, $ionicPopup) {
+.controller('mainTest', ['$scope', '$ionicPopover', '$ionicPopup', '$ionicTabsDelegate', 'CustomNav', '$timeout', function($scope, $ionicPopover, $ionicPopup, $ionicTabsDelegate, CustomNav, $timeout) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -25,6 +25,28 @@ angular.module('demo.controllers', [])
   $scope.$on('popover.removed', function() {
     // Execute action
   });
+
+  $scope.selectTabWithIndex = function(index) {
+    $ionicTabsDelegate.select(index);
+  };
+  // $scope.$watch($ionicTabsDelegate.selectedIndex(), function () {
+  //   CustomNav.fromTab = $ionicTabsDelegate.selectedIndex();
+  //   console.log(CustomNav.fromTab);
+  // });
+
+  // console.log(CustomNav.fromTab);
+  // if (CustomNav.fromTab > 0) {
+    $timeout( function () { //这里必须加$timeout, 否则ionic tabs还没加载完, 执行无效
+      $ionicTabsDelegate.select(CustomNav.fromTab);
+      // console.log(CustomNav.fromTab);
+      $scope.tabNav = function () {
+        CustomNav.fromTab = $ionicTabsDelegate.selectedIndex();
+        // console.log(CustomNav.fromTab);
+      };
+    });
+    // console.log(CustomNav.fromTab);
+  // }
+
 }])
 
 

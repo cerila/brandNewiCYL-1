@@ -40,7 +40,7 @@
   <div class="tabs-striped tabs-top tabs-background-positive tabs-light">
     <ion-tabs class="tabs-positive tabs-icon-only tabs-top custom-top">
 
-      <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
+      <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline" on-select='tabNav()'>
         <ion-content class="has-footer no-header">
           <a class="button button-block" href="#/main/testl">列表功能</a>
           <a class="button button-block" href="#/main/testr">超级列表</a>
@@ -50,7 +50,7 @@
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
+      <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline" on-select='tabNav()'>
         <ion-content class="has-footer no-header">
           <a class="button button-block" href="itms://itunes.apple.com/gb/app/yi-dong-cai-bian/id391945719?mt=8">APP跳转</a>
           <a class="button button-block" href="#/main/testc">卡片列表</a>
@@ -58,7 +58,7 @@
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+      <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline" on-select='tabNav()'>
         <ion-content class="has-footer no-header padding">
           <ion-list class="card">
             <ion-item class="item-avatar">
@@ -96,8 +96,8 @@
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="SwipeCards" icon-on="ion-ios7-albums" icon-off="ion-ios7-albums-outline">
-        <ion-content class="has-footer no-header padding">
+      <ion-tab title="SwipeCards" icon-on="ion-ios7-albums" icon-off="ion-ios7-albums-outline" on-select='tabNav()'>
+        <ion-content class="has-footer no-header padding" scroll="false">
           <ion-list class="card">
             <ion-item class="item-avatar">
               <img src="http://ionicframework.com/img/docs/mcfly.jpg">
@@ -134,8 +134,14 @@
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="link" icon-on="ion-ios7-pricetag" icon-off="ion-ios7-pricetag-outline" href="#/main/default">
+      <ion-tab title="Link" icon-on="ion-ios7-pricetag" icon-off="ion-ios7-pricetag-outline" href="#/main/default" on-select='tabNav()'>
         <ion-content class="has-footer no-header">
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="Select" icon-on="ion-ios7-checkmark" icon-off="ion-ios7-checkmark-outline" on-select='tabNav()'>
+        <ion-content class="has-footer no-header">
+          <a class="button button-block select-tab" ng-click="selectTabWithIndex(0)">手动选择</a>
         </ion-content>
       </ion-tab>
 

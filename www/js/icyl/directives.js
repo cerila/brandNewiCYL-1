@@ -42,12 +42,14 @@ angular.module('icyl.directives', [])
             // var elemPosition = $ionicPosition.position(element);
             var elemOffset = $ionicPosition.offset(element);
             var tabs = angular.element(document.querySelector('.custom-top > .tabs'));
-            var scrollContent;
+            // var scrollContent; 
 
             $timeout(function(){
 
-                scrollContent = angular.element(document.querySelector('.custom-top > .pane > .scroll-content')); //放在timeout外面获取是undefined, 因为dom还没有加载完.
-                tab = angular.element(document.querySelectorAll('.custom-top > .tabs > a.tab-item'));
+                var scrollContent = angular.element(document.querySelector('.custom-top > .pane > .scroll-content')); //放在timeout外面获取是undefined, 因为dom还没有加载完.
+                var tab = angular.element(document.querySelectorAll('.custom-top > .tabs > a.tab-item'));
+                // var select = angular.element(document.querySelectorAll('.custom-top > .tabs .select-tab'));
+                // console.log(select);
                 // console.log(scrollContent);
                 // console.log(elemOffset.top);
                 // console.log(tab[0] + "就是MouseEvent的srcElement");
@@ -70,6 +72,24 @@ angular.module('icyl.directives', [])
                             scrollContent[0].style.bottom = "55px";
                             // console.log(elemOffset.top);
                             // console.log(tabs);
+                            
+                            /* 下面的部分是试验 */
+                            var select = angular.element(document.querySelectorAll('.custom-top > .pane .select-tab'));
+                            // console.log(select);
+                            angular.forEach(select, function (elem, index, aselect) {
+                                angular.element(elem).bind('click', function () {
+                                    scope.$apply(function () {
+                                        elemOffset = $ionicPosition.offset(element);
+                                        scrollContent = angular.element(document.querySelector('.custom-top > .pane > .scroll-content')); //放在timeout外面获取是undefined, 因为dom还没有加载完.
+                                        // console.log(scrollContent);
+                                        scrollContent[0].style.top = elemOffset.top + 49 + "px";
+                                        scrollContent[0].style.bottom = "55px";
+                                        // console.log(elemOffset.top);
+                                        // console.log(tabs);
+                                    });
+                                });
+                                // console.log(elem);
+                            });
                         });
                     });
                     // console.log(elem);
@@ -108,6 +128,9 @@ angular.module('icyl.directives', [])
             //         // console.log(tabs);
             //     });
             // });
+            scope.$on("$destroy", function () {
+                element.remove();
+            });
         }
     };
 }])

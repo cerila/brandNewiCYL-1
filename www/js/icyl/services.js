@@ -138,6 +138,7 @@ angular.module('icyl.services', ['ngResource'])
     // }
   };
   this.fromState = '';
+  this.fromTab = 0;
   //this.isGoBack = false;
   return this;
 }])
