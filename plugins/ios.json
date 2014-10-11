@@ -107,6 +107,10 @@
                         {
                             "xml": "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -278,6 +282,9 @@
             "PACKAGE_NAME": "net.go5le.iCYL"
         },
         "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "net.go5le.iCYL"
+        },
+        "xu.li.cordova.wechat": {
             "PACKAGE_NAME": "net.go5le.iCYL"
         }
     },

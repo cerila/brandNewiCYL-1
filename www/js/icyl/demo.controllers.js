@@ -29,6 +29,25 @@ angular.module('demo.controllers', [])
   $scope.selectTabWithIndex = function(index) {
     $ionicTabsDelegate.select(index);
   };
+  $scope.wechat = function() {
+    Wechat.share({
+        message: {
+          title: "Message Title",
+          description: "Message Description(optional)",
+          mediaTagName: "Media Tag Name(optional)",
+          thumb: "http://YOUR_THUMBNAIL_IMAGE",
+          media: {
+            type: Wechat.Type.WEBPAGE,   // webpage
+            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"    // webpage
+          }
+        },
+      scene: Wechat.Scene.TIMELINE   // share to Timeline
+    }, function () {
+        alert("Success");
+    }, function (reason) {
+        alert("Failed: " + reason);
+    });
+  };
   // $scope.$watch($ionicTabsDelegate.selectedIndex(), function () {
   //   CustomNav.fromTab = $ionicTabsDelegate.selectedIndex();
   //   console.log(CustomNav.fromTab);
