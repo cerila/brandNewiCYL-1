@@ -1,0 +1,175 @@
+/* Your app's CSS, go crazy, make it your own */
+
+.ionic-logo {
+	display: block;
+	margin: 15px auto;
+	width: 96px;
+	height: 96px;
+}
+.box {
+/*	min-height: 90px;
+	background-color: red;*/
+}
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.center-block {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+.word-front {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+	padding-top: 1.25em;
+	padding-bottom: 0.5em;
+	/*color: #fff;*/
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, .6);
+}
+@media screen and (min-width: 768px) {
+  .word-front {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 1.875em;
+  }
+}
+.word-front h3, .word-front h4 {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: rgb(255, 0, 102);
+}
+.word-front h4 {
+	color: white;
+	margin-bottom: 0;
+}
+.no-padding {
+	padding: 0;
+}
+.no-padding-td {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.slider-pager {
+	display: none;
+}
+
+
+.background-clear, .button.background-clear.active, .button.background-clear.activated {
+	background-color: transparent;
+	border-style: none;
+	box-shadow: none; 
+}
+.position {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+.background-img {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -999;
+}
+.cell-img {
+	background-color: transparent;
+	max-width: 4em;
+	padding: 0.5em 0 0 0;
+}
+
+.text-lg {
+	font-size: 135%;
+}
+.text-hg {
+	font-size: 150%;
+	min-width: 33%;
+}
+.take-position {
+	color: transparent;
+}
+
+.text-right {
+	text-align: right;
+}
+
+/*.iframe-wrapper {
+	-webkit-overflow-scrolling: touch !important;
+    overflow: scroll !important;
+}*/
+
+.iframe-wrapper iframe {
+	padding: 0;
+	/*padding-top: 1.5em;*/
+	margin: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*.has-header iframe {
+	padding-top: 0;
+}*/
+
+a.center-block {
+	color: rgb(190, 18, 18);
+	font-weight: bold;
+}
+
+.img-size .icon:before {
+	margin-top: 0.3em;
+	font-size: 3em;
+	/*color: rgb(247, 216, 56);*/
+}
+
+/*.button .img-size .icon {
+	display: block;
+	margin-top: 0.5em;
+	font-size: 3em;
+	color: rgb(247, 216, 56);
+}*/
+
+/*ionic.css源代码里面找.bar-header, ios平台有专门针对bar-header的css语句, 将bar-header下移了20px, 因此对没有has-header的ion-content统一下移20px*/
+.platform-ios.platform-cordova:not(.fullscreen) ion-content.scroll-content:not(.has-header) {
+  top: 20px; }
+
+
+
+/*如果tabs之上还要放置banner等图片, 需要手动对tabs-top的绝对位置进行定位, 如下(已经用代码动态实现)*/
+/*.tabs-top > .tabs {
+	top: 244px;
+}*/
+/*.tabs-top > .pane > .scroll-content {
+	top: 293px;
+	bottom: 55px;
+}*/
+.ad-banner, .ad-banner .box {
+	margin-top: 0;
+/*	max-height: 200px;*/
+	z-index: 99;
+}
+
+.tabs-striped.tabs-background-positive .tabs-secondary {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddd;
+	background-color: #fff;
+	/*color: #444;*/
+}
+.tabs-striped.tabs-light .tabs-secondary .tab-item {
+	color: #444;
+	opacity: .7;
+}
+
+.tabs-top.tabs-striped .tabs-secondary .tab-item.activated, .tabs-top.tabs-striped .tabs-secondary .tab-item.active, .tabs-top.tabs-striped .tabs-secondary .tab-item.tab-item-active {
+	opacity: 1;
+}

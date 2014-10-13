@@ -1,0 +1,42 @@
+<div class="modal">
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="actions.closeLogin()">取消</button>
+    </div>
+    <h1 class="title text-lg">请登录</h1>
+  </ion-header-bar>
+  <ion-content>
+    <form class="form-horizontal w5c-form" w5c-form-validate="" w5c-submit="actions.doLogin()" role="form" novalidate name="form_user_signin">
+      <ion-list>
+        <ion-item>
+          <label class="item-input">
+            <span class="input-label text-lg">用户名:</span>
+            <!-- <input type="text" autofocus="" placeholder="请输入用户名" w5c-unique-check="{url:'/check?username={{loginData.username}}'}" ng-model="loginData.username" required="" name="username" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{1,19}$/"> -->
+            <input type="text" autofocus="" placeholder="请输入用户名" ng-model="loginData.username" required="" name="username" ng-pattern="/^[0-9A-Za-z_]{1,19}$/">
+          </label>
+        </ion-item>
+        <ion-item>
+          <label class="item-input">
+            <span class="input-label text-lg">密<span class="take-position">占</span>码:</span>
+            <input type="password" placeholder="8-16位" ng-model="loginData.password" required="" name="password" ng-minlength="1" ng-maxlength="16">
+          </label>
+        </ion-item>
+        <!-- <div class="item item-toggle text-right">
+          <span>记住密码</span>
+          <label class="toggle toggle-positive">
+            <input type="checkbox">        
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </div> -->
+        <!-- <ion-toggle ng-model="loginData.rememberPwd" toggle-class="toggle-positive" class="text-right text-lg hide">记住密码</ion-toggle> -->
+        <ion-item>
+          <button class="button button-positive text-hg" type="submit">登录</button>
+          <button class="button button-stable text-hg" type="reset">重置</button>
+          <button class="button button-energized text-hg" ng-click="actions.preRegister()" type="button">注册</button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+</div>

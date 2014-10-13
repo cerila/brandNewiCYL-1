@@ -1,0 +1,70 @@
+<ion-view>
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" custom-go-back>
+          <i class="icon ion-ios7-arrow-back"></i>
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
+          排序
+        </button>
+      </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content>
+
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+      <ion-item ng-repeat="item in items" item="item" href="#/item/{{item}}" on-hold="data.showDelete = !data.showDelete">
+        Hello, Item {{item}}!
+        <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
+        </ion-delete-button>
+        <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+          删除
+        </ion-option-button>
+        <ion-option-button class="button-calm" ng-click="share(item)">
+          共享
+        </ion-option-button>
+        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+        </ion-reorder-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-toggle ng-model="data.showDelete" ng-click="data.showReorder = false">显示删除按钮?</ion-toggle>
+
+    <ion-checkbox ng-model="isChecked">{{isChecked}}</ion-checkbox>
+    <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'C'">Choose C</ion-radio>
+
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="1%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+
+  <ion-footer-bar class="bar-stable no-padding">
+    <div class="tabs tabs-icon-top">
+      <a class="tab-item" href="#/main/default">
+        <i class="icon ion-ios7-home"></i>
+        首页
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        收藏
+      </a>
+      <a class="tab-item" href="#/main/testr">
+        <i class="icon ion-gear-a"></i>
+        大列表
+      </a>
+      <a class="tab-item" mine-href>
+        <i class="icon ion-person"></i>
+        我的
+      </a>
+    </div>
+  </ion-footer-bar>
+
+</ion-view>

@@ -1,0 +1,71 @@
+<ion-view>
+
+  <!-- <link href="css/demo_dianping.css" rel="stylesheet"> -->
+
+  <ion-nav-bar class="nav-title-slide-ios7 item-input-inset">
+      <button id="down" class="button button-clear icon-right ion-chevron-down">
+        {{locationCity="杭州"}}
+        <!-- <i class="icon ion-chevron-down"></i> -->
+      </button>
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios7-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+  </ion-nav-bar>
+
+  <div class="tabs-striped tabs-top tabs-background-positive tabs-light">
+    <ion-tabs class="tabs-positive tabs-icon-only tabs-top">
+
+      <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
+        <ion-content class="has-footer">
+
+          <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+          </ion-refresher>
+
+          <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+            <ion-item ng-repeat="item in items" item="item" href="#/item/{{item}}" on-hold="data.showDelete = !data.showDelete" class="item-thumbnail-left">
+                <img ng-src="http://ionicframework.com/img/docs/blue-album.jpg">
+                <h2>Hello, Item {{item}}!<span class="align-right">{{distance = "30km"}}</span></h2>
+                <p class="description">Nine Inch Nails<br><span>$ 5.72</span><span>$ 5.99</span></p>
+              <!-- <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
+              </ion-delete-button>
+              <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+                删除
+              </ion-option-button>
+              <ion-option-button class="button-calm" ng-click="share(item)">
+                共享
+              </ion-option-button>
+              <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+              </ion-reorder-button> -->
+            </ion-item>
+          </ion-list>
+          <!-- <ion-toggle ng-model="data.showDelete" ng-click="data.showReorder = false">显示删除按钮?</ion-toggle> -->
+
+          <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="1%">
+          </ion-infinite-scroll>
+
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
+        <ion-content>
+          <a class="button button-block" href="itms://itunes.apple.com/gb/app/yi-dong-cai-bian/id391945719?mt=8">APP跳转</a>
+          <a class="button button-block" href="#/main/dianping">大众点评</a>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+        <ion-content>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="link" icon-on="ion-ios7-pricetag" icon-off="ion-ios7-pricetag-outline" href="#/main/default">
+        <ion-content>
+        </ion-content>
+      </ion-tab>
+    </ion-tabs>
+  </div>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>

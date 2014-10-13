@@ -3,3 +3,6 @@
 # Except this file
 !.gitignore
 !net.go5le.icyl.keystore
+!ios/www/
+!ios/.gitignore
+ios/www/plugins/

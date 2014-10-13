@@ -1,0 +1,88 @@
+<ion-view>
+  
+  <style type="text/css">
+    .button.button-icon.input-button {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      color: #bbb;
+    }
+    .item img {
+      height: 60px;
+      width: 60px;
+      float: left;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+    .list .my-item.item {
+      left: 0;
+      right: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  </style>
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" custom-go-back>
+          <i class="icon ion-ios7-arrow-back"></i>
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button" ng-click="scrollBottom()">
+          到底部
+        </button>
+      </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-header-bar class="bar-light bar-subheader">
+    <input type="search"
+      placeholder="过滤器..."
+      ng-model="search"
+      ng-focus="searchFocused = true"
+      ng-blur="searchFocused = false"
+      ng-change="scrollTop()">
+    <button ng-if="search.length"
+      class="button button-icon ion-android-close input-button"
+      ng-click="clearSearch()">
+    </button>
+  </ion-header-bar>
+
+  <ion-content>
+
+    <div class="list">
+      <a class="item my-item"
+        collection-repeat="item in getContacts()"
+        collection-item-height="getItemHeight(item)"
+        collection-item-width="getItemWidth(item)"
+        ng-style="{'line-height': getItemHeight(item) + 'px'}"
+        ng-class="{'item-divider': item.isLetter}">
+        <img ng-if="!item.isLetter" ng-src="http://placekitten.com/60/{{55 + ($index % 10)}}">
+        {{item.letter || (item.first_name+' '+item.last_name)}}
+      </a>
+    </div>
+
+  </ion-content>
+
+  <ion-footer-bar class="bar-stable no-padding">
+    <div class="tabs tabs-icon-top">
+      <a class="tab-item" href="#/main/default">
+        <i class="icon ion-ios7-home"></i>
+        首页
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        收藏
+      </a>
+      <a class="tab-item" social-sharing>
+        <i class="icon ion-gear-a"></i>
+        转发
+      </a>
+      <a class="tab-item" mine-href>
+        <i class="icon ion-person"></i>
+        我的
+      </a>
+    </div>
+  </ion-footer-bar>
+
+</ion-view>
