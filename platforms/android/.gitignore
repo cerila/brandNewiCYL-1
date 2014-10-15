@@ -1,0 +1,19 @@
+# *.mode1v3
+# *.perspectivev3
+# *.pbxuser
+# .DS_Store
+# build/
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+!assets/*
+!AndroidManifest.xml
+assets/www/plugins/
+
+*.mode1v3
+*.perspectivev3
+*.pbxuser
+.DS_Store
+build/
