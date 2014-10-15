@@ -1,0 +1,62 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      特卖汇
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+  <div class="list card" ng-repeat="item in items">
+    <div class="item item-avatar item-text-wrap">
+      <h1><span class="travelType">{{type = "跟团游"}}</span>{{travelTitle = "三亚+南山5日跟团游·180度海景 一价全含特卖汇"}}</h1>
+    </div>
+
+    <div class="item item-thumbnail-left">
+      <img ng-src="http://pic3.nipic.com/20090625/391634_093944007_2.jpg">
+      <h3>
+        交通：{{transportation = "丰富航班可选"}}
+      </h3>
+      <h3>
+        酒店：{{hotel = "四钻酒店"}}
+      </h3>
+      <h3>
+        班期：{{schedule = "9月、10月多班"}}
+      </h3>
+      <h3>
+        原价：{{originalCost = "￥4699"}}
+      </h3>
+    </div>
+
+    <div class="item">
+      <h2>{{stopDate = "10月15日 10：00 结束"}}<span class="discount">{{discount = "4.5折"}}</span><span class="prices">￥<b>{{prices = "2110"}}</b>起</span></h2>
+    </div>
+
+  </div>
+</ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

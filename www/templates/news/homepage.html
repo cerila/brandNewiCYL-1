@@ -1,0 +1,80 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      团青时讯
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+
+  <ion-slide-box does-continue="true" auto-play="true" slide-interval="1000" class="ad-banner has-header">
+    <ion-slide>
+      <div class="box">
+        <img src="img/mainImg3.png" class="img-responsive center-block">
+        <div elem-position></div>
+        <div class="word-front center-block">
+          <h3>建设美丽浙江 创造美好生活</h3>
+          <h4>浙江省直机关“智慧团青”</h4>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="box">
+        <img src="img/mainImg5.png" class="img-responsive center-block">
+        <div class="word-front center-block">
+          <h3>建设美丽浙江 创造美好生活</h3>
+          <h4>浙江省直机关“智慧团青”APP</h4>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+
+  <div class="tabs-striped tabs-top tabs-positive">
+    <ion-tabs class="tabs-striped tabs-top tabs-positive custom-top">
+      <ion-tab title="通知公告" on-select='tabNav()'>
+        <ion-content>
+          <ion-list>
+            <a class="item item-avatar" ng-repeat="item in items" href="{{item.url}}">
+              <img ng-src="{{item.imageUrl}}">
+              <h2><b>{{item.newsTitle}}</b></h2>
+              <p>浏览{{item.times}}次<span class="p-right">{{item.date}}</span></p>
+            </a>
+          </ion-list>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="团讯要闻" on-select='tabNav()'>
+        <ion-content>
+          
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="头条新闻" on-select='tabNav()'>
+        <ion-content>
+          
+        </ion-content>
+      </ion-tab>
+    </ion-tabs>
+  </div>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

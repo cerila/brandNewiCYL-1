@@ -1,0 +1,171 @@
+<ion-view>
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      个人定制
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+
+  <ion-content class="has-footer">
+
+    <ion-slide-box does-continue="true" auto-play="true" slide-interval="1000">
+      <ion-slide>
+        <div class="box">
+          <img src="img/mainImg3.png" class="img-responsive center-block">
+          <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”</h4>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box">
+          <img src="img/mainImg5.png" class="img-responsive center-block">
+          <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”APP</h4>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+    <div class="padding">
+      <a href="#/main/newsHomepage" class="button button-block button-positive">
+        <b>信息发布</b>--第一时间分享自己的感想
+      </a>
+
+      <a href="" class="button button-block button-positive">
+        <b>我的下单</b>--已报名的活动，现场签到
+      </a>
+
+      <a href="#/main/lovePersonalZone" class="button button-block button-positive">
+        <b>个人主页</b>--个人空间
+      </a>
+
+      <a href="#/main/personSignIn" class="button button-block button-positive">
+        <b>签到管理</b>--活动组织，成员签到
+      </a>
+
+      <a href="" class="button button-block button-positive">
+        <b>活动统计</b>--第一时间得到成员的报名信息
+      </a>
+
+      <a href="" class="button button-block button-positive">
+        <b>活动提醒</b>--修改活动的提示
+      </a>
+
+      <a href="#/main/personMessage" class="button button-block button-positive">
+        <b>我的留言</b>--留言及建议
+      </a>
+
+      <a href="" class="button button-block button-positive">
+        <b>资料修改</b>--个人相关信息补充修改
+      </a>
+
+      <a href="" class="button button-block button-positive">
+        <b>账号生成</b>--生成会员账号
+      </a>
+    </div>
+<!--     <div class="padding position">
+      <div class="row">
+        <div class="col">
+          <a href="#/main/newsHomepage" class="button center-block-1 positive-bg">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-information-circled">
+              </i>
+            </span>
+            信息发布
+          </a>
+        </div>
+        <div class="col">
+          <a href="#/main/knowlbase" class="button center-block-1" style="background: #01BCE4">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-android-share">
+              </i>
+            </span>
+            我的下单
+          </a>
+        </div>
+        <div class="col">
+          <a href="#/main/lovePersonalZone" class="button center-block-1" style="background: #82A8FF">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-link">
+              </i>
+            </span>
+            个人主页
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a href="#/main/personSignIn" class="button center-block-1 assertive-bg">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-ios7-star">
+              </i>
+            </span>
+            签到管理
+          </a>
+        </div>
+        <div class="col">
+          <a href="#/main/career" class="button center-block-1" style="background: #FF9F08">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-social-usd">
+              </i>
+            </span>
+            活动统计
+          </a>
+        </div>
+        <div class="col">
+          <a href="#/main/love" class="button center-block-1 energized-bg">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-person-stalker">
+              </i>
+            </span>
+            活动提醒
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a href="#/main/personMessage" class="button center-block-1" style="background: #22AC38">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-heart">
+              </i>
+            </span>
+            我的留言
+          </a>
+        </div>
+        <div class="col">
+          <a href="#/main/life" class="button center-block-1" style="background: #5EBE00">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-fork">
+              </i>
+            </span>
+            资料修改
+          </a>
+        </div>
+        <div class="col">
+          <a mine-href class="button center-block-1" style="background: #84D018">
+            <span class="img-responsive center-block cell-img img-size" style="color:#FFF;"> 
+              <i class="icon ion-gear-a">
+              </i>
+            </span>
+            账号生成
+          </a>
+        </div>
+      </div>
+    </div> -->
+
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>

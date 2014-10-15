@@ -1,0 +1,67 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        留言板
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <span class="input-label">姓名</span>
+        <input type="text" value="{{item.name}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">留言卡号</span>
+        <input type="text" value="{{item.cardNo}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">组织</span>
+        <input type="text" value="{{item.organization}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">地址</span>
+        <input type="text" value="{{item.address}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">电话</span>
+        <input type="text" value="{{item.phone}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">QQ</span>
+        <input type="text" value="{{item.QQ}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">留言内容</span>
+        <textarea>{{item.messageContent}}</textarea>
+      </label>
+    </div>
+
+    <button class="button button-block button-positive">
+        提交
+    </button>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

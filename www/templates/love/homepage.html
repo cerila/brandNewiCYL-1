@@ -1,0 +1,78 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      智会相亲
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="单位">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="姓名">
+      </label>
+
+      <ion-item class="item-divider">
+        性别
+      </ion-item>
+      <ion-radio ng-model="sex" ng-value="'A'">男</ion-radio>
+      <ion-radio ng-model="sex" ng-value="'B'">女</ion-radio>
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-positive">
+        查找
+      </button>
+    </div>
+
+    <div class="list card" ng-repeat="item in items">
+      <ion-item class="item-avatar item-text-wrap">
+        <img ng-src="{{item.imageUrl}}">
+        <h2><b>{{item.name}}<span class="p-right">{{item.sex}}&nbsp;&nbsp;&nbsp;{{item.age}}</span></b></h2>
+        <p>单位：{{item.work}}</p>
+        <p>地址：{{item.address}}</p>
+        <p>个人爱好：{{item.hobby}}</p>
+      </ion-item>
+
+      <ion-item class="tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#/main/lovePersonalZone">
+          <i class="icon ion-android-contact"></i>
+          多面了解
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-chatbox"></i>
+          意向留言
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-ios7-telephone"></i>
+          电话{{item.phone}}
+        </a>
+      </ion-item>
+    </div>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

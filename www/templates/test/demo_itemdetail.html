@@ -1,0 +1,83 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      签证详情
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-share" ng-click="openPopover($event)">
+      </button>
+      <button class="button button-clear ion-ios7-heart-outline" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content>
+
+    <div class="item item-thumbnail-left">
+      <img ng-src="http://www.gduuu.com/files/2013-2/20130207153856115661.jpg">
+      <h2>
+        {{itemTitle = "台湾个人游入台证（电子版材料，上海送证）移民署价145元+服务费40元"}}
+      </h2>
+      <p>
+        {{subTitle = "移民署价145元+服务费40元"}}
+      </p>
+      <p><span style="color: #ff6f00">￥<b>{{prices = "185"}}</b>/人</span><span class="remark">{{remark = "（需提前11天预订）"}}</span></p>
+    </div>
+  
+
+  <!--   <ion-tabs class="tabs-striped tabs-top tabs-dark">
+      <ion-tab title="概述">
+        <ion-content>
+          <p>移民署价145元+服务费40元</p>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="所需材料">
+        <ion-content>
+          <p>证件照+财产证明</p>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="预订须知">
+        <ion-content>
+          <h4>出行警示及说明</h4>
+          <p>1. 为普及旅游安全知识及旅游文明公约，使您的旅程顺利圆满完成，特制订《携程旅游游客注意事项》，请您认真阅读并切实遵守。</p>
+          <h4>预订限制</h4>
+          <p>1. 在办理入台签证期间，我司可能会根据您的材料情况要求增补其他材料、担保金或予以劝退</p>
+        </ion-content>
+      </ion-tab>
+    </ion-tabs> -->
+  
+  </ion-content>
+
+  <ion-footer-bar class="bar-energized">
+    <h1 class="title">
+     <a class="button button-clear button-block">大众点评</a>
+    </h1>
+    <!-- <button class="button button-energized">
+      立即预订
+    </button> -->
+    <!-- <button class="button title">Right</button> -->
+  </ion-footer-bar>
+  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

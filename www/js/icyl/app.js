@@ -146,7 +146,7 @@ angular.module('icyl', dependencies)
       access: { authenticate: false },
       views: {
         'main-container': {
-          templateUrl: 'templates/main/default.html',
+          templateUrl: 'templates/test/demo_shouye.html',
           controller: 'mainDefault'
         }
       }
@@ -231,8 +231,12 @@ angular.module('icyl', dependencies)
       url:'/love',
       access: { authenticate: false },
       views: {
+        // 'main-container': {
+        //   templateUrl: 'templates/main/love.html',
+        //   controller: 'mainLove'
+        // }
         'main-container': {
-          templateUrl: 'templates/main/love.html',
+          templateUrl: 'templates/love/homepage.html',
           controller: 'mainLove'
         }
         // ,
@@ -266,7 +270,7 @@ angular.module('icyl', dependencies)
         // }
         // ,
         'main-container': {
-          templateUrl: 'templates/main/life.html',
+          templateUrl: 'templates/life/homepage.html',
           controller: 'mainLife'
         }
         // ,
@@ -467,6 +471,151 @@ angular.module('icyl', dependencies)
       }
     })
 
+    .state('main.shouye', {
+      url:'/shouye',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/test/demo_shouye.html',
+          controller: 'mainDemoShouye'
+        }
+      }
+    })
+
+    .state('main.newsHomepage', {
+      url:'/newsHomepage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/news/homepage.html',
+          controller: 'mainNewsHomepage'
+        }
+      }
+    })
+
+    .state('main.newsArticle', {
+      url:'/newsArticle',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/news/article.html',
+          controller: 'mainNewsArticle'
+        }
+      }
+    })
+
+    .state('main.lovePersonalZone', {
+      url:'/lovePersonalZone',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/love/personalZone.html',
+          controller: 'mainLovePersonalZone'
+        }
+      }
+    })
+
+    .state('main.loveMessage', {
+      url:'/loveMessage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/love/message.html',
+          controller: 'mainLoveMessage'
+        }
+      }
+    })
+
+    //团青活动首页
+    .state('main.activityHomepage', {
+      url:'/activityHomepage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/activity/homepage.html',
+          controller: 'mainActivityHomepage'
+        }
+      }
+    })
+
+    .state('main.activitySignUp', {
+      url:'/activitySignUp',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/activity/signUp.html',
+          controller: 'mainActivitySignUp'
+        }
+      }
+    })
+
+    //智慧生活
+    .state('main.lifeChat', {
+      url:'/lifeChat',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/life/chatHomepage.html',
+          controller: 'mainLifeChat'
+        }
+      }
+    })
+
+    .state('main.lifeLoan', {
+      url:'/lifeLoan',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/life/loan.html',
+          controller: 'mainLifeLoan'
+        }
+      }
+    })
+
+    .state('main.lifeCommodity', {
+      url:'/lifeCommodity',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/life/commodity.html',
+          controller: 'mainLifeCommodity'
+        }
+      }
+    })
+
+    //个人定制
+    .state('main.personHomepage', {
+      url:'/personHomepage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/homepage.html',
+          controller: 'mainPersonHomepage'
+        }
+      }
+    })
+
+    .state('main.personSignIn', {
+      url:'/personSignIn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/signIn.html',
+          controller: 'mainPersonSignIn'
+        }
+      }
+    })
+
+    .state('main.personMessage', {
+      url:'/personMessage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/message.html',
+          controller: 'mainPersonMessage'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback

@@ -1,7 +1,9 @@
 angular.module('demo.controllers', [])
 
 
+
 .controller('mainTest', ['$scope', '$ionicPopover', '$ionicPopup', '$ionicTabsDelegate', 'CustomNav', '$timeout', function($scope, $ionicPopover, $ionicPopup, $ionicTabsDelegate, CustomNav, $timeout) {
+
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -29,16 +31,17 @@ angular.module('demo.controllers', [])
   $scope.selectTabWithIndex = function(index) {
     $ionicTabsDelegate.select(index);
   };
+
   $scope.wechat = function() {
     Wechat.share({
         message: {
           title: "Message Title",
           description: "Message Description(optional)",
           mediaTagName: "Media Tag Name(optional)",
-          thumb: "http://YOUR_THUMBNAIL_IMAGE",
+          thumb: "http://ec4.images-amazon.com/images/I/41H7ZorRkiL._AA278_PIkin4,BottomRight,-34,22_AA300_SH20_OU28_.jpg",
           media: {
             type: Wechat.Type.WEBPAGE,   // webpage
-            webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"    // webpage
+            webpageUrl: "http://17f.go5le.net/bootstrap-3.1.1"    // webpage
           }
         },
       scene: Wechat.Scene.TIMELINE   // share to Timeline
@@ -57,6 +60,7 @@ angular.module('demo.controllers', [])
       alert('oh no');
     });
   };
+
   // $scope.$watch($ionicTabsDelegate.selectedIndex(), function () {
   //   CustomNav.fromTab = $ionicTabsDelegate.selectedIndex();
   //   console.log(CustomNav.fromTab);
@@ -141,6 +145,281 @@ angular.module('demo.controllers', [])
 }])
 
 
+.controller('mainDemoShouye', ['$scope', function($scope) {
+  
+}])
+
+.controller('mainNewsHomepage', ['$scope', function($scope) {
+  $scope.items = [
+    {'newsTitle': '"智慧团青"测试反馈在此填写',
+     'times': '89',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+     'url': '#/main/newsArticle'},
+    {'newsTitle': '"智慧团青"测试反馈在此填写',
+     'times': '102',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+    'url': '#/main/newsArticle'},
+    {'newsTitle': '"智慧团青"测试反馈在此填写',
+     'times': '4',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+     'url': '#/main/newsArticle'}
+  ];
+}])
+
+.controller('mainNewsArticle', ['$scope', function($scope) {
+  $scope.newsTitle = '团省委组织召开机关党员大会';
+  $scope.newsDate = '2014-8-11';
+  $scope.newsSource = '浙江省团建';
+  $scope.newsContent = '6月23日下午，团省委组织召开机关党员大会，认真学习贯彻习近平总书记在中央办公厅座谈会上的重要讲话精神和。团省委书记周艳出席会议并讲话。团省委副书记苗伟伦传达习总书记讲话精神。';
+  $scope.userComment = '已阅';
+  $scope.items = [
+    {'company': '保险公司',
+     'user': '保险员A',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '5'},
+    {'company': '保险公司',
+     'user': '保险员B',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '41'},
+    {'company': '保险公司',
+     'user': '保险员C',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '10'}
+  ];
+}])
+
+//智会相亲页面控制器
+.controller('mainLove', ['$scope', function($scope) {
+  $scope.sex = 'B';
+  
+  $scope.items = [
+    {'name': '王成',
+     'sex': '男',
+     'age': '20~35岁',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '省经信委',
+     'address':'',
+     'phone':'15057188887',
+     'hobby': '无'},
+    {'name': '戴丽娟',
+     'sex': '女',
+     'age': '20~35岁',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '浙江长征职业技术学院',
+     'address':'留和路525号',
+     'phone':'',
+     'hobby': '无'},
+    {'name': '叶林伟',
+     'sex': '男',
+     'age': '20~35岁',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '杭州市某自动化技术有限公司',
+     'address':'杭州市拱墅区舟山东路66号',
+     'phone':'',
+     'hobby': '无'}
+  ];
+}])
+
+.controller('mainLovePersonalZone', ['$scope', function($scope) {  
+  $scope.item = 
+    {'name': '王成',
+     'sex': '男',
+     'age': '20~35岁',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '省经信委',
+     'address':'',
+     'phone':'15057188887',
+     'hobby': '无'};
+}])
+
+.controller('mainLoveMessage', ['$scope', function($scope) {  
+  $scope.item = 
+    {'name': '王成',
+     'cardNo': '91',
+     'organization': '省直机关团工委',
+     'address':'',
+     'phone':'15057188887',
+     'QQ': '260025526',
+     'messageContent': ''};
+}])
+
+.controller('mainActivityHomepage', ['$scope', function($scope) {
+  $scope.items = [
+    {'activityTitle': '关于举办“书海琴缘”省直机关单身青年钢琴比赛',
+     'times': '89',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+     'url': '#/main/activitySignUp'},
+    {'activityTitle': '关于举行2014年度新申报省级青年文明号',
+     'times': '102',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+    'url': '#/main/activitySignUp'},
+    {'activityTitle': '2014年青年文明号创建',
+     'times': '4',
+     'imageUrl': "img/main_backimg_fade.png",
+     'date': '2014-10-8',
+     'url': '#/main/activitySignUp'}
+  ];
+}])
+
+.controller('mainActivitySignUp', ['$scope', function($scope) {
+  $scope.activityTitle = '关于举办“书海琴缘”省直机关单身青年钢琴比赛';
+
+  $scope.item = 
+    {'name': '91',
+     'phone': '',
+     'number': '1'};
+  $scope.points = '内部参与';
+  $scope.endDate = '2014-8-13';
+  $scope.activityDate = '2014-8-15';
+  $scope.detail = '省直机关各单位团组织、省（部）属企事业单位团委、省属在杭高职学院团委：为充分发挥团组织的桥梁纽带作用，更好的服务广大团员青年，丰富机关文化建设载体，积极培育和践行社会主义核心价值观，形成向上、向善的强大精神力量，激励广大机关青年为建设美丽浙江、创造美好生活而不懈奋斗，经团工委研究，决定举办“书海琴缘”省直机关单身青年钢琴训练营。';
+}])
+
+.controller('mainLifeChat', ['$scope', function($scope) {
+  $scope.item = {'chatTitle': '午间正能量：书海“琴”缘',
+     'imageUrl': "img/main_backimg_fade.png",
+     'url': '#/main/activitySignUp'};
+  $scope.items = [
+    {'chatTitle': '中国青年服饰现象探讨',
+     'imageUrl': "img/main_backimg_fade.png",
+     'url': '#/main/activitySignUp'},
+    {'chatTitle': '和谐社会建设需要加强大学生环境素养的培育',
+     'imageUrl': "img/main_backimg_fade.png",
+     'url': '#/main/activitySignUp'},
+    {'chatTitle': '省交通运输厅团工委成功举办“2014交通青年论坛”',
+     'imageUrl': "img/main_backimg_fade.png",
+     'url': '#/main/activitySignUp'}
+  ];
+}])
+
+.controller('mainLifeLoan', ['$scope', function($scope) {
+  $scope.items = [
+    {'itemTitle': '核桃木家居的特点',
+     'date': '10-10',
+     'url': '#/main/activitySignUp'},
+    {'itemTitle': '汇宇家居，优“汇疯”气，抢起来！',
+     'date': '10-10',
+     'url': '#/main/activitySignUp'},
+    {'itemTitle': '主题读书征文分享活动',
+     'date': '10-10',
+     'url': '#/main/activitySignUp'}
+  ];
+}])
+
+.controller('mainLifeCommodity', ['$scope', '$ionicModal', function($scope, $ionicModal) {
+
+  $scope.priceRegions = [
+    {'priceRegion': "0-100"},
+    {'priceRegion': '100-200'},
+    {'priceRegion': '200-400'},
+  ];
+
+  $scope.priceRegion = '200-400';
+
+  $scope.catagoryList = [
+    {'catagoryName': '服饰/鞋/包/配饰'},
+    {'catagoryName': '居家生活'},
+    {'catagoryName': '母婴童装'},
+    {'catagoryName': '手机数码'},
+    {'catagoryName': '家用电器'}
+  ];
+
+  $scope.catagory = '手机数码';
+
+  $scope.regions = [
+    {'region': '浙江省'},
+    {'region': '杭州市'},
+    {'region': '台州市'},
+    {'region': '宁波市'},
+    {'region': '绍兴市'}
+  ];
+
+  $scope.items = [
+    {'name': '奥普兰沙发',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'catagory':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+    },
+    {'name': '奥普兰床',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'catagory':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+    },
+    {'name': '奥普兰餐桌',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'catagory':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+   }
+  ];
+
+  $ionicModal.fromTemplateUrl('commodityModal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.commodityModal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.commodityModal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.commodityModal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.commodityModal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+}])
+
+.controller('mainPersonHomepage', ['$scope', function($scope) {
+  
+}])
+
+.controller('mainPersonSignIn', ['$scope', function($scope) {
+  $scope.userName = '王成';
+  $scope.userID = '2014082911423';
+  $scope.currentNum = '0';
+  $scope.toBeChecked = '0';
+}])
+
+.controller('mainPersonMessage', ['$scope', function($scope) { 
+  $scope.items = [
+    {'name': '王成',
+     'message': '你好！',
+     'date': '2014-8-15'},
+    {'name': '王成',
+     'message': '你在哪里工作呀？',
+     'date': '2014-8-15'},
+    {'name': '王林',
+     'message': 'HI！',
+     'date': '2014-8-16'}
+  ];
+}])
+
+
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope,
@@ -166,6 +445,7 @@ angular.module('demo.controllers', [])
     // Execute action
   });
 }])
+
 
 .controller('mainTestP', ['$scope', '$ionicPopover', '$ionicPopup', '$ionicBackdrop', '$timeout', '$ionicPosition', function($scope, $ionicPopover, $ionicPopup, $ionicBackdrop, $timeout, $ionicPosition) {
 
@@ -467,7 +747,6 @@ angular.module('demo.controllers', [])
   };
 
 }])
-
 
 ;
 
