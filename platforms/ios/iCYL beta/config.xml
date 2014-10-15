@@ -151,4 +151,7 @@
         <param name="ios-package" value="CDVWechat" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="WeiXin">
+        <param name="ios-package" value="WeiXin" />
+    </feature>
 </widget>

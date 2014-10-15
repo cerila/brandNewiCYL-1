@@ -507,6 +507,13 @@ module.exports = [
         "clobbers": [
             "Wechat"
         ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.weixin/www/weixin.js",
+        "id": "com.phonegap.plugins.weixin.weixin",
+        "merges": [
+            "navigator.weixin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -534,7 +541,8 @@ module.exports.metadata =
     "org.apache.cordova.splashscreen": "0.3.2",
     "org.apache.cordova.statusbar": "0.1.7",
     "org.apache.cordova.vibration": "0.3.10",
-    "xu.li.cordova.wechat": "0.4"
+    "xu.li.cordova.wechat": "0.4",
+    "com.phonegap.plugins.weixin": "0.1.0"
 }
 // BOTTOM OF METADATA
 });
