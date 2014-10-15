@@ -41,7 +41,7 @@ angular.module('demo.controllers', [])
             webpageUrl: "https://github.com/xu-li/cordova-plugin-wechat"    // webpage
           }
         },
-      scene: Wechat.Scene.TIMELINE   // share to Timeline
+      scene: Wechat.Scene.SESSION   // share to Timeline
     }, function () {
         alert("Success");
     }, function (reason) {
@@ -50,6 +50,13 @@ angular.module('demo.controllers', [])
   };
 
   $scope.weixin = function() {
+    navigator.weixin.register('wx9123bbd027f0a99e', function(){
+      alert('registered');
+    }, 
+    function(){
+      alert('not register');
+    });
+
     navigator.weixin.openWeixin(function(){
       alert('haha');
     }, 

@@ -189,6 +189,8 @@ Key Words : ajccom, phonegap-weixin, xu.li, cordova-plugin-wechat
 
 Main Body----------------
 1. xu.li 见 ＃4
+1) scene: Wechat.Scene.SESSION是分享到聊天界面; TIMELINE是分享到朋友圈; FAVORITE是分享到收藏
+
 2. ajccom
 1) cordova plugin add https://github.com/ajccom/phonegap-weixin.git
 2) iCYL beta -> Targets -> Info -> URL Types 加weixin [weixinAPPID] DONE in #4
