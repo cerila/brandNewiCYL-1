@@ -27,6 +27,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "WXApi.h"
 
 #import <Cordova/CDVPlugin.h>
 
@@ -106,7 +107,8 @@
     // all plugins will get the notification, and their handlers will be called
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
 
-    return YES;
+    //return YES;
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
 // repost all remote and local notification using the default NSNotificationCenter so multiple plugins may respond

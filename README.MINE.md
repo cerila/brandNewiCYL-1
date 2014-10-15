@@ -175,3 +175,36 @@ Result~~~~~~~~~~~~~~~~~~~
 
 =#5-END==================
 =========================
+
+
+
+=========================
+=#6======================
+
+Subject   : WeChat插件使用
+Date      : 20141015
+Author    : Alex Zhou
+Abstract  : 
+Key Words : ajccom, phonegap-weixin, xu.li, cordova-plugin-wechat
+
+Main Body----------------
+1. xu.li 见 ＃4
+2. ajccom
+1) cordova plugin add https://github.com/ajccom/phonegap-weixin.git
+2) iCYL beta -> Targets -> Info -> URL Types 加weixin [weixinAPPID] DONE in #4
+3) Add following code to openURL method in AppDelegate.m file:
+    a) #import "WXApi.h"
+    b) return [WXApi handleOpenURL:url delegate:self]; in '- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:' method
+    c) 注意作者github说明文档里面笔误, handleOpenURL错写成hadleOpenURL, 要改正!!!
+
+Method & Material~~~~~~~~
+Online    : 
+Code      : 
+
+Procedure~~~~~~~~~~~~~~~~
+
+Result~~~~~~~~~~~~~~~~~~~
+
+
+=#6-END==================
+=========================
