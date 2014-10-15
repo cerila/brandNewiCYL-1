@@ -15,13 +15,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.phonegap.plugins.weixin/www/weixin.js",
-        "id": "com.phonegap.plugins.weixin.weixin",
-        "merges": [
-            "navigator.weixin"
-        ]
-    },
-    {
         "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
         "id": "nl.x-services.plugins.socialsharing.SocialSharing",
         "clobbers": [
@@ -521,7 +514,6 @@ module.exports.metadata =
 {
     "com.ionic.keyboard": "1.0.2",
     "com.phonegap.plugins.barcodescanner": "2.0.0",
-    "com.phonegap.plugins.weixin": "0.1.0",
     "nl.x-services.plugins.socialsharing": "4.3.2",
     "org.apache.cordova.battery-status": "0.2.10",
     "org.apache.cordova.camera": "0.3.1",

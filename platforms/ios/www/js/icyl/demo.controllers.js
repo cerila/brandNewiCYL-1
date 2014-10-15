@@ -48,6 +48,15 @@ angular.module('demo.controllers', [])
         alert("Failed: " + reason);
     });
   };
+
+  $scope.weixin = function() {
+    navigator.weixin.openWeixin(function(){
+      alert('haha');
+    }, 
+    function(){
+      alert('oh no');
+    });
+  };
   // $scope.$watch($ionicTabsDelegate.selectedIndex(), function () {
   //   CustomNav.fromTab = $ionicTabsDelegate.selectedIndex();
   //   console.log(CustomNav.fromTab);

@@ -1,1 +1,15 @@
-android/
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+!ios/www/
+!ios/iCYL beta/*
+ios/www/plugins/
+ios/iCYL beta/Plugins/
+
+*.mode1v3
+*.perspectivev3
+*.pbxuser
+.DS_Store
+build/
+

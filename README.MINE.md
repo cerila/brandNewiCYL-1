@@ -117,3 +117,61 @@ Result~~~~~~~~~~~~~~~~~~~
 
 =#3-END==================
 =========================
+
+
+
+=========================
+=#4======================
+
+Subject   : Xcode环境下开发
+Date      : 20141015
+Author    : Alex Zhou
+Abstract  : 
+Key Words : 
+
+Main Body----------------
+1) cordove platform add ios
+2) 打开platforms/ios/iCYL beta.xcodeproj
+3) iCYL beta -> Targets -> General -> Build 修改成100之类的数字 (optional)
+4) iCYL beta -> Targets -> Info -> URL Types 加weixin [weixinAPPID]
+5) iCYL beta -> Targets -> Build Settings -> Architectures $(ARCHS_STANDARD)改为$(ARCHS_STANDARD_32_BIT)
+6) iCYL beta, Plugins 右键 Add Files to "iCYL beta"...  加入微信SDK, libWeChatSDK.a, WXApi.h, WXApiObject.h
+7) iCYL beta, Resources, icons/splash 右键 Add Files to "iCYL beta"... 加入icon和splash
+
+Method & Material~~~~~~~~
+Online    : http://blog.sina.com.cn/s/blog_ad3a545d0102v0dh.html
+Code      : 
+
+Procedure~~~~~~~~~~~~~~~~
+
+Result~~~~~~~~~~~~~~~~~~~
+
+
+=#4-END==================
+=========================
+
+
+
+=========================
+=#5======================
+
+Subject   : Xcode模拟器测试、真机测试、Beta测试、Archive－Organizer、常规设置
+Date      : 20141015
+Author    : Alex Zhou
+Abstract  : 
+Key Words : 
+
+Main Body----------------
+
+
+Method & Material~~~~~~~~
+Online    : 
+Code      : 
+
+Procedure~~~~~~~~~~~~~~~~
+
+Result~~~~~~~~~~~~~~~~~~~
+
+
+=#5-END==================
+=========================
