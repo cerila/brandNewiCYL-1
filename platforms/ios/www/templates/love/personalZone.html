@@ -1,0 +1,75 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      个人空间
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <!-- <ion-content class="has-footer"> -->
+    <div class="card ad-banner margin-top">
+      <ion-item class="item-thumbnail-left item-text-wrap">
+        <img ng-src="{{item.imageUrl}}">
+        <a class="button button-small button-outline button-positive under-thumbnail" href="#/main/loveMessage">
+          给我留言
+        </a>
+        <h2><b>{{item.name}}<span class="p-right">{{item.sex}}&nbsp;&nbsp;&nbsp;{{item.age}}</span></b></h2>
+        <p>单位：{{item.work}}</p>
+        <p>地址：{{item.address}}</p>
+        <p>个人爱好：{{item.hobby}}</p>
+      </ion-item>
+
+    </div>
+    <!-- <div style="height: 30px"></div> -->
+    <div elem-position></div> 
+  <!-- </ion-content> -->
+
+
+  <div class="tabs-striped tabs-top tabs-positive">
+    <ion-tabs class="tabs-striped tabs-top tabs-positive custom-top">
+      <ion-tab title="个人感想" on-select='tabNav()'>
+        <ion-content>
+          <h3>爱生活，爱自己！</h3>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="我的日志" on-select='tabNav()'>
+        <ion-content>
+          
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="我的活动" on-select='tabNav()'>
+        <ion-content>
+          
+        </ion-content>
+      </ion-tab>
+      <ion-tab title="我的分享" on-select='tabNav()'>
+        <ion-content>
+          
+        </ion-content>
+      </ion-tab>
+    </ion-tabs>
+  </div>
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

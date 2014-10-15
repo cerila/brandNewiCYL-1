@@ -1,0 +1,48 @@
+/*Blow works, be aware of CLASS .icon-right*/
+/*.bar .button.button-clear .icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before, .bar .button.button-clear.icon:before {
+    font-size: 0.8em;
+}*/
+.bar .button.button-clear.icon-right:before {
+    font-size: 0.8em;
+    margin-right: 0.5em;
+}
+/*.bar .button.button-clear .icon:before {
+    font-size: 0.8em;
+    margin-right: 0.5em;
+}*/
+
+span.align-right {
+    position: absolute;
+    right: 0.5em;
+    color: #999;
+    font-size: 0.8em;
+}
+
+.description {
+    line-height: 1.5em;
+}
+
+p .p-right,
+h2 .p-right {
+    position: absolute;
+    right: 1.0em;
+}
+/*
+p.word-right {
+    text-align: right;
+}
+
+.word-center{
+    text-align: center;
+}
+*/
+.article-div{
+    margin: 1.0em;
+}
+
+.under-thumbnail{
+    position: absolute;
+    left: 1.8em;
+    bottom: 0.8em;
+
+}

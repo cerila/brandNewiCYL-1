@@ -1,0 +1,65 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      团青时讯
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+
+  <ion-content>
+    <div class="article-div">
+      <p>时间：{{newsDate}}&nbsp;来源：{{newsSource}}</p>  
+      <h1 class="text-center">{{newsTitle}}</h1>
+      <img ng-src="{{imageUrl}}">
+      <p>{{newsContent}}</p>
+    </div>   
+    <div>
+
+    <ion-list>
+      <ion-item class="item-divider">
+        用户评论
+      </ion-item>
+      <ion-item class="item-input-inset">
+        <label class="item-input-wrapper">
+          <textarea type="text" placeholder="已阅">{{userComment}}</textarea>
+        </label>
+        <button class="button button-small">
+          确认阅读
+        </button>
+      </ion-item>
+
+      <ion-item class="item-divider">
+        活动评价
+      </ion-item>
+      <ion-item ng-repeat="item in items">
+        <p>[{{item.company}}]{{item.user}}<span class="p-right">{{item.date}}</span></p>
+        <p>{{item.comment}}</p>
+        <p class="text-right">赞成：{{item.times}}</p>
+      </ion-item>
+    </ion-list>
+
+    </div>
+  </ion-content>
+  
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

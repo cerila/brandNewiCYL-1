@@ -160,10 +160,10 @@ angular.module('icyl.controllers', [])
 
 }])
 
-//智会相亲页面控制器
-.controller('mainLove', ['$scope', function($scope) {
+// //智会相亲页面控制器
+// .controller('mainLove', ['$scope', function($scope) {
 
-}])
+// }])
 
 //最美浙江页面控制器
 .controller('mainBeauty', ['$scope', function($scope) {
