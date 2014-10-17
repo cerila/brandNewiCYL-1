@@ -1,0 +1,78 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        活动报名
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <h2 class="text-center">{{activityTitle}}</h2>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <span class="input-label">参加人</span>
+        <input type="text" value="{{item.name}}">
+      </label>
+      
+      <label class="item item-input">
+        <span class="input-label">联系电话</span>
+        <input type="text" value="{{item.phone}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">报名数目</span>
+        <input type="text" value="{{item.number}}">
+      </label>
+      
+    </div>
+
+    <button class="button button-block button-positive">
+        报名
+    </button>
+    <p>提示：报名流程：意向报名-确定意向报名-积分支付。
+    此处为意向报名，报名完成确认后可正式报名</p>
+
+    <ion-list>
+      <ion-item class="item-divider">
+        活动详情
+      </ion-item>
+      <ion-item>
+        【所需积分】{{points}}
+      </ion-item>
+      <ion-item>
+        【报名截止时间】{{endDate}}
+      </ion-item>
+      <ion-item>
+        【活动时间】{{endDate}}
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        【活动说明】
+        <p>{{detail}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>  

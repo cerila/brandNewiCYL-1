@@ -44,7 +44,7 @@ angular.module('demo.controllers', [])
             webpageUrl: "http://17f.go5le.net/bootstrap-3.1.1"    // webpage
           }
         },
-      scene: Wechat.Scene.TIMELINE   // share to Timeline
+      scene: Wechat.Scene.SESSION   // share to Timeline
     }, function () {
         alert("Success");
     }, function (reason) {
