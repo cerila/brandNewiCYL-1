@@ -115,6 +115,10 @@
                         {
                             "xml": "<feature name=\"WeiXin\"><param name=\"ios-package\" value=\"WeiXin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -292,6 +296,9 @@
             "PACKAGE_NAME": "net.go5le.iCYL"
         },
         "com.phonegap.plugins.weixin": {
+            "PACKAGE_NAME": "net.go5le.iCYL"
+        },
+        "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "net.go5le.iCYL"
         }
     },

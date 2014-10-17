@@ -514,6 +514,13 @@ module.exports = [
         "merges": [
             "navigator.weixin"
         ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
+        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
+        "clobbers": [
+            "PushNotification"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -542,7 +549,8 @@ module.exports.metadata =
     "org.apache.cordova.statusbar": "0.1.7",
     "org.apache.cordova.vibration": "0.3.10",
     "xu.li.cordova.wechat": "0.4",
-    "com.phonegap.plugins.weixin": "0.1.0"
+    "com.phonegap.plugins.weixin": "0.1.0",
+    "com.phonegap.plugins.PushPlugin": "2.4.0"
 }
 // BOTTOM OF METADATA
 });

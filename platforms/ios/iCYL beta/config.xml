@@ -154,4 +154,7 @@
     <feature name="WeiXin">
         <param name="ios-package" value="WeiXin" />
     </feature>
+    <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
 </widget>
