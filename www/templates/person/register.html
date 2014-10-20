@@ -9,7 +9,7 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-        个人信息修改
+        注册
     </h1>
     <div class="buttons">
       <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
@@ -20,17 +20,18 @@
   <ion-content class="has-footer">
 
   <div class="list list-inset">
-      <ion-item class="item-divider">
+  <!--     <ion-item class="item-divider">
         基本信息
-      </ion-item>
-      <label class="item item-input">
+      </ion-item> -->
+
+      <label class="item item-input item-stacked-label">
         <span class="input-label">用户ID</span>
         <input type="text" readonly="readonly" value="{{item.userID}}">
       </label>
 
-      <label class="item item-input">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">用户名</span>
-        <input type="text" value="{{item.userName}}">
+        <input type="text" placeholder="姓名" value="{{item.userName}}">
       </label>
 
       <label class="item item-input item-select">
@@ -43,17 +44,18 @@
         </select>
       </label>
 
-      <label class="item item-input">
-        <span class="input-label">出生年月</span>
-        <input type="text" value="{{item.birth}}">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">身份证号（请正确填写）</span>
+        <input type="text" placeholder="身份证号" value="{{item.identityCard}}">
       </label>
 
-      <label class="item item-input">
-        <span class="input-label">身份证</span>
-        <input type="text" value="{{item.identityCard}}">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">联系方式（请正确填写）</span>
+        <input type="text" placeholder="手机号码" value="{{item.phone}}">
       </label>
 
-      <ion-item class="item-divider">
+
+      <!-- <ion-item class="item-divider">
         密码
       </ion-item>
       <label class="item item-input">
@@ -64,12 +66,12 @@
       <label class="item item-input">
         <span class="input-label">确认密码</span>
         <input type="text" value="{{item.password2}}">
-      </label>
+      </label> -->
 
-      <ion-item class="item-divider">
+      <!-- <ion-item class="item-divider">
         联系方式
-      </ion-item>
-      <label class="item item-input">
+      </ion-item> -->
+     <!--  <label class="item item-input">
         <span class="input-label">手机</span>
         <input type="text" value="{{item.phone}}">
       </label>
@@ -80,53 +82,9 @@
       <label class="item item-input">
         <span class="input-label">邮箱</span>
         <input type="text" value="{{item.email}}">
-      </label>
+      </label> -->
 
-      <ion-item class="item-divider">
-        详细信息
-      </ion-item>
-      <label class="item item-input">
-        <span class="input-label">单位</span>
-        <input type="text" value="{{item.work}}">
-      </label>
       
-      <label class="item item-input item-select">
-        <div class="input-label">
-          职务
-        </div>
-        <select>
-          <option selected>书记</option>
-          <option>副书记</option>
-        </select>
-      </label>
-
-      <label class="item item-input">
-        <span class="input-label">地址</span>
-        <input type="text" value="{{item.address}}">
-      </label>
-
-      <label class="item item-input">
-        <span class="input-label">爱好</span>
-        <input type="text" value="{{item.hobby}}">
-      </label>
-
-      <label class="item item-input">
-        <span class="input-label">简介</span>
-        <input type="text" value="{{item.brief}}">
-      </label>
-
-      <ion-item class="item-divider">
-        其他
-      </ion-item>
-      <label class="item item-input item-select">
-        <div class="input-label">
-          定制空间
-        </div>
-        <select>
-          <option selected>开启</option>
-          <option>不开启</option>
-        </select>
-      </label>
 
     </div>
     

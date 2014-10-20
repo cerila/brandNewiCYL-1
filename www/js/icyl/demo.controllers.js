@@ -419,6 +419,39 @@ angular.module('demo.controllers', [])
   ];
 }])
 
+.controller('mainPersonInformation', ['$scope', function($scope) {
+  $scope.item = {'userName':'王成',
+    'userID':'2014082911423',
+    'birth':'1978-5-12',
+    'identityCard':'000000000000000',
+
+    'password':'123',
+    'password2':'123',
+    'phone':'13732255555',
+    'QQ':'113456789',
+    'email':'123@qq.com',
+
+    'work':'省直机关团工委',
+    'address':'浙江省杭州市',
+    'hobby':'读书',
+    'brief':'无'};
+
+
+}])
+
+.controller('mainPersonRegister', ['$scope', function($scope) {
+  $scope.item = {'userName':'',
+    'userID':'2014082911423',
+    'identityCard':'',
+    'phone':''};
+}])
+
+.controller('mainPersonGuide', ['$scope', function($scope) {
+  $scope.item = {'userName':'',
+    'userID':'2014082911423',
+    'identityCard':'',
+    'phone':''};
+}])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {

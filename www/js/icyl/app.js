@@ -616,6 +616,39 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    .state('main.personInformation', {
+      url:'/personInformation',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/information.html',
+          controller: 'mainPersonInformation'
+        }
+      }
+    })
+
+    .state('main.personRegister', {
+      url:'/personRegister',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/register.html',
+          controller: 'mainPersonRegister'
+        }
+      }
+    })
+
+    .state('main.personGuide', {
+      url:'/personGuide',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/guide.html',
+          controller: 'mainPersonGuide'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
