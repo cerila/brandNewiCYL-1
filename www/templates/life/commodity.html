@@ -54,7 +54,7 @@
           {{item.commentNum}}
         </a>
         <a class="tab-item" href="">
-          分类{{item.catagory}}
+          分类{{item.category}}
         </a>
       </ion-item>
     </div>
@@ -86,8 +86,8 @@
         <ion-item class="item-divider">
           类型
         </ion-item>
-        <ion-radio ng-model="catagory" ng-repeat="item in catagoryList" ng-value="'{{item.catagoryName}}'">
-          {{item.catagoryName}}
+        <ion-radio ng-model="category" ng-repeat="item in categoryList" ng-value="'{{item.catgoryName}}'">
+          {{item.categoryName}}
         </ion-radio>
       </ion-list>
     </ion-content>

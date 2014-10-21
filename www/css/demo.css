@@ -23,7 +23,8 @@ span.align-right {
 }
 
 p .p-right,
-h2 .p-right {
+h2 .p-right,
+h3 .p-right {
     position: absolute;
     right: 1.0em;
 }
@@ -45,4 +46,11 @@ p.word-right {
     left: 1.8em;
     bottom: 0.8em;
 
+}
+
+.button.button-icon.input-button {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    color: #bbb;
 }

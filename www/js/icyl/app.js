@@ -595,6 +595,17 @@ angular.module('icyl', dependencies)
       }
     })
 
+    .state('main.personPublish', {
+      url:'/personPublish',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/publish.html',
+          controller: 'mainPersonPublish'
+        }
+      }
+    })
+
     .state('main.personSignIn', {
       url:'/personSignIn',
       access: { authenticate: false },
@@ -646,6 +657,50 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/person/guide.html',
           controller: 'mainPersonGuide'
+        }
+      }
+    })
+
+    .state('main.personManagement', {
+      url:'/personManagement',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/management.html',
+          controller: 'mainPersonManagement'
+        }
+      }
+    })
+
+    .state('main.personStatistics', {
+      url:'/personStatistics',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/statistics.html',
+          controller: 'mainPersonStatistics'
+        }
+      }
+    })
+
+    .state('main.personQuestionnaire', {
+      url:'/personQuestionnaire',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/questionnaire.html',
+          controller: 'mainPersonQuestionnaire'
+        }
+      }
+    })
+
+    .state('main.personWarn', {
+      url:'/personWarn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/warn.html',
+          controller: 'mainPersonWarn'
         }
       }
     })

@@ -1,4 +1,7 @@
 <ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
   <ion-nav-bar class="bar-stable nav-title-slide-ios7">
     <ion-nav-buttons side="left">
       <button class="button button-clear" custom-go-back>
@@ -6,35 +9,28 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-      操作指南
+        活动提醒
     </h1>
     <div class="buttons">
       <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
       </button>
     </div>
   </ion-nav-bar>
-
-  <ion-header-bar class="bar-light bar-subheader">
-    <input type="search"
-      placeholder="搜索标题..."
-      ng-model="search"
-      ng-focus="searchFocused = true"
-      ng-blur="searchFocused = false">
-    <button ng-if="search.length"
-      class="button button-icon ion-android-close input-button"
-      ng-click="clearSearch()">
-    </button>
-  </ion-header-bar>
-
   
-  <ion-content>
-    <ion-list>
-      <a class="item" href="{{item.url}}" ng-repeat="item in items">
-        <h2><b>>>{{item.itemTitle}}</b>[{{item.date}}]</h2>
-      </a>
-    </ion-list>
+  <ion-content class="has-footer"> 
+    <div class="card" ng-repeat="item in items">
+      <ion-item class="item-divider item-text-wrap">
+        <h2>{{item.activityTitle}}（{{item.date}}）</h2>
+      </ion-item>
+      <ion-item>
+        <textarea ng-model="item.content">
+        </textarea>
+      </ion-item>
+      <button class="button button-block button-positive">
+        修改
+      </button>
+    </div>
   </ion-content>
-
 
   <ng-include src="'templates/common/footer.html'"></ng-include>
 
@@ -49,4 +45,4 @@
       Hello!
     </ion-content>
   </ion-popover-view>
-</script>
+</script>  

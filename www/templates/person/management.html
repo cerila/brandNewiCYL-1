@@ -1,0 +1,74 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        活动统计
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <div class="list list-inset">
+        <label class="item item-input">
+          <span class="input-label">活动内容</span>
+          <input type="text" ng-model="activityContent">
+        </label>
+
+        <label class="item item-input">
+          <div class="input-label">
+            分类
+          </div>
+          <select ng-model="typeName" ng-options="type.name for type in types">
+          </select>
+        </label>
+
+        <label class="item item-input">
+          <div class="input-label">
+            部门
+          </div>
+          <select ng-model="deptName" ng-options="dept.name for dept in depts">
+          </select>
+        </label>
+
+        <button class="button button-block button-positive" ng-click="clearContent()">
+            搜索
+        </button>
+    </div>
+
+    <ion-list>
+      <ion-item class="item-divider">
+        活动列表
+      </ion-item>
+      <a class="item item-text-wrap" ng-repeat="item in items" href="{{item.url}}">
+        <h2><b>{{item.activityTitle}}</b></h2>
+        <h3>分类：{{item.typeName}}<span class="p-right">意向：{{item.number}}人</span></h3>
+        <h3>发布：{{item.organizer}}<span class="p-right">浏览：{{item.count}}次</span></h3>
+      </a>
+    </ion-list>
+   
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>  

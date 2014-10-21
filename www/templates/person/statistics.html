@@ -1,0 +1,57 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        活动统计详情
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <div class="list">
+        <ion-item class="item-divideritem-text-wrap">
+          <h2 class="text-center">{{activityTitle}}</h2>
+        </ion-item>
+        <ion-item class="item-divideritem-text-wrap">
+          <h2 class="text-center">报名总人数：{{count}}</h2>
+        </ion-item>
+
+        <ion-item class="item-divider">
+          报名人员
+        </ion-item>
+        <ion-item class="item-text-wrap" ng-repeat="item in items" ng-style="{'background-color':item.isConfirmed}">
+          <h2><b>{{item.name}}</b><span class="badge badge-assertive">{{item.isConfirmed}}</span></h2>
+          <h3>所属部门：{{item.dept}}</h3>
+          <!-- <h3>地址：{{item.address}}</h3> -->
+          <h3>联系方式：{{item.phone}}</h3>
+          <h3>参加其他活动次数：{{item.count}}<span class="p-right">评论：{{item.comment}}</span></h3>
+        </ion-item>
+
+        
+    </div>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>  
