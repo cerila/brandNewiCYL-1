@@ -25,12 +25,12 @@
       </ion-item>
       <label class="item item-input">
         <span class="input-label">用户ID</span>
-        <input type="text" readonly="readonly" value="{{item.userID}}">
+        <input type="text" readonly="readonly" ng-model="item.userID">
       </label>
 
       <label class="item item-input">
         <span class="input-label">用户名</span>
-        <input type="text" value="{{item.userName}}">
+        <input type="text" ng-model="item.userName">
       </label>
 
       <label class="item item-input item-select">
@@ -45,12 +45,12 @@
 
       <label class="item item-input">
         <span class="input-label">出生年月</span>
-        <input type="text" value="{{item.birth}}">
+        <input type="text" ng-model="item.birth">
       </label>
 
       <label class="item item-input">
         <span class="input-label">身份证</span>
-        <input type="text" value="{{item.identityCard}}">
+        <input type="text" ng-model="item.identityCard">
       </label>
 
       <ion-item class="item-divider">
@@ -58,12 +58,12 @@
       </ion-item>
       <label class="item item-input">
         <span class="input-label">密码</span>
-        <input type="text" value="{{item.password}}">
+        <input type="text" ng-model="item.password">
       </label>
 
       <label class="item item-input">
         <span class="input-label">确认密码</span>
-        <input type="text" value="{{item.password2}}">
+        <input type="text" ng-model="item.password2">
       </label>
 
       <ion-item class="item-divider">
@@ -71,15 +71,15 @@
       </ion-item>
       <label class="item item-input">
         <span class="input-label">手机</span>
-        <input type="text" value="{{item.phone}}">
+        <input type="text" ng-model="item.phone">
       </label>
       <label class="item item-input">
         <span class="input-label">QQ</span>
-        <input type="text" value="{{item.QQ}}">
+        <input type="text" ng-model="item.QQ">
       </label>
       <label class="item item-input">
         <span class="input-label">邮箱</span>
-        <input type="text" value="{{item.email}}">
+        <input type="text" ng-model="item.email">
       </label>
 
       <ion-item class="item-divider">
@@ -87,7 +87,7 @@
       </ion-item>
       <label class="item item-input">
         <span class="input-label">单位</span>
-        <input type="text" value="{{item.work}}">
+        <input type="text" ng-model="item.work">
       </label>
       
       <label class="item item-input item-select">
@@ -102,17 +102,17 @@
 
       <label class="item item-input">
         <span class="input-label">地址</span>
-        <input type="text" value="{{item.address}}">
+        <input type="text" ng-model="item.address">
       </label>
 
       <label class="item item-input">
         <span class="input-label">爱好</span>
-        <input type="text" value="{{item.hobby}}">
+        <input type="text" ng-model="item.hobby">
       </label>
 
       <label class="item item-input">
         <span class="input-label">简介</span>
-        <input type="text" value="{{item.brief}}">
+        <input type="text" ng-model="item.brief">
       </label>
 
       <ion-item class="item-divider">

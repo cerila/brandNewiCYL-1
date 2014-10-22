@@ -20,18 +20,14 @@
   <ion-content class="has-footer">
 
   <div class="list list-inset">
-  <!--     <ion-item class="item-divider">
-        基本信息
-      </ion-item> -->
-
       <label class="item item-input item-stacked-label">
         <span class="input-label">用户ID</span>
-        <input type="text" readonly="readonly" value="{{item.userID}}">
+        <input type="text" readonly="readonly" ng-model="item.userID">
       </label>
 
       <label class="item item-input item-stacked-label">
         <span class="input-label">用户名</span>
-        <input type="text" placeholder="姓名" value="{{item.userName}}">
+        <input type="text" placeholder="姓名" ng-model="item.userName">
       </label>
 
       <label class="item item-input item-select">
@@ -46,46 +42,13 @@
 
       <label class="item item-input item-stacked-label">
         <span class="input-label">身份证号（请正确填写）</span>
-        <input type="text" placeholder="身份证号" value="{{item.identityCard}}">
+        <input type="text" placeholder="身份证号" ng-model="item.identityCard">
       </label>
 
       <label class="item item-input item-stacked-label">
         <span class="input-label">联系方式（请正确填写）</span>
-        <input type="text" placeholder="手机号码" value="{{item.phone}}">
+        <input type="text" placeholder="手机号码" ng-model="item.phone">
       </label>
-
-
-      <!-- <ion-item class="item-divider">
-        密码
-      </ion-item>
-      <label class="item item-input">
-        <span class="input-label">密码</span>
-        <input type="text" value="{{item.password}}">
-      </label>
-
-      <label class="item item-input">
-        <span class="input-label">确认密码</span>
-        <input type="text" value="{{item.password2}}">
-      </label> -->
-
-      <!-- <ion-item class="item-divider">
-        联系方式
-      </ion-item> -->
-     <!--  <label class="item item-input">
-        <span class="input-label">手机</span>
-        <input type="text" value="{{item.phone}}">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">QQ</span>
-        <input type="text" value="{{item.QQ}}">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">邮箱</span>
-        <input type="text" value="{{item.email}}">
-      </label> -->
-
-      
-
     </div>
     
 
