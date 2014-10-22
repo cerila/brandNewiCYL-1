@@ -323,15 +323,15 @@ angular.module('demo.controllers', [])
 
   $scope.priceRegion = '200-400';
 
-  $scope.catagoryList = [
-    {'catagoryName': '服饰/鞋/包/配饰'},
-    {'catagoryName': '居家生活'},
-    {'catagoryName': '母婴童装'},
-    {'catagoryName': '手机数码'},
-    {'catagoryName': '家用电器'}
+  $scope.categoryList = [
+    {'categoryName': '服饰/鞋/包/配饰'},
+    {'categoryName': '居家生活'},
+    {'categoryName': '母婴童装'},
+    {'categoryName': '手机数码'},
+    {'categoryName': '家用电器'}
   ];
 
-  $scope.catagory = '手机数码';
+  $scope.category = '手机数码';
 
   $scope.regions = [
     {'region': '浙江省'},
@@ -347,7 +347,7 @@ angular.module('demo.controllers', [])
      'price': '1000',
      'region': 'A区',
      'commentNum':'2',
-     'catagory':'家居生活',
+     'category':'家居生活',
      'imageUrl': "img/main_backimg_fade.png"
     },
     {'name': '奥普兰床',
@@ -355,7 +355,7 @@ angular.module('demo.controllers', [])
      'price': '1000',
      'region': 'A区',
      'commentNum':'2',
-     'catagory':'家居生活',
+     'category':'家居生活',
      'imageUrl': "img/main_backimg_fade.png"
     },
     {'name': '奥普兰餐桌',
@@ -363,7 +363,7 @@ angular.module('demo.controllers', [])
      'price': '1000',
      'region': 'A区',
      'commentNum':'2',
-     'catagory':'家居生活',
+     'category':'家居生活',
      'imageUrl': "img/main_backimg_fade.png"
    }
   ];
@@ -398,6 +398,122 @@ angular.module('demo.controllers', [])
   
 }])
 
+.controller('mainPersonPublish', ['$scope', function($scope) {
+  $scope.item = {'itemTitle':'',
+    'state':'',
+    'itemLink':'',
+    'contacts':'省直团工委',
+    'phone':'13757196484'};
+
+  $scope.types = [
+    {name:'通知公告', category:'团讯要闻'},
+    {name:'头条新闻', category:'团讯要闻'},
+    {name:'新闻', category:'团讯要闻'},
+    {name:'本级活动', category:'活动超市'},
+    {name:'部门活动', category:'活动超市'},
+    {name:'活动回顾', category:'活动超市'},
+  ];
+
+  $scope.typeName = $scope.types[0];
+
+  $scope.clearContent = function() {
+    $scope.item.itemTitle = '';
+    $scope.item.state = '';
+    $scope.item.itemLink = '';
+  };
+
+}])
+
+.controller('mainPersonSignIn', ['$scope', function($scope) {
+  $scope.userName = '王成';
+  $scope.userID = '2014082911423';
+  $scope.currentNum = '0';
+  $scope.toBeChecked = '0';
+}])
+
+.controller('mainPersonManagement', ['$scope', function($scope) {
+  $scope.activityContent = "";
+
+  $scope.types = [
+    {name:'全部', category:'全部'},
+    {name:'读书会', category:'读书会'},
+    {name:'--大型活动', category:'读书会'},
+    {name:'--阅读分享', category:'读书会'},
+    {name:'团青活动', category:'团青活动'},
+    {name:'--相亲活动', category:'团青活动'},
+    {name:'--娱体活动', category:'团青活动'},
+    {name:'--组织活动', category:'团青活动'},
+  ];
+
+  $scope.typeName = $scope.types[0];
+
+  $scope.depts = [
+    {name:'全部', category:''},
+    {name:'省委办公厅', category:''},
+    {name:'浙江省团建', category:''}
+  ];
+
+  $scope.deptName = $scope.types[0];
+
+  $scope.items = [
+    {activityTitle:'省直机关午间正能量——摄影沙龙活动', 
+     typeName:'娱体活动',
+     organizer:'浙江省团建',
+     number:'0',
+     count:'38',
+     url:'#/main/personStatistics'},
+    {activityTitle:'关于举办“书海琴缘”省直机关单身青年钢琴训练营的通知', 
+     typeName:'娱体活动',
+     organizer:'浙江省团建',
+     number:'0',
+     count:'381',
+     url:'#/main/personStatistics'},
+    {activityTitle:'真人CS', 
+     typeName:'娱体活动',
+     organizer:'浙江省团建',
+     number:'0',
+     count:'328',
+     url:'#/main/personStatistics'},
+    {activityTitle:'万人相亲会够“疯狂” 解读五宗“最”', 
+     typeName:'相亲活动',
+     organizer:'浙江省团建',
+     number:'0',
+     count:'138',
+     url:'#/main/personStatistics'},
+  ];
+
+}])
+
+.controller('mainPersonStatistics', ['$scope', function($scope) {
+  $scope.activityTitle = '关于举办“书海琴缘”省直机关单身青年钢琴训练营的通知';
+  
+  $scope.items = [
+    {name:'浙商银行', 
+     dept:'浙商银行',
+     address:'浙江省杭州市',
+     phone:'12456789038',
+     count:'2',
+     isConfirmed:'未确认',
+     comment:'0'},
+    {name:'省司法厅', 
+     dept:'省司法厅',
+     address:'浙江省杭州市',
+     phone:'12456789038',
+     count:'2',
+     isConfirmed:'已确认',
+     comment:'0'},
+    {name:'保险1', 
+     dept:'保险公司',
+     address:'浙江省杭州市',
+     phone:'12456789038',
+     count:'2',
+     isConfirmed:'未确认',
+     comment:'0'}
+  ];
+  $scope.count = $scope.items.length;
+
+}])
+
 .controller('mainPersonSignIn', ['$scope', function($scope) {
   $scope.userName = '王成';
   $scope.userID = '2014082911423';
@@ -419,6 +535,99 @@ angular.module('demo.controllers', [])
   ];
 }])
 
+.controller('mainPersonInformation', ['$scope', function($scope) {
+  $scope.item = {'userName':'王成',
+    'userID':'2014082911423',
+    'birth':'1978-5-12',
+    'identityCard':'000000000000000',
+
+    'password':'123',
+    'password2':'123',
+    'phone':'13732255555',
+    'QQ':'113456789',
+    'email':'123@qq.com',
+
+    'work':'省直机关团工委',
+    'address':'浙江省杭州市',
+    'hobby':'读书',
+    'brief':'无'};
+
+
+}])
+
+.controller('mainPersonRegister', ['$scope', function($scope) {
+  $scope.item = {'userName':'',
+    'userID':'2014082911423',
+    'identityCard':'',
+    'phone':''};
+}])
+
+.controller('mainPersonGuide', ['$scope', function($scope) {
+  $scope.item = {'userName':'',
+    'userID':'2014082911423',
+    'identityCard':'',
+    'phone':''};
+
+  $scope.items = [
+    {'itemTitle': '如何报名活动',
+     'date': '10-10',
+     'url': ''},
+    {'itemTitle': '操作指南',
+     'date': '10-10',
+     'url': ''}
+  ];
+
+  $scope.clearSearch = function() {
+    $scope.search = '';
+  };
+
+}])
+
+.controller('mainPersonQuestionnaire', ['$scope', function($scope) {
+  $scope.staff = "91001";
+
+  $scope.types = [
+    {name:'团青活动', category:''},
+    {name:'活动调查', category:''}
+  ];
+
+  $scope.typeName = $scope.types[0];
+
+  // $scope.choices = [
+
+  // ]
+  $scope.items = [
+    {num:'1', 
+     name:'Q1',
+     question:'智慧团青版块界面如何？',
+     answer1:'1.很好',
+     answer2:'2.好',
+     answer3:'3.一般',
+     answer4:'4.差',
+     choice: '4'},
+    {num:'2', 
+     name:'Q2',
+     question:'活动版块内容丰富吗？',
+     answer1:'1.很好',
+     answer2:'2.好',
+     answer3:'3.一般',
+     answer4:'4.差',
+     choice: '1'}
+  ];
+
+}])
+
+.controller('mainPersonWarn', ['$scope', function($scope) {
+  $scope.items = [
+    {activityTitle:'关于举办“书海琴缘”省直机关单身青年钢琴训练营的报名', 
+     date:'2014-8-14',
+     content:'请提前报名'},
+    {activityTitle:'关于开展2014年度浙江省青年岗位能手评选的通知', 
+     date:'2014-8-14',
+     content:'请尽快报名'}
+  ];
+
+}])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {

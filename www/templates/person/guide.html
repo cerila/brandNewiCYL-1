@@ -6,37 +6,35 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-        签到管理
+      操作指南
     </h1>
     <div class="buttons">
       <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
       </button>
     </div>
   </ion-nav-bar>
-  
-  <ion-content class="has-footer">
-    <div class="list list-inset">
-      <ion-item>
-        姓名：{{userName}}
-      </ion-item>
-      <ion-item>
-        ID：{{userID}}
-      </ion-item>
-    </div>
 
-    <button class="button button-block button-positive">
-        签到
+  <ion-header-bar class="bar-light bar-subheader">
+    <input type="search"
+      placeholder="搜索标题..."
+      ng-model="search"
+      ng-focus="searchFocused = true"
+      ng-blur="searchFocused = false">
+    <button ng-if="search.length"
+      class="button button-icon ion-android-close input-button"
+      ng-click="clearSearch()">
     </button>
-    
+  </ion-header-bar>
+
+  
+  <ion-content>
     <ion-list>
-      <ion-item>
-        当日签到人数:{{currentNum}}
-      </ion-item>
-      <ion-item>
-        待检人数:{{toBeChecked}}
-      </ion-item>
+      <a class="item" href="{{item.url}}" ng-repeat="item in items">
+        <h2><b>>>{{item.itemTitle}}</b>[{{item.date}}]</h2>
+      </a>
     </ion-list>
   </ion-content>
+
 
   <ng-include src="'templates/common/footer.html'"></ng-include>
 
