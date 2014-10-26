@@ -149,24 +149,114 @@ angular.module('demo.controllers', [])
   
 }])
 
-.controller('mainNewsHomepage', ['$scope', function($scope) {
-  $scope.items = [
-    {'newsTitle': '"智慧团青"测试反馈在此填写',
-     'times': '89',
-     'imageUrl': "img/main_backimg_fade.png",
-     'date': '2014-10-8',
-     'url': '#/main/newsArticle'},
-    {'newsTitle': '"智慧团青"测试反馈在此填写',
-     'times': '102',
-     'imageUrl': "img/main_backimg_fade.png",
-     'date': '2014-10-8',
-    'url': '#/main/newsArticle'},
-    {'newsTitle': '"智慧团青"测试反馈在此填写',
-     'times': '4',
-     'imageUrl': "img/main_backimg_fade.png",
-     'date': '2014-10-8',
-     'url': '#/main/newsArticle'}
-  ];
+.controller('mainNewsHomepage', ['$scope', 'Data', 'Storage', function($scope, Data, Storage) {
+  var pageParams = [
+  {
+    // pageName: 'mainNewsHomepage',
+    tabName: '通知公告',
+    tabCode: '300',
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  },
+  {
+    // pageName: 'mainNewsHomepage',
+    tabName: '团讯要闻',
+    tabCode: '301',
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  },
+  {
+    // pageName: 'mainNewsHomepage',
+    tabName: '头条新闻',
+    tabCode: '302',
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  }];
+  $scope.articleLists = [];
+  var moreData = [false, false, false];
+    
+  $scope.tabNav = function(index){
+    // pageParams[index].lastID = 0;
+    if(!$scope.articleLists[index]){
+      // console.log(pageParams[index].loaded);
+      Data.articleList.loadlist(pageParams[index], function(data){
+        $scope.articleLists[index] = data.data.items;
+        // console.log($scope.articleLists[index].length);
+        // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+        pageParams[index].loaded = $scope.articleLists[index].length;
+        pageParams[index].lastID = $scope.articleLists[index][$scope.articleLists[index].length - 1][0];
+        moreData[index] = true;
+      });
+    }
+    // console.log(pageParams[2].lastID);
+  };
+  
+  //下拉刷新
+  $scope.doRefresh = function(index) {
+    pageParams[index].lastID = 0;
+    pageParams[index].requestNO = pageParams[index].loaded;
+    Data.articleList.loadlist(pageParams[index], function(data){
+      $scope.articleLists[index] = data.data.items;
+      // console.log(pageParams[index]);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams[index].loaded = $scope.articleLists[index].length;
+      pageParams[index].lastID = $scope.articleLists[index][$scope.articleLists[index].length - 1][0];
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function(index) {
+    Data.articleList.loadlist(pageParams[index], function(data){
+      $scope.articleLists[index] = $scope.articleLists[index].concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams[index].loaded = $scope.articleLists[index].length;
+      pageParams[index].lastID = $scope.articleLists[index][$scope.articleLists[index].length - 1][0];
+      // console.log(Storage.kget(pageParams[index].tabCode));
+      // console.log(pageParams[index].loaded);
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.articleList.loadlist(pageParams[index], function(data){
+      if(data.data.items.length < 1) {
+        moreData[index] = false;
+      }
+      else {
+        moreData[index] = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function(index) {
+    // console.log(moreData[index]+'001');
+    return moreData[index];
+  };
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
+
+  // $scope.items = [
+  //   {'newsTitle': '"智慧团青"测试反馈在此填写',
+  //    'times': '89',
+  //    'imageUrl': "img/main_backimg_fade.png",
+  //    'date': '2014-10-8',
+  //    'url': '#/main/newsArticle'},
+  //   {'newsTitle': '"智慧团青"测试反馈在此填写',
+  //    'times': '102',
+  //    'imageUrl': "img/main_backimg_fade.png",
+  //    'date': '2014-10-8',
+  //   'url': '#/main/newsArticle'},
+  //   {'newsTitle': '"智慧团青"测试反馈在此填写',
+  //    'times': '4',
+  //    'imageUrl': "img/main_backimg_fade.png",
+  //    'date': '2014-10-8',
+  //    'url': '#/main/newsArticle'}
+  // ];
 }])
 
 .controller('mainNewsArticle', ['$scope', function($scope) {

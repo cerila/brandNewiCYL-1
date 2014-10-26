@@ -177,7 +177,16 @@ angular.module('icyl.services', ['ngResource'])
                     {
                       signin: {method:'POST', params:{c:'user', a:'get_token'}},
                       singup: {method:'POST', params:{c:'user', a:'register'}}
-                    })
+                    }),
+    articleList: $resource('http://17f.go5le.net/mall/index/app_news.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'},
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      loadlist: {method:'JSONP'}
+                    }),
 
 
 
