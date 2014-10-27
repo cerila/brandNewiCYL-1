@@ -755,6 +755,8 @@ angular.module('demo.controllers', [])
   });
   $scope.openPopover = function($event) {
     $scope.popover.show($event);
+    console.log($event);
+    $scope.hello = "Hello World!";
   };
   $scope.closePopover = function() {
     $scope.popover.hide();

@@ -4,6 +4,10 @@
     .button {
       margin-top: 2px;
     }
+    .popfilter {
+      width: 95%;
+      margin-top: 6px;
+    }
   </style>
 
   <ion-nav-bar class="bar-stable nav-title-slide-ios7">
@@ -64,12 +68,12 @@
   <ng-include src="'templates/common/footer.html'"></ng-include>
 
   <script id="my-popover.html" type="text/ng-template">
-    <ion-popover-view>
+    <ion-popover-view class="popfilter" style="">
       <ion-header-bar>
         <h1 class="title">My Popover Title</h1>
       </ion-header-bar>
       <ion-content>
-        Hello!
+        {{hello}}
       </ion-content>
     </ion-popover-view>
   </script>
