@@ -777,7 +777,7 @@ angular.module('demo.controllers', [])
     $scope.data = {}
     // An elaborate, custom popup
     var myPopup = $ionicPopup.show({
-      template: '<input type="password" ng-model="data.wifi">',
+      template: '<input type="password" ng-model="data.wifi"  placeholder="Password">',
       title: 'Enter Wi-Fi Password',
       subTitle: 'Please use normal things',
       scope: $scope,
