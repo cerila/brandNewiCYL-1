@@ -77,6 +77,9 @@ angular.module('icyl.controllers', [])
 
 }])
 
+.controller('simpleContainer', ['$scope', '$state', 'Identification', 'User', 'Alert', 'CustomNav', '$window', function ($scope, $state, Identification, User, Alert, CustomNav, $window) {
+
+  }])
 //默认主页控制器
 .controller('mainDefault', ['$scope', '$window', 'Storage', function($scope, $window, Storage) {
 

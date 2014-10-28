@@ -146,25 +146,25 @@ angular.module('icyl.services', ['ngResource'])
 //数据模型函数
 .factory('Data', ['$resource', function($resource){
   return {
-    // User: $resource('http://17f.go5le.net/mall/index/chklogin_app.asp', 
-    User: $resource('http://:baseurl/:path/public/:route', 
+    User: $resource('http://17f.go5le.net/mall/index/chklogin_app.asp', 
+    // User: $resource('http://:baseurl/:path/public/:route', 
                     {
-                      baseurl:'localhost', 
-                      path:'myserver',
-                      // callback: 'JSON_CALLBACK' //jsonp_flag
+                      // baseurl:'localhost', 
+                      // path:'myserver',
+                      callback: 'JSON_CALLBACK' //jsonp_flag
                     }, 
                     {
                       //signin: {method:'POST', params:{c:'user', a:'get_token'}, timeout: 3000},//json_flag
                       //signup: {method:'POST', params:{c:'user', a:'register'}, timeout: 3000}, //json_flag
                       //checktoken: {method:'POST', params:{c:'user', a:'user_verify'}, timeout: 3000}, //json_flag
                       //updateuserinfo: {method:'POST', params:{c:'user', a:'update_userinfo'}, timeout: 3000},  //json_flag
-                      // signin: {method:'JSONP', params:{c:'user', a:'get_token'}, timeout: 3000}, //jsonp_flag
-                      // signup: {method:'JSONP', params:{c:'user', a:'register'}, timeout: 3000},  //jsonp_flag
-                      // checktoken: {method:'JSONP', params:{c:'user', a:'user_verify'}, timeout: 3000}, //jsonp_flag
+                      signin: {method:'JSONP', params:{c:'user', a:'get_token'}, timeout: 3000}, //jsonp_flag
+                      signup: {method:'JSONP', params:{c:'user', a:'register'}, timeout: 3000},  //jsonp_flag
+                      checktoken: {method:'JSONP', params:{c:'user', a:'user_verify'}, timeout: 3000}, //jsonp_flag
                       // updateuserinfo: {method:'JSONP', params:{c:'user', a:'update_userinfo'}, timeout: 3000},  //jsonp_flag
-                      signin: {method:'POST', params:{route:'login'}, timeout: 3000}, //json_flag laravel
-                      signup: {method:'POST', params:{route:'register'}, timeout: 3000},  //json_flag laravel
-                      checktoken: {method:'POST', params:{route:'checkToken'}, timeout: 3000}, //json_flag laravel
+                      // signin: {method:'POST', params:{route:'login'}, timeout: 3000}, //json_flag laravel
+                      // signup: {method:'POST', params:{route:'register'}, timeout: 3000},  //json_flag laravel
+                      // checktoken: {method:'POST', params:{route:'checkToken'}, timeout: 3000}, //json_flag laravel
                       updateuserinfo: {method:'POST', params:{route:'updateUserinfo'}, timeout: 3000},  //json_flag laravel
                       update_avatar: {method:'POST'},
                       update_mobile: {method:'POST'},
@@ -273,8 +273,8 @@ angular.module('icyl.services', ['ngResource'])
                 Storage.kset('password', data.data.password);
               }
               Storage.kset('username', data.data.username);
-              Storage.kset('token', data.data.token);
-              Session.create(data.data.token);
+              // Storage.kset('token', data.data.token);  ########################key, use in the future
+              // Session.create(data.data.token);  ########################key, use in the future
               //$scope.mine.mineNgclick = '';
               //$scope.mine.minehref = '#/main/mine';
               //Alert(data.data.token+'=='+data.data.username+'=='+data.data.password+'=='+$scope.loginData.rememberPwd);
@@ -379,7 +379,7 @@ angular.module('icyl.services', ['ngResource'])
       userLogout: function() {
         Session.destroy();
         Storage.kremove('password');
-        Storage.kremove('token');
+        // Storage.kremove('token');  ########################key, use in the future
         $state.go('main.mine');
       },
 
@@ -492,8 +492,8 @@ angular.module('icyl.services', ['ngResource'])
               else {
                 Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
                   if (data.err_code === 0) { 
-                    Storage.kset('token', data.data.token);
-                    Session.create(data.data.token);
+                    // Storage.kset('token', data.data.token);  ########################key, use in the future
+                    // Session.create(data.data.token);  ########################key, use in the future
                     //Actions.mineClick.allowed($scope);
                     //console.log("#6----------"+$scope.$id);  //=====================test
                     //return true;
@@ -520,8 +520,8 @@ angular.module('icyl.services', ['ngResource'])
           else {
             Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
               if (data.err_code === 0) { 
-                  Storage.kset('token', data.data.token);
-                  Session.create(data.data.token);
+                  // Storage.kset('token', data.data.token);  ########################key, use in the future
+                  // Session.create(data.data.token);  ########################key, use in the future
                   //Actions.mineClick.allowed($scope);
                   //console.log("#8----------"+$scope.$id);  //=====================test
                   //return true;
@@ -542,7 +542,7 @@ angular.module('icyl.services', ['ngResource'])
         }
         else {
           if (Session.token) {
-            //console.log("#10----------"+$scope.$id);  //=====================test
+            console.log("#10----------"+$scope.$id);  //=====================test
             Data.User.checktoken({token: Session.token}, function(data) {
               if (data.err_code === 0) { 
                 //Actions.mineClick.allowed($scope);

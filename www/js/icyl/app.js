@@ -586,7 +586,7 @@ angular.module('icyl', dependencies)
     //个人定制
     .state('main.personHomepage', {
       url:'/personHomepage',
-      access: { authenticate: false },
+      access: { authenticate: true },
       views: {
         'main-container': {
           templateUrl: 'templates/person/homepage.html',
@@ -706,10 +706,58 @@ angular.module('icyl', dependencies)
     })
     ;
 
+    $stateProvider
+
+    .state('simple', {
+      url:'/simple',
+      abstract: true,
+      access: { authenticate: false },
+      templateUrl: 'templates/simple.html',
+      controller: 'simpleContainer'
+    })
+
+    // //分模块加载
+    // .state('main.default', {
+    //   url:'/default',
+    //   access: { authenticate: false },
+    //   views: {
+    //     // 'main-header': {
+    //     //   templateUrl: 'templates/common/header.html'
+    //     // },
+    //     'main-container': {
+    //       templateUrl: 'templates/main/default.html'
+    //       //, controller: 'mainDefault'
+    //     },
+    //     'main-footer': {
+    //       templateUrl: 'templates/common/footer.html'
+    //     }
+    //   },
+    //   controller: 'mainDefault'
+    // })
+    
+    //一次加载整个页面
+    .state('simple.default', {
+      url:'/default',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/test/demo_shouye.html',
+          controller: 'mainDefault'
+        }
+      }
+    })
+    ;
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/main/default');
+  // $urlRouterProvider.otherwise('/main/default');
+  $urlRouterProvider.otherwise('/simple/default');
 
 }])
+
+  
+  
+
+
 
 .config(['$ionicConfigProvider', function ($ionicConfigProvider) {
   $ionicConfigProvider.prefetchTemplates(false);
