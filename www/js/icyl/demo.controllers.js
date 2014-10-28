@@ -53,6 +53,13 @@ angular.module('demo.controllers', [])
   };
 
   $scope.weixin = function() {
+    navigator.weixin.register('wx9123bbd027f0a99e', function(){
+      alert('registered');
+    }, 
+    function(){
+      alert('not register');
+    });
+
     navigator.weixin.openWeixin(function(){
       alert('haha');
     }, 
