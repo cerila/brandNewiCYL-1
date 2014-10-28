@@ -210,3 +210,53 @@ Result~~~~~~~~~~~~~~~~~~~
 
 =#6-END==================
 =========================
+
+
+
+=========================
+=#7======================
+
+Subject   : 微信分享插件
+Date      : 20141010
+Author    : Alex Zhou
+Abstract  : 在Mac OS X 10.9.5 + Xcode 6.0.1环境下开发微信分享功能
+Key Words : 
+
+Main Body----------------
+参考问题: 今天在用一个第三方的静态库.a文件的时候, 运行于64位模拟器, 报错. 我在终端查了下那个.a文件支持哪些文件结构, 发现缺少x86_64, arm64
+解决方法: 是把自己的工程只适配于32位, iPhone5s以上是64位兼容32位, 在TARGETS里面点项目名 -> Build Settings -> Architectures -> Other.. -> $(ARCHS_STANDARD_32_BIT), 这样你的App就会只支持32位的了.
+我的问题: 出现WXApi.h file not found的错误, 是因为WXApi.h只支持32位, 按照上述方法修改后问题解决.
+
+Method & Material~~~~~~~~
+Online    : https://github.com/ajccom/phonegap-weixin
+
+Code      : 
+
+Procedure~~~~~~~~~~~~~~~~
+1. 工程在Xcode中打开(参考PhoneGap文档iOS Platform Guide);
+2. 在工程中设置URL Types(选中工程, Targets里面点项目名, Info);
+3. 设置Build Settings里面的Architectures从$(ARCHS_STANDARD)改为$(ARCHS_STANDARD_32_BIT);
+4. 在工程中导入Wechat的Lib, libWeChatSDK.a, WXApi.h, WXApiObject.h(任意文件夹上右键Add Files to "Project Name");
+5. 模拟器运行, 真机运行.
+Result~~~~~~~~~~~~~~~~~~~
+
+Note~~~~~~~~~~~~~~~~~~~~~
+1. Xcode工程最外面的config.xml和www文件夹是项目中的原始文件, 不是platforms目录里面的文件;
+2. Staging目录里的文件是platforms目录下的文件;
+3. 要修改icon和splash需要在Resources/splash和Resources/icon目录下直接修改, 修改www/res里面的文件没用;
+
+=#7-END==================
+=========================
+
+
+
+=========================
+=#8======================
+
+Subject   : iPhone连接VMWare中的Mac OS X系统
+Date      : 20141010
+Author    : Alex Zhou
+Abstract  : VMWare暂时不识别USB3.0接口, 因此点击VMWare右下角任务栏切换设备时会出现驱动无法安装的错误, 将iPhone连接到USB2.0接口就解决了.
+
+=#8-END==================
+=========================
