@@ -719,6 +719,84 @@ angular.module('demo.controllers', [])
 
 }])
 
+//简版
+//首页
+.controller('simpleHomepage', ['$scope', 'Data', 'Storage', function($scope, Data, Storage) {
+  var pageParams = 
+  {
+    // pageName: 'mainNewsHomepage',
+    tabName: '通知公告',
+    tabCode: '301',
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  };
+  $scope.articleLists = {};
+  var moreData = false;
+    
+  Data.articleList.loadlist(pageParams, function(data){
+    $scope.articleLists = data.data.items;
+    pageParams.loaded = $scope.articleLists.length;
+    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    moreData = true;
+  });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.articleList.loadlist(pageParams, function(data){
+      $scope.articleLists = data.data.items;
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    Data.articleList.loadlist(pageParams, function(data){
+      $scope.articleLists = $scope.articleLists.concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.articleList.loadlist(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
+}])
+
+//文章导航
+.controller('simpleNavArticle', ['$scope', function($scope) {
+  // $scope.items = [
+  //   {activityTitle:'关于举办“书海琴缘”省直机关单身青年钢琴训练营的报名', 
+  //    date:'2014-8-14',
+  //    content:'请提前报名'},
+  //   {activityTitle:'关于开展2014年度浙江省青年岗位能手评选的通知', 
+  //    date:'2014-8-14',
+  //    content:'请尽快报名'}
+  // ];
+
+}])
+
+
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope,

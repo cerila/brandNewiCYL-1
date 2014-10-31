@@ -715,25 +715,6 @@ angular.module('icyl', dependencies)
       templateUrl: 'templates/simple.html',
       controller: 'simpleContainer'
     })
-
-    // //分模块加载
-    // .state('main.default', {
-    //   url:'/default',
-    //   access: { authenticate: false },
-    //   views: {
-    //     // 'main-header': {
-    //     //   templateUrl: 'templates/common/header.html'
-    //     // },
-    //     'main-container': {
-    //       templateUrl: 'templates/main/default.html'
-    //       //, controller: 'mainDefault'
-    //     },
-    //     'main-footer': {
-    //       templateUrl: 'templates/common/footer.html'
-    //     }
-    //   },
-    //   controller: 'mainDefault'
-    // })
     
     //一次加载整个页面
     .state('simple.default', {
@@ -746,11 +727,35 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    //首页
+    .state('simple.homepage', {
+      url:'/homepage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/homepage.html',
+          controller: 'simpleHomepage'
+        }
+      }
+    })
+
+    //文章导航
+    .state('simple.navArticle', {
+      url:'/navArticle',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/navigation/article.html',
+          controller: 'simpleNavArticle'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/main/default');
-  $urlRouterProvider.otherwise('/simple/default');
+  $urlRouterProvider.otherwise('/simple/homepage');
 
 }])
 
