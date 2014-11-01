@@ -123,7 +123,7 @@ angular.module('icyl.services', ['ngResource'])
     return this.histories.indexOf(toState);
   };
   this.defaultback = function (currentState) {
-    return 'main.default';
+    return 'simple.homepage';
     // var currentState = currentState.replace(/\./,"_");
     // var temp = 'null';
     // !!DEFAULT_NAV_TREE_REVERT[currentState] ? temp = DEFAULT_NAV_TREE_REVERT[currentState].slice(0, -2) : temp = '';
