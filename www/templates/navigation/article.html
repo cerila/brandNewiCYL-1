@@ -1,0 +1,156 @@
+<ion-view>
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      文章导航
+    </h1>
+    <div class="buttons">
+      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button>
+    </div>
+  </ion-nav-bar>
+
+  <ion-content scroll="true" class="has-footer">
+    <ion-list>
+      <div class="item item-divider">
+        <h2 class="text-center">团青时讯</h2>
+      </div>
+      <ion-item>
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-document-text" style="background: #F3893C" href="#/simple/articleList/300"></a>
+            <p class="text-center-2"><b>通知公告</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-compose" style="background: #FA6469"  href="#/simple/articleList/301">
+            </a>
+            <p class="text-center-2"><b>团讯要闻</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-information" style="background: #46CECE"  href="#/simple/articleList/302">
+            </a>
+            <p class="text-center-2"><b>头条新闻</b></p>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="item item-divider">
+        <h2 class="text-center">智汇共享</h2>
+      </div>
+      <ion-item>
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-chatbox-working" style="background: #93CE68"  href="#/simple/articleList/304">
+            </a>
+            <p class="text-center-2"><b>书记寄语</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-social-buffer" style="background: #C761AA"  href="#/simple/articleList/303">
+            </a>
+            <p class="text-center-2"><b>案例共享</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-social-twitter" style="background: #DCBF82"  href="#/simple/articleList/306">
+            </a>
+            <p class="text-center-2"><b>微客大咖</b></p>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="item item-divider">
+        <h2 class="text-center">活动超市</h2>
+      </div>
+      <ion-item>
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-trophy" style="background: #FA6469"  href="">
+            </a>
+            <p class="text-center-2"><b>评比活动</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ribbon-b" style="background: #58B5E0"  href="#/simple/articleList/308">
+            </a>
+            <p class="text-center-2"><b>部门活动</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-speakerphone" style="background: #FDB747"  href="">
+            </a>
+            <p class="text-center-2"><b>支部活动</b></p>
+          </div>
+        </div>
+
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-circle-filled" style="background: #46CECE"  href="#/simple/articleList/310">
+            </a>
+            <p class="text-center-2"><b>活动回顾</b></p>
+          </div>
+
+          <div class="col">
+          </div>
+
+          <div class="col">
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="item item-divider">
+        <h2 class="text-center">青年创业</h2>
+      </div>
+      <ion-item>
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-power" style="background: #BA9971"  href="#/simple/articleList/318">
+            </a>
+            <p class="text-center-2"><b>扶持政策</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-browsers" style="background: #94CE68"  href="">
+            </a>
+            <p class="text-center-2"><b>创业项目</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-people" style="background: #B48FC2"  href="#/simple/articleList/319">
+            </a>
+            <p class="text-center-2"><b>招聘信息</b></p>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="item item-divider">
+        <h2 class="text-center">党建动态</h2>
+      </div>
+      <ion-item>
+        <div class="row no-padding">
+          <div class="col text-center">
+            <a class="button round-button icon ion-paper-airplane" style="background: #3B78CF"  href="#/simple/articleList/299">
+            </a>
+            <p class="text-center-2"><b>党建动态</b></p>
+          </div>
+
+          <div class="col">
+          </div>
+
+          <div class="col">
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
