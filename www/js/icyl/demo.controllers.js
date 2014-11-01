@@ -728,7 +728,7 @@ angular.module('demo.controllers', [])
 
 //简版
 //首页
-.controller('simpleHomepage', ['$scope', 'Data', function($scope, Data) {
+.controller('simpleHomepage', ['$scope', 'Data', 'CustomNav', function($scope, Data, CustomNav) {
   var pageParams = 
   {
     // pageName: 'mainNewsHomepage',
@@ -738,6 +738,7 @@ angular.module('demo.controllers', [])
     lastID: 0,
     requestNO: 20
   };
+  $scope.showNavBack = !!CustomNav.histories.length;
   $scope.articleLists = {};
   var moreData = false;
     
