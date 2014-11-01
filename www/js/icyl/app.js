@@ -751,6 +751,17 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    .state('simple.articleList', {
+      url:'/articleList/:tabCode',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/articlelist.html',
+          controller: 'simpleArticleList'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
