@@ -752,6 +752,19 @@ angular.module('icyl', dependencies)
       }
     })
 
+    //活动导航
+    .state('simple.navActivity', {
+      url:'/navActivity',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/navigation/activity.html',
+          controller: 'simpleNavActivity'
+        }
+      }
+    })
+
+    //文章列表
     .state('simple.articleList', {
       url:'/articleList/:tabCode',
       access: { authenticate: false },
@@ -759,6 +772,18 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/main/articlelist.html',
           controller: 'simpleArticleList'
+        }
+      }
+    })
+
+    //活动列表
+    .state('simple.activityList', {
+      url:'/activityList/:tabCode',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/activitylist.html',
+          controller: 'simpleActivityList'
         }
       }
     })

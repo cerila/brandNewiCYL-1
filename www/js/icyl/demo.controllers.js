@@ -724,8 +724,6 @@ angular.module('demo.controllers', [])
 .controller('simpleHomepage', ['$scope', 'Data', function($scope, Data) {
   var pageParams = 
   {
-    // pageName: 'mainNewsHomepage',
-    tabName: '通知公告',
     tabCode: '301',
     loaded: 0,
     lastID: 0,
@@ -796,11 +794,15 @@ angular.module('demo.controllers', [])
 
 }])
 
+//活动导航
+.controller('simpleNavActivity', ['$scope', function($scope) {
+
+}])
+
+//文章列表
 .controller('simpleArticleList', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
   var pageParams = 
   {
-    // pageName: 'mainNewsHomepage',
-    tabName: '通知公告',
     tabCode: $stateParams.tabCode,
     loaded: 0,
     lastID: 0,
@@ -859,6 +861,87 @@ angular.module('demo.controllers', [])
   });
 }])
 
+//活动列表
+.controller('simpleActivityList', ['$scope', '$ionicModal', function($scope, $ionicModal) {
+
+  $scope.priceRegions = [
+    {'priceRegion': "0-100"},
+    {'priceRegion': '100-200'},
+    {'priceRegion': '200-400'},
+  ];
+
+  $scope.priceRegion = '200-400';
+
+  $scope.categoryList = [
+    {'categoryName': '服饰/鞋/包/配饰'},
+    {'categoryName': '居家生活'},
+    {'categoryName': '母婴童装'},
+    {'categoryName': '手机数码'},
+    {'categoryName': '家用电器'}
+  ];
+
+  $scope.category = '手机数码';
+
+  $scope.regions = [
+    {'region': '浙江省'},
+    {'region': '杭州市'},
+    {'region': '台州市'},
+    {'region': '宁波市'},
+    {'region': '绍兴市'}
+  ];
+
+  $scope.items = [
+    {'name': '奥普兰沙发',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'category':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+    },
+    {'name': '奥普兰床',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'category':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+    },
+    {'name': '奥普兰餐桌',
+     'provider': '奥普兰',
+     'price': '1000',
+     'region': 'A区',
+     'commentNum':'2',
+     'category':'家居生活',
+     'imageUrl': "img/main_backimg_fade.png"
+   }
+  ];
+
+  $ionicModal.fromTemplateUrl('commodityModal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.commodityModal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.commodityModal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.commodityModal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.commodityModal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+}])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
   $ionicPopover.fromTemplateUrl('my-popover.html', {
