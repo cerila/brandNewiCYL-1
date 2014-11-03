@@ -731,7 +731,7 @@ angular.module('demo.controllers', [])
 .controller('simpleHomepage', ['$scope', 'Data', 'CustomNav', function($scope, Data, CustomNav) {
   var pageParams = 
   {
-    tabCode: '301',
+    tabCode: '',
     loaded: 0,
     lastID: 0,
     requestNO: 20
