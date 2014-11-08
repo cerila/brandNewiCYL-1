@@ -915,7 +915,7 @@ angular.module('demo.controllers', [])
   });
 }])
 
-.controller('simpleArticle', ['$scope', '$stateParams', function($scope, $stateParams) {
+.controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
   var pageParams = 
   {
     articleId: $stateParams.articleId
@@ -923,13 +923,16 @@ angular.module('demo.controllers', [])
   
   $scope.article = {};
   $scope.comment = {};
+  var moreData = false;
     
-  Data.article.loadarticle(pageParams, function(data){
-    $scope.articleLists = data.data.items;
-    pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+  Data.Post.loadarticle(pageParams, function(data){
+    $scope.article = data.data.items;
+  });
+  Data.Post.loadcomments(pageParams, function(data){
+    $scope.comment = data.data.items;
     moreData = true;
   });
+
   $scope.newsTitle = '团省委组织召开机关党员大会';
   $scope.newsDate = '2014-8-11';
   $scope.newsSource = '浙江省团建';
@@ -1034,6 +1037,10 @@ angular.module('demo.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+}])
+
+.controller('simplePersonHomepage', ['$scope', function($scope) {
+  
 }])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {

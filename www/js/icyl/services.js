@@ -170,13 +170,15 @@ angular.module('icyl.services', ['ngResource'])
                       update_mobile: {method:'POST'},
                       update_password: {method:'POST'}
                     }),
-    Post: $resource('http://:baseurl/:path/lp.php',
+    Post: $resource('http://17f.go5le.net/mall/index/article.asp',
                     {
-                      baseurl:'localhost',
-                      path:'good'},
+                      // baseurl:'localhost',
+                      // path:'good'
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
                     {
-                      signin: {method:'POST', params:{c:'user', a:'get_token'}},
-                      singup: {method:'POST', params:{c:'user', a:'register'}}
+                      loadarticle: {method:'JSONP', params:{c:'user', a:'get_token'}, timeout: 3000},
+                      loadcomments: {method:'JSONP', timeout: 3000}
                     }),
     articleList: $resource('http://17f.go5le.net/mall/index/app_news.asp',
                     {
@@ -185,7 +187,7 @@ angular.module('icyl.services', ['ngResource'])
                       callback: 'JSON_CALLBACK' //jsonp_flag
                     },
                     {
-                      loadlist: {method:'JSONP'}
+                      loadlist: {method:'JSONP', timeout: 3000}
                     }),
 
 

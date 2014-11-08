@@ -822,6 +822,18 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    //个人定制
+    .state('simple.personHomepage', {
+      url:'/personHomepage',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/homepage.html',
+          controller: 'simplePersonHomepage'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
