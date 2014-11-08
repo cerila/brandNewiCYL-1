@@ -728,7 +728,7 @@ angular.module('demo.controllers', [])
 
 //简版
 //首页
-.controller('simpleHomepage', ['$scope', 'Data', 'CustomNav', function($scope, Data, CustomNav) {
+.controller('simpleHomepage', ['$scope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', function($scope, $ionicActionSheet, $location, Data, CustomNav) {
   var pageParams = 
   {
     tabCode: '',
@@ -746,6 +746,28 @@ angular.module('demo.controllers', [])
     pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
     moreData = true;
   });
+
+  // Triggered on a button click, or some other target
+  $scope.show = function() {
+    // Show the action sheet
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+       { text: '发布文章' },
+       { text: '发布活动' }
+      ],
+      titleText: '发布',
+      cancelText: '取消',
+      cancel: function() {
+          // add cancel code..
+      },
+      buttonClicked: function(index) {
+        if(index == 0){
+          $location.path('/simple/publish');
+        }
+        return true;
+      }
+    });
+  };
 
   //下拉刷新
   $scope.doRefresh = function() {
@@ -791,19 +813,43 @@ angular.module('demo.controllers', [])
 
 //文章导航
 .controller('simpleNavArticle', ['$scope', function($scope) {
-  // $scope.items = [
-  //   {activityTitle:'关于举办“书海琴缘”省直机关单身青年钢琴训练营的报名', 
-  //    date:'2014-8-14',
-  //    content:'请提前报名'},
-  //   {activityTitle:'关于开展2014年度浙江省青年岗位能手评选的通知', 
-  //    date:'2014-8-14',
-  //    content:'请尽快报名'}
-  // ];
 
 }])
 
 //活动导航
 .controller('simpleNavActivity', ['$scope', function($scope) {
+
+}])
+
+//搜索
+.controller('simpleSearch', ['$scope', function($scope) {
+  
+}])
+
+//发布
+.controller('simplePublish', ['$scope', function($scope) {
+  $scope.item = {'itemTitle':'',
+    'state':'',
+    'itemLink':'',
+    'contacts':'省直团工委',
+    'phone':'13757196484'};
+
+  $scope.types = [
+    {name:'通知公告', category:'团讯要闻'},
+    {name:'头条新闻', category:'团讯要闻'},
+    {name:'新闻', category:'团讯要闻'},
+    {name:'本级活动', category:'活动超市'},
+    {name:'部门活动', category:'活动超市'},
+    {name:'活动回顾', category:'活动超市'},
+  ];
+
+  $scope.typeName = $scope.types[0];
+
+  $scope.clearContent = function() {
+    $scope.item.itemTitle = '';
+    $scope.item.state = '';
+    $scope.item.itemLink = '';
+  };
 
 }])
 

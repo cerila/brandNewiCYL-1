@@ -9,10 +9,12 @@
     <h1 class="title">
       智慧团青
     </h1>
-    <div class="buttons">
-      <button class="button button-clear ion-funnel" ng-click="openPopover($event)">
+    <ion-nav-buttons side="right">
+      <a class="button button-icon icon ion-ios7-search" href="#/simple/search">
+      </a>
+      <button class="button button-icon icon ion-ios7-plus-outline" ng-click="show($event)">
       </button>
-    </div>
+    </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-content class="has-footer">
@@ -38,8 +40,26 @@
       </ion-slide>
     </ion-slide-box>
 
-  
-    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+    <div class="row no-padding">
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-document-text"  href="#/simple/articleList/300"></a>
+        <p class="text-center-2"><b>文章</b></p>
+      </div>
+
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-ios7-people" href="#/simple/activityList/301">
+        </a>
+        <p class="text-center-2"><b>活动</b></p>
+      </div>
+
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-coffee" href="#">
+        </a>
+        <p class="text-center-2"><b>服务</b></p>
+      </div>
+    </div>
+
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list>
       <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="http://17f.go5le.net/99_tj/991/news1.asp?id={{item[0]}}">
