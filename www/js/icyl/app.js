@@ -798,6 +798,30 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    //搜索
+    .state('simple.search', {
+      url:'/search',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/search.html',
+          controller: 'simpleSearch'
+        }
+      }
+    })
+
+    //发布
+    .state('simple.publish', {
+      url:'/publish',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/publish.html',
+          controller: 'simplePublish'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback

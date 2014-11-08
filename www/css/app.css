@@ -121,6 +121,7 @@
 .text-center-2 {
 	text-align: center;
 	margin-top: 0.3em;
+
 }
 /*.iframe-wrapper {
 	-webkit-overflow-scrolling: touch !important;
@@ -175,6 +176,21 @@ div.margin-top{
 	border-radius: 50%;
 	border:0;
 	color: #fff;
+}
+
+.round-button-2
+{
+	border-radius: 50%;
+	border: 1px solid #ef4e3a;
+}
+
+.round-avatar
+{
+	width:5em;
+	height:5em;
+	border-radius: 50%;
+	border:2px solid #dddddd;
+	margin: 0.5em;
 }
 
 /*.button .img-size .icon {
