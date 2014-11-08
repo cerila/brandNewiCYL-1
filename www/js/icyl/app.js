@@ -100,7 +100,7 @@ angular.module('icyl', dependencies)
     toState.name.indexOf('offline') > -1 ? CustomNav.fromState = fromState.name : CustomNav.fromState = '';
     //console.log(CustomNav.histories+'==='+fromState.name+'==='+index+'==='+toState.name+'==='+$state.current.name+'==='+CustomNav.fromState);  //=====================test
     //console.log(CustomNav.fromState);  //=====================test
-    console.log(CustomNav.histories);
+    // console.log(CustomNav.histories);
   });
 
 }])
