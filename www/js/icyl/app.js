@@ -787,6 +787,17 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    .state('simple.article', {
+      url:'/article/:articleId',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/news/article.html',
+          controller: 'simpleArticle'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback

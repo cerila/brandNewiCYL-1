@@ -54,3 +54,8 @@ p.word-right {
     top: 5px;
     color: #bbb;
 }
+
+.box img.center-block {
+    height: 180px;
+    width: 100%;
+}
