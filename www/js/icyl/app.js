@@ -100,7 +100,7 @@ angular.module('icyl', dependencies)
     toState.name.indexOf('offline') > -1 ? CustomNav.fromState = fromState.name : CustomNav.fromState = '';
     //console.log(CustomNav.histories+'==='+fromState.name+'==='+index+'==='+toState.name+'==='+$state.current.name+'==='+CustomNav.fromState);  //=====================test
     //console.log(CustomNav.fromState);  //=====================test
-    console.log(CustomNav.histories);
+    // console.log(CustomNav.histories);
   });
 
 }])
@@ -788,6 +788,17 @@ angular.module('icyl', dependencies)
       }
     })
 
+    .state('simple.article', {
+      url:'/article/:articleId',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/news/article.html',
+          controller: 'simpleArticle'
+        }
+      }
+    })
+
     //搜索
     .state('simple.search', {
       url:'/search',
@@ -808,6 +819,18 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/main/publish.html',
           controller: 'simplePublish'
+        }
+      }
+    })
+
+    //个人定制
+    .state('simple.personHomepage', {
+      url:'/personHomepage',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/homepage.html',
+          controller: 'simplePersonHomepage'
         }
       }
     })

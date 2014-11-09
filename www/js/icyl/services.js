@@ -170,13 +170,15 @@ angular.module('icyl.services', ['ngResource'])
                       update_mobile: {method:'POST'},
                       update_password: {method:'POST'}
                     }),
-    Post: $resource('http://:baseurl/:path/lp.php',
+    Post: $resource('http://17f.go5le.net/mall/index/article.asp',
                     {
-                      baseurl:'localhost',
-                      path:'good'},
+                      // baseurl:'localhost',
+                      // path:'good'
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
                     {
-                      signin: {method:'POST', params:{c:'user', a:'get_token'}},
-                      singup: {method:'POST', params:{c:'user', a:'register'}}
+                      loadarticle: {method:'JSONP', params:{c:'user', a:'get_token'}, timeout: 3000},
+                      loadcomments: {method:'JSONP', timeout: 3000}
                     }),
     articleList: $resource('http://17f.go5le.net/mall/index/app_news.asp',
                     {
@@ -185,7 +187,7 @@ angular.module('icyl.services', ['ngResource'])
                       callback: 'JSON_CALLBACK' //jsonp_flag
                     },
                     {
-                      loadlist: {method:'JSONP'}
+                      loadlist: {method:'JSONP', timeout: 3000}
                     }),
 
 
@@ -273,8 +275,8 @@ angular.module('icyl.services', ['ngResource'])
                 Storage.kset('password', data.data.password);
               }
               Storage.kset('username', data.data.username);
-              // Storage.kset('token', data.data.token);  ########################key, use in the future
-              // Session.create(data.data.token);  ########################key, use in the future
+              // Storage.kset('token', data.data.token);  //########################key, use in the future
+              Session.create(data.data.token);  //########################key, use in the future
               //$scope.mine.mineNgclick = '';
               //$scope.mine.minehref = '#/main/mine';
               //Alert(data.data.token+'=='+data.data.username+'=='+data.data.password+'=='+$scope.loginData.rememberPwd);
@@ -379,7 +381,7 @@ angular.module('icyl.services', ['ngResource'])
       userLogout: function() {
         Session.destroy();
         Storage.kremove('password');
-        // Storage.kremove('token');  ########################key, use in the future
+        // Storage.kremove('token');  //########################key, use in the future
         $state.go('main.mine');
       },
 
@@ -477,6 +479,7 @@ angular.module('icyl.services', ['ngResource'])
         //$scope.mine = {};
         //$scope.mine.mineNgclick = "actions.login()";
         //console.log("#4----------"+$scope.$id);  //=====================test
+        // console.log("#4----------");
         //设置promise
         var deferred = $q.defer();
         //checkToken具体步骤
@@ -492,8 +495,8 @@ angular.module('icyl.services', ['ngResource'])
               else {
                 Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
                   if (data.err_code === 0) { 
-                    // Storage.kset('token', data.data.token);  ########################key, use in the future
-                    // Session.create(data.data.token);  ########################key, use in the future
+                    // Storage.kset('token', data.data.token);  //########################key, use in the future
+                    Session.create(data.data.token);  //########################key, use in the future
                     //Actions.mineClick.allowed($scope);
                     //console.log("#6----------"+$scope.$id);  //=====================test
                     //return true;
@@ -520,8 +523,8 @@ angular.module('icyl.services', ['ngResource'])
           else {
             Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
               if (data.err_code === 0) { 
-                  // Storage.kset('token', data.data.token);  ########################key, use in the future
-                  // Session.create(data.data.token);  ########################key, use in the future
+                  // Storage.kset('token', data.data.token);  //########################key, use in the future
+                  Session.create(data.data.token);  //########################key, use in the future
                   //Actions.mineClick.allowed($scope);
                   //console.log("#8----------"+$scope.$id);  //=====================test
                   //return true;

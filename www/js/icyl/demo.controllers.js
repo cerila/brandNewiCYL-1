@@ -915,6 +915,48 @@ angular.module('demo.controllers', [])
   });
 }])
 
+.controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
+  var pageParams = 
+  {
+    articleId: $stateParams.articleId
+  };
+  
+  $scope.article = {};
+  $scope.comment = {};
+  var moreData = false;
+    
+  Data.Post.loadarticle(pageParams, function(data){
+    $scope.article = data.data.items;
+  });
+  Data.Post.loadcomments(pageParams, function(data){
+    $scope.comment = data.data.items;
+    moreData = true;
+  });
+
+  $scope.newsTitle = '团省委组织召开机关党员大会';
+  $scope.newsDate = '2014-8-11';
+  $scope.newsSource = '浙江省团建';
+  $scope.newsContent = '6月23日下午，团省委组织召开机关党员大会，认真学习贯彻习近平总书记在中央办公厅座谈会上的重要讲话精神和。团省委书记周艳出席会议并讲话。团省委副书记苗伟伦传达习总书记讲话精神。';
+  $scope.userComment = '已阅';
+  $scope.items = [
+    {'company': '保险公司',
+     'user': '保险员A',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '5'},
+    {'company': '保险公司',
+     'user': '保险员B',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '41'},
+    {'company': '保险公司',
+     'user': '保险员C',
+     'date': '2014-8-21 13:12:46',
+     'comment': '已阅',
+     'times': '10'}
+  ];
+}])
+
 //活动列表
 .controller('simpleActivityList', ['$scope', '$ionicModal', function($scope, $ionicModal) {
 
@@ -995,6 +1037,10 @@ angular.module('demo.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+}])
+
+.controller('simplePersonHomepage', ['$scope', function($scope) {
+  
 }])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
