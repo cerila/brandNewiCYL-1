@@ -15,10 +15,10 @@
   </ion-nav-bar>
 
   <ion-content>
-    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list>
-      <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="http://17f.go5le.net/99_tj/991/news1.asp?id={{item[0]}}">
+      <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="#/simple/article/{{item[0]}}">
         <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
         <h2><b>【{{item[4]}}】{{item[1]}}</b></h2>
         <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>

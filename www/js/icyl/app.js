@@ -817,7 +817,7 @@ angular.module('icyl', dependencies)
       access: { authenticate: true },
       views: {
         'main-container': {
-          templateUrl: 'templates/main/publish.html',
+          templateUrl: 'templates/person/publish.html',
           controller: 'simplePublish'
         }
       }
@@ -831,6 +831,30 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/person/homepage.html',
           controller: 'simplePersonHomepage'
+        }
+      }
+    })
+
+    //收藏
+    .state('simple.favorites', {
+      url:'/favorites',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/favorites.html',
+          controller: 'simpleFavorites'
+        }
+      }
+    })
+
+    //设置
+    .state('simple.settings', {
+      url:'/settings',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/settings.html',
+          controller: 'simpleSettings'
         }
       }
     })

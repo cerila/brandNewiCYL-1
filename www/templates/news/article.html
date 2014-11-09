@@ -14,15 +14,16 @@
     </div>
   </ion-nav-bar>
 
-  <ion-content class="has-footer">
-    <div class="article-div">
+  <ion-content>
+    <div>
       <p>时间：{{newsDate}}&nbsp;来源：{{newsSource}}</p>  
       <h1 class="text-center">{{newsTitle}}</h1>
       <img ng-src="{{imageUrl}}">
       <p>{{newsContent}}</p>
-    </div>   
-    <div>
-
+    </div> 
+    
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
       <ion-item class="item-divider">
         用户评论
@@ -45,11 +46,12 @@
         <p class="text-right">赞成：{{item.times}}</p>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
+    </ion-infinite-scroll>
 
-    </div>
   </ion-content>
   
-  <ng-include src="'templates/common/footer.html'"></ng-include>
+  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
 
 </ion-view>
 

@@ -16,6 +16,9 @@
   </ion-nav-bar>
   
   <ion-content>
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
+
     <div class="list list-inset">
       <label class="item item-input">
         <span class="input-label">名称</span>
@@ -58,6 +61,9 @@
         </a>
       </ion-item>
     </div>
+
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
+    </ion-infinite-scroll>
   </ion-content>
 
   <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->

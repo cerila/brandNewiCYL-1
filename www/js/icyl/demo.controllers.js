@@ -910,9 +910,11 @@ angular.module('demo.controllers', [])
   $scope.moreDataCanBeLoaded = function() {
     return moreData;
   };
+
   $scope.$on('stateChangeSuccess', function() {
     $scope.loadMoreData();
   });
+
 }])
 
 .controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
@@ -955,10 +957,66 @@ angular.module('demo.controllers', [])
      'comment': '已阅',
      'times': '10'}
   ];
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    //刷新文章内容
+
+
+    //刷新评论 
+
+
+    // pageParams.lastID = 0;
+    // pageParams.requestNO = pageParams.loaded;
+    // Data.Post.loadcomments(pageParams, function(data){
+    //   $scope.comment = data.data.items;
+    //   pageParams.loaded = $scope.comment.length;
+    //   pageParams.lastID = $scope.comment[$scope.comment.length - 1][0];
+       $scope.$broadcast('scroll.refreshComplete');
+    // });
+    
+  };
+
+  //上拉加载更多评论
+  $scope.loadMoreData = function() {
+    Data.Post.loadcomments(pageParams, function(data){
+      $scope.comment = $scope.comment.concat(data.data.items);
+      pageParams.loaded = $scope.comment.length;
+      pageParams.lastID = $scope.comment[$scope.comment.length - 1][0];
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.Post.loadcomments(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
 }])
 
 //活动列表
-.controller('simpleActivityList', ['$scope', '$ionicModal', function($scope, $ionicModal) {
+.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', '$ionicModal', function($scope, Data, $stateParams, $ionicModal) {
+  var pageParams = 
+  {
+    tabCode: $stateParams.tabCode,
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  };
+  
+  $scope.activityLists = {};
+  var moreData = false;
 
   $scope.priceRegions = [
     {'priceRegion': "0-100"},
@@ -1037,10 +1095,42 @@ angular.module('demo.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
+   //下拉刷新
+  $scope.doRefresh = function() {
+
+    $scope.$broadcast('scroll.refreshComplete');
+  };
+
+  //上拉加载更多评论
+  $scope.loadMoreData = function() {
+    
+    $scope.$broadcast('scroll.infiniteScrollComplete');
+
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
 }])
 
+//我的
 .controller('simplePersonHomepage', ['$scope', function($scope) {
   
+}])
+
+//收藏
+.controller('simpleFavorites', ['$scope', function($scope) {
+  
+}])
+
+//设置
+.controller('simpleSettings', ['$scope', function($scope) {
+  $scope.userName = "王林";
+  $scope.signature = "";
 }])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
