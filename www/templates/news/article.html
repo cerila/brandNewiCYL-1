@@ -18,8 +18,9 @@
     <div>
       <p>时间：{{newsDate}}&nbsp;来源：{{newsSource}}</p>  
       <h1 class="text-center">{{newsTitle}}</h1>
-      <img ng-src="{{imageUrl}}">
-      <p>{{newsContent}}</p>
+      <!-- <img ng-src="{{imageUrl}}"> -->
+      <!-- <div>{{newsContent}}</div> -->
+      <div ng-bind-html="newsContent"></div>
     </div> 
     
     <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">

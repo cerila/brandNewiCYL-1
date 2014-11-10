@@ -170,7 +170,7 @@ angular.module('icyl.services', ['ngResource'])
                       update_mobile: {method:'POST'},
                       update_password: {method:'POST'}
                     }),
-    Post: $resource('http://17f.go5le.net/mall/index/app_news1.asp',
+    Post: $resource('http://17f.go5le.net/mall/index/app_news12.asp',
                     {
                       // baseurl:'localhost',
                       // path:'good'
