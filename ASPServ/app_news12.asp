@@ -27,7 +27,7 @@ Else
 fblx=""
 End If 
 id1=request.querystring("articleid")
-id1="132402"
+'id1="132402"
 set rs=server.CreateObject("ADODB.RecordSet")
 If id1<>"" Then 
 sql2="Select id,zt,tp1,fbsj,fblx,js_sts,ckcs,staff_id,nr,qy_qymc From web_xxfb_nr where 1=1"
