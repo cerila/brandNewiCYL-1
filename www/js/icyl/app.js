@@ -858,6 +858,30 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    //个人资料
+    .state('simple.personalInfo', {
+      url:'/personalInfo',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/information.html',
+          controller: 'simplePersonalInfo'
+        }
+      }
+    })
+
+    //我的主页
+    .state('simple.mine', {
+      url:'/mine',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/mine.html',
+          controller: 'simpleMine'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
