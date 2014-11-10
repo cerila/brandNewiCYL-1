@@ -10,29 +10,59 @@
       收藏
     </h1>
     <ion-nav-buttons side="right">
-      <button class="button button-icon icon ion-ios7-plus-empty" ng-click="show($event)">
+      <button class="button button-icon icon ion-ios7-plus-empty" ng-click="openModal($event)">
       </button>
     </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-content scroll="true">
-    <div class="row">
-      <div class="col text-center">
+    <!-- <div class="row"> -->
+      <div class="col col-33 text-center" ng-if="itemList[0].checked" style="float: left; ">
         <a class="button round-button icon ion-document-text" style="background: #F3893C" href="#/simple/articleList/300"></a>
         <p class="text-center-2"><b>通知公告</b></p>
       </div>
 
-      <div class="col text-center">
+      <div class="col col-33 text-center" ng-if="itemList[1].checked" style="float: left; ">
         <a class="button round-button icon ion-ios7-compose" style="background: #FA6469"  href="#/simple/articleList/301">
         </a>
         <p class="text-center-2"><b>团讯要闻</b></p>
       </div>
 
-      <div class="col text-center">
+      <div class="col col-33 text-center" ng-if="itemList[2].checked" style="float: left; ">
         <a class="button round-button icon ion-ios7-information" style="background: #46CECE"  href="#/simple/articleList/302">
         </a>
         <p class="text-center-2"><b>头条新闻</b></p>
       </div>
-    </div>
+
+      <div class="col col-33 text-center" ng-if="itemList[3].checked" style="float: left; ">
+        <a class="button round-button icon ion-chatbox-working" style="background: #93CE68"  href="#/simple/articleList/304">
+        </a>
+        <p class="text-center-2"><b>书记寄语</b></p>
+      </div>
+    <!-- </div> -->
   </ion-content>
 </ion-view>
+
+<script id="favoritesModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">请选择收藏内容</h1>
+      <div class="buttons" side="right">
+        <button class="button button-clear button-positive" ng-click="closeModal($event)">取消</button>
+      </div>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-checkbox ng-repeat="item in itemList"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">{{ item.text }}
+        </ion-checkbox>
+      </ion-list>
+    </ion-content>
+  </ion-modal-view>
+  <ion-footer-bar class="bar-energized">
+    <h1 class="title">
+     <a class="button button-clear button-block" ng-click="closeModal($event)">完成</a>
+    </h1>
+  </ion-footer-bar>
+</script>

@@ -1,0 +1,68 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      我的主页
+    </h1>
+    <div class="buttons">
+      <a class="button button-clear ion-android-social-user" href="#/simple/personalInfo">
+      </a>
+    </div>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="text-center">
+      <img ng-src="img/defaultAvatar.png" class="round-avatar">
+      <p ng-if="userID == ''">欢迎</p>
+      <p ng-if="userID != ''">{{userName}}</p>
+    </div>
+
+    <ion-list>
+      <ion-item>
+        <div class="row">
+          <div class="col text-center">
+            <a class="button round-button icon ion-chatboxes" style="background: #F3893C" href="#/main/personMessage"></a>
+            <p class="text-center-2"><b>我的留言</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-paw" style="background: #FA6469"  href="">
+            </a>
+            <p class="text-center-2"><b>我的活动</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-ios7-mic" style="background: #46CECE"  href="#/main/personPublish">
+            </a>
+            <p class="text-center-2"><b>信息发布</b></p>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="row">
+          <div class="col text-center">
+            <a class="button round-button icon ion-stats-bars" style="background: #93CE68"  href="#/main/personManagement">
+            </a>
+            <p class="text-center-2"><b>活动统计</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-navigate" style="background: #C761AA"  href="#/main/personSignIn">
+            </a>
+            <p class="text-center-2"><b>签到管理</b></p>
+          </div>
+
+          <div class="col text-center">
+            <a class="button round-button icon ion-alert" style="background: #DCBF82"  href="#/main/personWarn">
+            </a>
+            <p class="text-center-2"><b>活动提醒</b></p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

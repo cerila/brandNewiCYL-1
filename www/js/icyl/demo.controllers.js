@@ -649,7 +649,6 @@ angular.module('demo.controllers', [])
     'hobby':'读书',
     'brief':'无'};
 
-
 }])
 
 .controller('mainPersonRegister', ['$scope', function($scope) {
@@ -1118,13 +1117,44 @@ angular.module('demo.controllers', [])
 }])
 
 //我的
-.controller('simplePersonHomepage', ['$scope', function($scope) {
-  
+.controller('simpleMine', ['$scope', function($scope) {
+  $scope.userID = '1';
+  $scope.userName = '王成';
 }])
 
 //收藏
-.controller('simpleFavorites', ['$scope', function($scope) {
-  
+.controller('simpleFavorites', ['$scope', '$ionicModal', function($scope, $ionicModal) {
+  $scope.itemList = [
+    { text: "通知公告", checked: true },
+    { text: "团讯要闻", checked: false },
+    { text: "头条新闻", checked: false },
+    { text: "书记寄语", checked: false }
+  ];
+
+  $ionicModal.fromTemplateUrl('favoritesModal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.favoritesModal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.favoritesModal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.favoritesModal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.favoritesModal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
 }])
 
 //设置
@@ -1159,6 +1189,25 @@ angular.module('demo.controllers', [])
   });
 }])
 
+//个人资料
+.controller('simplePersonalInfo', ['$scope', function($scope) {
+  $scope.item = {'userName':'王成',
+    'userID':'2014082911423',
+    'birth':'1978-5-12',
+    'identityCard':'000000000000000',
+
+    'password':'123',
+    'password2':'123',
+    'phone':'13732255555',
+    'QQ':'113456789',
+    'email':'123@qq.com',
+
+    'work':'省直机关团工委',
+    'address':'浙江省杭州市',
+    'hobby':'读书',
+    'brief':'无'};
+
+}])
 
 .controller('mainTestP', ['$scope', '$ionicPopover', '$ionicPopup', '$ionicBackdrop', '$timeout', '$ionicPosition', function($scope, $ionicPopover, $ionicPopup, $ionicBackdrop, $timeout, $ionicPosition) {
 
