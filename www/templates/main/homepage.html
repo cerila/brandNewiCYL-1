@@ -19,33 +19,39 @@
 
   <!-- <ion-content class="has-footer"> -->
   <ion-content>
-    <ion-slide-box does-continue="true" auto-play="true" slide-interval="1000">
+    <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000">
       <ion-slide>
         <div class="box">
-          <img ng-src="{{articleLists[0][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[0][2] || ''}}" class="img-responsive center-block">
+          <a ng-href="#/simple/article/{{articleLists[0][0]}}">
+            <img ng-src="{{articleLists[0][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[0][2] || ''}}" class="img-responsive center-block">
+          </a>
           <!-- <div elem-position></div> -->
-          <div class="word-front center-block">
-            <!-- <h3>建设美丽浙江 创造美好生活</h3>
-            <h4>浙江省直机关“智慧团青”</h4> -->
-          </div>
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”</h4>
+          </div> -->
         </div>
       </ion-slide>
       <ion-slide>
         <div class="box">
-          <img ng-src="{{articleLists[1][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[1][2] || ''}}" class="img-responsive center-block">
-          <div class="word-front center-block">
-            <!-- <h3>建设美丽浙江 创造美好生活</h3>
-            <h4>浙江省直机关“智慧团青”</h4> -->
-          </div>
+          <a ng-href="#/simple/article/{{articleLists[1][0]}}">
+            <img ng-src="{{articleLists[1][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[1][2] || ''}}" class="img-responsive center-block">
+          </a>
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”</h4>
+          </div> -->
         </div>
       </ion-slide>
       <ion-slide>
         <div class="box">
-          <img ng-src="{{articleLists[2][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[2][2] || ''}}" class="img-responsive center-block">
-          <div class="word-front center-block">
-            <!-- <h3>建设美丽浙江 创造美好 生活</h3>
-            <h4>浙江省直机关“智慧团青”APP</h4> -->
-          </div>
+          <a ng-href="#/simple/article/{{articleLists[2][0]}}">
+            <img ng-src="{{articleLists[2][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[2][2] || ''}}" class="img-responsive center-block">
+          </a>
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好 生活</h3>
+            <h4>浙江省直机关“智慧团青”APP</h4>
+          </div> -->
         </div>
       </ion-slide>
     </ion-slide-box>

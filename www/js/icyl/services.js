@@ -189,6 +189,15 @@ angular.module('icyl.services', ['ngResource'])
                     {
                       loadlist: {method:'JSONP', timeout: 3000}
                     }),
+    Comments: $resource('http://17f.go5le.net/mall/index/app_pj.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'},
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      loadcomments: {method:'JSONP', timeout: 3000}
+                    }),
 
 
 
