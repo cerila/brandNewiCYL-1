@@ -919,7 +919,10 @@ angular.module('demo.controllers', [])
 .controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
   var pageParams = 
   {
-    articleId: $stateParams.articleId
+    articleId: $stateParams.articleId,
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
   };
   
   $scope.article = {};
@@ -934,17 +937,19 @@ angular.module('demo.controllers', [])
     $scope.newsDate = $scope.article[0][3];
     $scope.newsSource = $scope.article[0][9];
     $scope.newsContent = $scope.article[0][8];
-    console.log($scope.newsTitle);
-    console.log($scope.newsDate);
-    console.log($scope.newsSource);
+    // console.log($scope.newsTitle);
+    // console.log($scope.newsDate);
+    // console.log($scope.newsSource);
     // console.log($scope.newsContent);
-
+    // console.log('loadarticle:' + moreData);
+    // moreData = true;
+    Data.Comments.loadcomments(pageParams, function(data){
+      $scope.comments = data.data.items;
+      // console.log('comments:' + moreData);
+      moreData = true;
+    });
   });
-  Data.Comments.loadcomments(pageParams, function(data){
-    $scope.comments = data.data.items;
-    console.log($scope.comments);
-    moreData = true;
-  });
+  
 
 
   $scope.userComment = '';
@@ -952,25 +957,34 @@ angular.module('demo.controllers', [])
 
   //下拉刷新
   $scope.doRefresh = function() {
-    //刷新文章内容
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.Post.loadarticle(pageParams, function(data){
+      $scope.article = data.data.items;
+      // console.log($scope.article);
 
-
-    //刷新评论 
-
-
-    // pageParams.lastID = 0;
-    // pageParams.requestNO = pageParams.loaded;
-    // Data.Post.loadcomments(pageParams, function(data){
-    //   $scope.comment = data.data.items;
-    //   pageParams.loaded = $scope.comment.length;
-    //   pageParams.lastID = $scope.comment[$scope.comment.length - 1][0];
-       $scope.$broadcast('scroll.refreshComplete');
-    // });
-    
+      $scope.newsTitle = $scope.article[0][1];
+      $scope.newsDate = $scope.article[0][3];
+      $scope.newsSource = $scope.article[0][9];
+      $scope.newsContent = $scope.article[0][8];
+      // console.log($scope.newsTitle);
+      // console.log($scope.newsDate);
+      // console.log($scope.newsSource);
+      // console.log($scope.newsContent);
+      // console.log('loadarticle:' + moreData);
+      // moreData = true;
+      Data.Comments.loadcomments(pageParams, function(data){
+        $scope.comments = data.data.items;
+        // console.log('comments:' + moreData);
+        moreData = true;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }); 
   };
 
-  //上拉加载更多评论
+  //上拉加载更多评论：需要在asp端模仿app_news.asp的方式，同样有loaded和lasdID
   $scope.loadMoreData = function() {
+    // console.log(moreData);
     Data.Comments.loadcomments(pageParams, function(data){
       $scope.comments = $scope.comments.concat(data.data.items);
       pageParams.loaded = $scope.comments.length;
