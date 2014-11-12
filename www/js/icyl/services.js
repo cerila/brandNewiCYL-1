@@ -233,8 +233,8 @@ angular.module('icyl.services', ['ngResource'])
     return {
       userLogin: function($scope) {
         $scope.loginData = {
-          username: 'alexgzhou',
-          password: '12345678',
+          username: '91',
+          password: '123',
           rememberPwd: true
         };
 
@@ -270,7 +270,7 @@ angular.module('icyl.services', ['ngResource'])
           console.log('正在登录', $scope.loginData);
 
           Data.User.signin($scope.loginData, function(data) {
-            console.log(data);
+            console.log(data.data.token);
 
           if (data.err_code === 0) { 
               //Alert(data.data.user + ' 您好，欢迎回来！' ); 
@@ -488,7 +488,7 @@ angular.module('icyl.services', ['ngResource'])
         //$scope.mine = {};
         //$scope.mine.mineNgclick = "actions.login()";
         //console.log("#4----------"+$scope.$id);  //=====================test
-        // console.log("#4----------");
+        // console.log("checkToken入口: " + Session.token);
         //设置promise
         var deferred = $q.defer();
         //checkToken具体步骤
@@ -499,6 +499,7 @@ angular.module('icyl.services', ['ngResource'])
                 //Actions.mineClick.allowed($scope);
                 //console.log("#5----------"+$scope.$id);  //=====================test
                 //return true;
+                // console.log(data.data.token);
                 deferred.resolve(data);
               }
               else {
@@ -509,6 +510,7 @@ angular.module('icyl.services', ['ngResource'])
                     //Actions.mineClick.allowed($scope);
                     //console.log("#6----------"+$scope.$id);  //=====================test
                     //return true;
+                    // console.log(data.data.token);
                     deferred.resolve(data);
                   }
                   else {
@@ -533,10 +535,11 @@ angular.module('icyl.services', ['ngResource'])
             Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
               if (data.err_code === 0) { 
                   // Storage.kset('token', data.data.token);  //########################key, use in the future
-                  Session.create(data.data.token);  //########################key, use in the future
+                  Session.create(data.data.token ? data.data.token : "whatever");  //########################key, use in the future
                   //Actions.mineClick.allowed($scope);
                   //console.log("#8----------"+$scope.$id);  //=====================test
                   //return true;
+                  // console.log("Session.create: " + data.data.token);
                   deferred.resolve(data);
                 }
                 else {

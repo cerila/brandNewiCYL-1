@@ -34,9 +34,11 @@ angular.module('icyl', dependencies)
   });
 }])
 
-.run(['$rootScope', '$state', 'Identification', 'User', 'Alert', 'CustomNav', function ($rootScope, $state, Identification, User, Alert, CustomNav) {
+.run(['$rootScope', '$state', 'Identification', 'User', 'Alert', 'CustomNav', 'Session', function ($rootScope, $state, Identification, User, Alert, CustomNav, Session) {
   CustomNav.new();
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams){
+    // console.log("stateChangeStart入口: '" + fromState.name + "' -> '" + toState.name + "'; +'" + Session.token + "'");
+    // console.log(fromState);
     if (toState.access.authenticate && !Identification.isAuthenticated()) {
       // User isn’t authenticated
       //event.preventDefault();
@@ -45,6 +47,7 @@ angular.module('icyl', dependencies)
         $state.go(toState.access.offline);
       }
       else {
+        // console.log("checkToken入口: '" + fromState.name + "' -> '" + toState.name + "'; + '" + !Session.token + "'");
         Identification.checkToken().then( function (data) {
           if (data.err_code !== 0) {
             $rootScope.actions = {
