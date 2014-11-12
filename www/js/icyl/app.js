@@ -882,6 +882,61 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    .state('simple.personSignIn', {
+      url:'/personSignIn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/signIn.html',
+          controller: 'mainPersonSignIn'
+        }
+      }
+    })
+
+    .state('simple.personMessage', {
+      url:'/personMessage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/message.html',
+          controller: 'mainPersonMessage'
+        }
+      }
+    })
+
+    .state('simple.personManagement', {
+      url:'/personManagement',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/management.html',
+          controller: 'mainPersonManagement'
+        }
+      }
+    })
+
+    .state('simple.personStatistics', {
+      url:'/personStatistics',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/statistics.html',
+          controller: 'mainPersonStatistics'
+        }
+      }
+    })
+
+    .state('simple.personWarn', {
+      url:'/personWarn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/warn.html',
+          controller: 'mainPersonWarn'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback

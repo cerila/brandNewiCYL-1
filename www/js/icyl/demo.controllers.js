@@ -558,7 +558,7 @@ angular.module('demo.controllers', [])
      organizer:'浙江省团建',
      number:'0',
      count:'38',
-     url:'#/main/personStatistics'},
+     url:'#/simple/personStatistics'},
     {activityTitle:'关于举办“书海琴缘”省直机关单身青年钢琴训练营的通知', 
      typeName:'娱体活动',
      organizer:'浙江省团建',
