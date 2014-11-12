@@ -506,7 +506,8 @@ angular.module('icyl.services', ['ngResource'])
                 Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
                   if (data.err_code === 0) { 
                     // Storage.kset('token', data.data.token);  //########################key, use in the future
-                    Session.create(data.data.token);  //########################key, use in the future
+                    // Session.create(data.data.token);  //########################key, use in the future
+                    Session.create(data.data.token ? data.data.token : "whatever");  //########################Temp, remove in the future
                     //Actions.mineClick.allowed($scope);
                     //console.log("#6----------"+$scope.$id);  //=====================test
                     //return true;
@@ -535,7 +536,8 @@ angular.module('icyl.services', ['ngResource'])
             Data.User.signin({username: Storage.kget('username'), password: Storage.kget('password')}, function(data) {
               if (data.err_code === 0) { 
                   // Storage.kset('token', data.data.token);  //########################key, use in the future
-                  Session.create(data.data.token ? data.data.token : "whatever");  //########################key, use in the future
+                  // Session.create(data.data.token);  //########################key, use in the future
+                  Session.create(data.data.token ? data.data.token : "whatever");  //########################Temp, remove in the future
                   //Actions.mineClick.allowed($scope);
                   //console.log("#8----------"+$scope.$id);  //=====================test
                   //return true;
@@ -557,7 +559,7 @@ angular.module('icyl.services', ['ngResource'])
         }
         else {
           if (Session.token) {
-            console.log("#10----------"+$scope.$id);  //=====================test
+            // console.log("#10----------"+$scope.$id);  //=====================test
             Data.User.checktoken({token: Session.token}, function(data) {
               if (data.err_code === 0) { 
                 //Actions.mineClick.allowed($scope);
