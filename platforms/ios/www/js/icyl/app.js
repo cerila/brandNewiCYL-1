@@ -34,9 +34,11 @@ angular.module('icyl', dependencies)
   });
 }])
 
-.run(['$rootScope', '$state', 'Identification', 'User', 'Alert', 'CustomNav', function ($rootScope, $state, Identification, User, Alert, CustomNav) {
+.run(['$rootScope', '$state', 'Identification', 'User', 'Alert', 'CustomNav', 'Session', function ($rootScope, $state, Identification, User, Alert, CustomNav, Session) {
   CustomNav.new();
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams){
+    // console.log("stateChangeStart入口: '" + fromState.name + "' -> '" + toState.name + "'; +'" + Session.token + "'");
+    // console.log(fromState);
     if (toState.access.authenticate && !Identification.isAuthenticated()) {
       // User isn’t authenticated
       //event.preventDefault();
@@ -45,6 +47,7 @@ angular.module('icyl', dependencies)
         $state.go(toState.access.offline);
       }
       else {
+        // console.log("checkToken入口: '" + fromState.name + "' -> '" + toState.name + "'; + '" + !Session.token + "'");
         Identification.checkToken().then( function (data) {
           if (data.err_code !== 0) {
             $rootScope.actions = {
@@ -100,7 +103,7 @@ angular.module('icyl', dependencies)
     toState.name.indexOf('offline') > -1 ? CustomNav.fromState = fromState.name : CustomNav.fromState = '';
     //console.log(CustomNav.histories+'==='+fromState.name+'==='+index+'==='+toState.name+'==='+$state.current.name+'==='+CustomNav.fromState);  //=====================test
     //console.log(CustomNav.fromState);  //=====================test
-
+    // console.log(CustomNav.histories);
   });
 
 }])
@@ -586,11 +589,22 @@ angular.module('icyl', dependencies)
     //个人定制
     .state('main.personHomepage', {
       url:'/personHomepage',
-      access: { authenticate: false },
+      access: { authenticate: true },
       views: {
         'main-container': {
           templateUrl: 'templates/person/homepage.html',
           controller: 'mainPersonHomepage'
+        }
+      }
+    })
+
+    .state('main.personPublish', {
+      url:'/personPublish',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/publish.html',
+          controller: 'mainPersonPublish'
         }
       }
     })
@@ -616,12 +630,328 @@ angular.module('icyl', dependencies)
         }
       }
     })
+
+    .state('main.personInformation', {
+      url:'/personInformation',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/information.html',
+          controller: 'mainPersonInformation'
+        }
+      }
+    })
+
+    .state('main.personRegister', {
+      url:'/personRegister',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/register.html',
+          controller: 'mainPersonRegister'
+        }
+      }
+    })
+
+    .state('main.personGuide', {
+      url:'/personGuide',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/guide.html',
+          controller: 'mainPersonGuide'
+        }
+      }
+    })
+
+    .state('main.personManagement', {
+      url:'/personManagement',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/management.html',
+          controller: 'mainPersonManagement'
+        }
+      }
+    })
+
+    .state('main.personStatistics', {
+      url:'/personStatistics',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/statistics.html',
+          controller: 'mainPersonStatistics'
+        }
+      }
+    })
+
+    .state('main.personQuestionnaire', {
+      url:'/personQuestionnaire',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/questionnaire.html',
+          controller: 'mainPersonQuestionnaire'
+        }
+      }
+    })
+
+    .state('main.personWarn', {
+      url:'/personWarn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/warn.html',
+          controller: 'mainPersonWarn'
+        }
+      }
+    })
+    ;
+
+    $stateProvider
+
+    .state('simple', {
+      url:'/simple',
+      abstract: true,
+      access: { authenticate: false },
+      templateUrl: 'templates/simple.html',
+      controller: 'simpleContainer'
+    })
+    
+    //一次加载整个页面
+    .state('simple.default', {
+      url:'/default',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/test/demo_shouye.html',
+          controller: 'mainDefault'
+        }
+      }
+    })
+
+    //首页
+    .state('simple.homepage', {
+      url:'/homepage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/homepage.html',
+          controller: 'simpleHomepage'
+        }
+      }
+    })
+
+    //文章导航
+    .state('simple.navArticle', {
+      url:'/navArticle',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/navigation/article.html',
+          controller: 'simpleNavArticle'
+        }
+      }
+    })
+
+    //活动导航
+    .state('simple.navActivity', {
+      url:'/navActivity',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/navigation/activity.html',
+          controller: 'simpleNavActivity'
+        }
+      }
+    })
+
+    //文章列表
+    .state('simple.articleList', {
+      url:'/articleList/:tabCode',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/articlelist.html',
+          controller: 'simpleArticleList'
+        }
+      }
+    })
+
+    //活动列表
+    .state('simple.activityList', {
+      url:'/activityList/:tabCode',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/activitylist.html',
+          controller: 'simpleActivityList'
+        }
+      }
+    })
+
+    .state('simple.article', {
+      url:'/article/:articleId',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/news/article.html',
+          controller: 'simpleArticle'
+        }
+      }
+    })
+
+    //搜索
+    .state('simple.search', {
+      url:'/search',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/search.html',
+          controller: 'simpleSearch'
+        }
+      }
+    })
+
+    //发布
+    .state('simple.publish', {
+      url:'/publish',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/publish.html',
+          controller: 'simplePublish'
+        }
+      }
+    })
+
+    //个人定制
+    .state('simple.personHomepage', {
+      url:'/personHomepage',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/homepage.html',
+          controller: 'simplePersonHomepage'
+        }
+      }
+    })
+
+    //收藏
+    .state('simple.favorites', {
+      url:'/favorites',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/favorites.html',
+          controller: 'simpleFavorites'
+        }
+      }
+    })
+
+    //设置
+    .state('simple.settings', {
+      url:'/settings',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/settings.html',
+          controller: 'simpleSettings'
+        }
+      }
+    })
+
+    //个人资料
+    .state('simple.personalInfo', {
+      url:'/personalInfo',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/information.html',
+          controller: 'simplePersonalInfo'
+        }
+      }
+    })
+
+    //我的主页
+    .state('simple.mine', {
+      url:'/mine',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/mine.html',
+          controller: 'simpleMine'
+        }
+      }
+    })
+
+    .state('simple.personSignIn', {
+      url:'/personSignIn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/signIn.html',
+          controller: 'mainPersonSignIn'
+        }
+      }
+    })
+
+    .state('simple.personMessage', {
+      url:'/personMessage',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/message.html',
+          controller: 'mainPersonMessage'
+        }
+      }
+    })
+
+    .state('simple.personManagement', {
+      url:'/personManagement',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/management.html',
+          controller: 'mainPersonManagement'
+        }
+      }
+    })
+
+    .state('simple.personStatistics', {
+      url:'/personStatistics',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/statistics.html',
+          controller: 'mainPersonStatistics'
+        }
+      }
+    })
+
+    .state('simple.personWarn', {
+      url:'/personWarn',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/warn.html',
+          controller: 'mainPersonWarn'
+        }
+      }
+    })
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/main/default');
+  // $urlRouterProvider.otherwise('/main/default');
+  $urlRouterProvider.otherwise('/simple/homepage');
 
 }])
+
+  
+  
+
+
 
 .config(['$ionicConfigProvider', function ($ionicConfigProvider) {
   $ionicConfigProvider.prefetchTemplates(false);

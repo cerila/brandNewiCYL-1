@@ -6,20 +6,20 @@
 =========================
 =#1======================
 
-Subject		: 微信分享功能开发(Android版), !!!!!!!!!直接使用nl.x-services.plugins.socialsharing插件就可以!!!!!!!!!
-Date		  : 20140815
-Author		: Alex Zhou
-Abstract	: 
-Key Words	: Wechat; Weixin; Phonegap; Cordova; Plugin; Share
+Subject   : 微信分享功能开发(Android版), !!!!!!!!!直接使用nl.x-services.plugins.socialsharing插件就可以!!!!!!!!!
+Date      : 20140815
+Author    : Alex Zhou
+Abstract  : 
+Key Words : Wechat; Weixin; Phonegap; Cordova; Plugin; Share
 
 Main Body----------------
 Method & Material~~~~~~~~
 Online    : http://blog.csdn.net/chen1026241686/article/details/38368713
-			      https://github.com/xu-li/cordova-plugin-wechat
-			      https://github.com/xu-li/cordova-plugin-wechat/issues/1
-			      https://github.com/xu-li/cordova-plugin-wechat-example
-Code 		  : cordova plugin add https://github.com/xu-li/cordova-plugin-wechat
-			      https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&verify=1&lang=zh_CN&target=res/app_download_android		##Android开发工具包中的libammsdk.jar, 在externalLibs/中
+            https://github.com/xu-li/cordova-plugin-wechat
+            https://github.com/xu-li/cordova-plugin-wechat/issues/1
+            https://github.com/xu-li/cordova-plugin-wechat-example
+Code      : cordova plugin add https://github.com/xu-li/cordova-plugin-wechat
+            https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&verify=1&lang=zh_CN&target=res/app_download_android   ##Android开发工具包中的libammsdk.jar, 在externalLibs/中
 
 Procedure~~~~~~~~~~~~~~~~
 1. 需要完全配置好Android-SDK开发环境(包括SDK, git, apache-ant, Java等, 见？文档);
@@ -133,10 +133,10 @@ Main Body----------------
 1) cordove platform add ios
 2) 打开platforms/ios/iCYL beta.xcodeproj
 3) iCYL beta -> Targets -> General -> Build 修改成100之类的数字 (optional)
-4) iCYL beta -> Targets -> Info -> URL Types 加weixin [weixinAPPID]
+4) iCYL beta -> Targets -> Info -> URL Types 加weixin [weixinAPPID] (e.g. Identifier: weixin; URL Schemes: wx9123bbd027f0a99e)
 5) iCYL beta -> Targets -> Build Settings -> Architectures $(ARCHS_STANDARD)改为$(ARCHS_STANDARD_32_BIT)
-6) iCYL beta, Plugins 右键 Add Files to "iCYL beta"...  加入微信SDK, libWeChatSDK.a, WXApi.h, WXApiObject.h
-7) iCYL beta, Resources, icons/splash 右键 Add Files to "iCYL beta"... 加入icon和splash
+6) iCYL beta, Plugins 右键 Add Files to "iCYL beta"...  加入微信SDK, libWeChatSDK.a, WXApi.h, WXApiObject.h (插件ajccom里有, 或者到open.weixin.qq.com下载最新)
+7) iCYL beta, Resources, icons & splash 右键 Add Files to "iCYL beta"... 加入icons和splash, 或者直接拷贝替换platforms/ios/iCYL beta/Resources/中的icons和splash
 
 Method & Material~~~~~~~~
 Online    : http://blog.sina.com.cn/s/blog_ad3a545d0102v0dh.html
@@ -216,7 +216,7 @@ Result~~~~~~~~~~~~~~~~~~~
 =========================
 =#7======================
 
-Subject   : 微信分享插件
+Subject   : 微信分享插件(废弃)
 Date      : 20141010
 Author    : Alex Zhou
 Abstract  : 在Mac OS X 10.9.5 + Xcode 6.0.1环境下开发微信分享功能

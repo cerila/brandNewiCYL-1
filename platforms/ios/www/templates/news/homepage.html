@@ -29,7 +29,7 @@
       <div class="box">
         <img src="img/mainImg5.png" class="img-responsive center-block">
         <div class="word-front center-block">
-          <h3>建设美丽浙江 创造美好生活</h3>
+          <h3>建设美丽浙江 创造美好 生活</h3>
           <h4>浙江省直机关“智慧团青”APP</h4>
         </div>
       </div>
@@ -38,27 +38,51 @@
 
   <div class="tabs-striped tabs-top tabs-positive">
     <ion-tabs class="tabs-striped tabs-top tabs-positive custom-top">
-      <ion-tab title="通知公告" on-select='tabNav()'>
-        <ion-content>
+      <ion-tab title="通知公告" on-select='tabNav(0)'>
+        <ion-content class="has-footer">
+          <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh(0)">
+          </ion-refresher>
           <ion-list>
-            <a class="item item-avatar" ng-repeat="item in items" href="{{item.url}}">
-              <img ng-src="{{item.imageUrl}}">
-              <h2><b>{{item.newsTitle}}</b></h2>
-              <p>浏览{{item.times}}次<span class="p-right">{{item.date}}</span></p>
+            <a class="item item-avatar" ng-repeat="item in articleLists[0]" ng-href="http://17f.go5le.net/99_tj/991/news1.asp?id={{item[0]}}">
+              <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+              <h2><b>{{item[1]}}</b></h2>
+              <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
             </a>
           </ion-list>
+          <ion-infinite-scroll ng-if="moreDataCanBeLoaded(0)" icon="ion-loading-c" on-infinite="loadMoreData(0)" distance="0%">
+          </ion-infinite-scroll>
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="团讯要闻" on-select='tabNav()'>
-        <ion-content>
-          
+      <ion-tab title="团讯要闻" on-select='tabNav(1)'>
+        <ion-content class="has-footer">
+          <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh(1)">
+          </ion-refresher>
+          <ion-list>
+            <a class="item item-avatar" ng-repeat="item in articleLists[1]" ng-href="http://17f.go5le.net/99_tj/991/news1.asp?id={{item[0]}}">
+              <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+              <h2><b>{{item[1]}}</b></h2>
+              <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
+            </a>
+          </ion-list>
+          <ion-infinite-scroll ng-if="moreDataCanBeLoaded(1)" icon="ion-loading-c" on-infinite="loadMoreData(1)" distance="0%">
+          </ion-infinite-scroll>
         </ion-content>
       </ion-tab>
 
-      <ion-tab title="头条新闻" on-select='tabNav()'>
-        <ion-content>
-          
+      <ion-tab title="头条新闻" on-select='tabNav(2)'>
+        <ion-content class="has-footer">
+          <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh(2)">
+          </ion-refresher>
+          <ion-list>
+            <a class="item item-avatar" ng-repeat="item in articleLists[2]" ng-href="http://17f.go5le.net/99_tj/991/news1.asp?id={{item[0]}}">
+              <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+              <h2><b>{{item[1]}}</b></h2>
+              <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
+            </a>
+          </ion-list>
+          <ion-infinite-scroll ng-if="moreDataCanBeLoaded(2)" icon="ion-loading-c" on-infinite="loadMoreData(2)" distance="-1%">
+          </ion-infinite-scroll>
         </ion-content>
       </ion-tab>
     </ion-tabs>

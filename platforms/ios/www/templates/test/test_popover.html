@@ -4,6 +4,10 @@
     .button {
       margin-top: 2px;
     }
+    .popfilter {
+      width: 95%;
+      margin-top: 6px;
+    }
   </style>
 
   <ion-nav-bar class="bar-stable nav-title-slide-ios7">
@@ -14,7 +18,7 @@
       </ion-nav-buttons>
   </ion-nav-bar>
 
-  <ion-content scroll="false">
+  <ion-content scroll="true" on-swipe-up="showAlert($event)" on-drag-up="showAlert($event)">
 
     <p>
         <button ng-click="openPopover($event)" class="button button-block">浮动弹出</button>
@@ -61,20 +65,22 @@
     </button>
   </ion-content>
 
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
   <script id="my-popover.html" type="text/ng-template">
-    <ion-popover-view>
+    <ion-popover-view class="popfilter" style="">
       <ion-header-bar>
         <h1 class="title">My Popover Title</h1>
       </ion-header-bar>
       <ion-content>
-        Hello!
+        {{hello}}
       </ion-content>
     </ion-popover-view>
   </script>
 
-  <script id="popup-template.html" type="text/ng-template">
+  <!-- <script id="popup-template.html" type="text/ng-template">
     <input ng-model="data.wifi" type="text" placeholder="Password">
-  </script>
+  </script> -->
   
 </ion-view>
 

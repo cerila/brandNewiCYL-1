@@ -18,31 +18,31 @@
     <div class="list list-inset">
       <label class="item item-input">
         <span class="input-label">姓名</span>
-        <input type="text" value="{{item.name}}">
+        <input type="text" ng-model="item.name">
       </label>
       <label class="item item-input">
         <span class="input-label">留言卡号</span>
-        <input type="text" value="{{item.cardNo}}">
+        <input type="text" ng-model="item.cardNo">
       </label>
       <label class="item item-input">
         <span class="input-label">组织</span>
-        <input type="text" value="{{item.organization}}">
+        <input type="text" ng-model="item.organization">
       </label>
       <label class="item item-input">
         <span class="input-label">地址</span>
-        <input type="text" value="{{item.address}}">
+        <input type="text" ng-model="item.address">
       </label>
       <label class="item item-input">
         <span class="input-label">电话</span>
-        <input type="text" value="{{item.phone}}">
+        <input type="text" ng-model="item.phone">
       </label>
       <label class="item item-input">
         <span class="input-label">QQ</span>
-        <input type="text" value="{{item.QQ}}">
+        <input type="text" ng-model="item.QQ">
       </label>
-      <label class="item item-input">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">留言内容</span>
-        <textarea>{{item.messageContent}}</textarea>
+        <textarea ng-model="item.messageContent"></textarea>
       </label>
     </div>
 

@@ -9,27 +9,27 @@
       团青时讯
     </h1>
     <div class="buttons">
-      <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
-      </button>
     </div>
   </ion-nav-bar>
 
   <ion-content>
-    <div class="article-div">
+    <div>
       <p>时间：{{newsDate}}&nbsp;来源：{{newsSource}}</p>  
       <h1 class="text-center">{{newsTitle}}</h1>
-      <img ng-src="{{imageUrl}}">
-      <p>{{newsContent}}</p>
-    </div>   
-    <div>
-
+      <!-- <img ng-src="{{imageUrl}}"> -->
+      <!-- <div>{{newsContent}}</div> -->
+      <div ng-bind-html="newsContent"></div>
+    </div> 
+    
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
       <ion-item class="item-divider">
         用户评论
       </ion-item>
       <ion-item class="item-input-inset">
         <label class="item-input-wrapper">
-          <textarea type="text" placeholder="已阅">{{userComment}}</textarea>
+          <textarea type="text" placeholder="已阅" ng-model="userComment"></textarea>
         </label>
         <button class="button button-small">
           确认阅读
@@ -45,11 +45,12 @@
         <p class="text-right">赞成：{{item.times}}</p>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
+    </ion-infinite-scroll>
 
-    </div>
   </ion-content>
   
-  <ng-include src="'templates/common/footer.html'"></ng-include>
+  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
 
 </ion-view>
 

@@ -8,10 +8,24 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
+        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
+        "clobbers": [
+            "PushNotification"
+        ]
+    },
+    {
         "file": "plugins/com.phonegap.plugins.barcodescanner/www/barcodescanner.js",
         "id": "com.phonegap.plugins.barcodescanner.BarcodeScanner",
         "clobbers": [
             "cordova.plugins.barcodeScanner"
+        ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.weixin/www/weixin.js",
+        "id": "com.phonegap.plugins.weixin.weixin",
+        "merges": [
+            "navigator.weixin"
         ]
     },
     {
@@ -507,27 +521,15 @@ module.exports = [
         "clobbers": [
             "Wechat"
         ]
-    },
-    {
-        "file": "plugins/com.phonegap.plugins.weixin/www/weixin.js",
-        "id": "com.phonegap.plugins.weixin.weixin",
-        "merges": [
-            "navigator.weixin"
-        ]
-    },
-    {
-        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
-        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
-        "clobbers": [
-            "PushNotification"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "com.ionic.keyboard": "1.0.2",
+    "com.phonegap.plugins.PushPlugin": "2.4.0",
     "com.phonegap.plugins.barcodescanner": "2.0.0",
+    "com.phonegap.plugins.weixin": "0.1.0",
     "nl.x-services.plugins.socialsharing": "4.3.2",
     "org.apache.cordova.battery-status": "0.2.10",
     "org.apache.cordova.camera": "0.3.1",
@@ -548,9 +550,7 @@ module.exports.metadata =
     "org.apache.cordova.splashscreen": "0.3.2",
     "org.apache.cordova.statusbar": "0.1.7",
     "org.apache.cordova.vibration": "0.3.10",
-    "xu.li.cordova.wechat": "0.4",
-    "com.phonegap.plugins.weixin": "0.1.0",
-    "com.phonegap.plugins.PushPlugin": "2.4.0"
+    "xu.li.cordova.wechat": "0.4"
 }
 // BOTTOM OF METADATA
 });

@@ -34,7 +34,7 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="phonegap-version" value="3.5.0" />
+    <preference name="phonegap-version" value="3.6.3" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
@@ -71,6 +71,7 @@
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="com.ionic.keyboard" />
+    <gap:plugin name="com.phonegap.plugins.pushplugin" />
     <icon src="res/favicon.png" />
     <gap:splash src="res/splash.png" />
     <gap:splash gap:platform="ios" height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
@@ -82,8 +83,14 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
+    <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
     <feature name="BarcodeScanner">
         <param name="ios-package" value="CDVBarcodeScanner" />
+    </feature>
+    <feature name="WeiXin">
+        <param name="ios-package" value="WeiXin" />
     </feature>
     <feature name="SocialSharing">
         <param name="ios-package" value="SocialSharing" />
@@ -150,11 +157,5 @@
     <feature name="Wechat">
         <param name="ios-package" value="CDVWechat" />
         <param name="onload" value="true" />
-    </feature>
-    <feature name="WeiXin">
-        <param name="ios-package" value="WeiXin" />
-    </feature>
-    <feature name="PushPlugin">
-        <param name="ios-package" value="PushPlugin" />
     </feature>
 </widget>

@@ -1,0 +1,104 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <!-- <button ng-if="showNavBack" class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button> -->
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      智慧团青
+    </h1>
+    <ion-nav-buttons side="right">
+      <a class="button button-icon icon ion-ios7-search" href="#/simple/search">
+      </a>
+      <button class="button button-icon icon ion-ios7-plus-outline" ng-click="show($event)">
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <!-- <ion-content class="has-footer"> -->
+  <ion-content>
+    <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000">
+      <ion-slide>
+        <div class="box">
+          <a ng-href="#/simple/article/{{articleLists[0][0]}}">
+            <img ng-src="{{articleLists[0][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[0][2] || ''}}" class="img-responsive center-block">
+          </a>
+          <!-- <div elem-position></div> -->
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”</h4>
+          </div> -->
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box">
+          <a ng-href="#/simple/article/{{articleLists[1][0]}}">
+            <img ng-src="{{articleLists[1][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[1][2] || ''}}" class="img-responsive center-block">
+          </a>
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好生活</h3>
+            <h4>浙江省直机关“智慧团青”</h4>
+          </div> -->
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box">
+          <a ng-href="#/simple/article/{{articleLists[2][0]}}">
+            <img ng-src="{{articleLists[2][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[2][2] || ''}}" class="img-responsive center-block">
+          </a>
+          <!-- <div class="word-front center-block">
+            <h3>建设美丽浙江 创造美好 生活</h3>
+            <h4>浙江省直机关“智慧团青”APP</h4>
+          </div> -->
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+
+    <div class="row no-padding">
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-document-text"  href="#/simple/articleList/"></a>
+        <p class="text-center-2"><b>文章</b></p>
+      </div>
+
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-ios7-people" href="#/simple/activityList/301">
+        </a>
+        <p class="text-center-2"><b>活动</b></p>
+      </div>
+
+      <div class="col text-center">
+        <a class="button button-outline round-button-2 icon button-assertive ion-coffee" href="#">
+        </a>
+        <p class="text-center-2"><b>服务</b></p>
+      </div>
+    </div>
+
+    <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="#/simple/article/{{item[0]}}">
+        <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+        <h2><b>【{{item[4]}}】{{item[1]}}</b></h2>
+        <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
+      </a>
+    </ion-list>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
+    </ion-infinite-scroll>
+  </ion-content>
+
+  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
+
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

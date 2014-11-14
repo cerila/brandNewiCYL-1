@@ -1,0 +1,153 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        我的个人资料
+    </h1>
+    <div class="buttons">
+      <!-- <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button> -->
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+
+  <div class="list list-inset">
+      <ion-item class="item-divider">
+        基本信息
+      </ion-item>
+      <label class="item item-input">
+        <span class="input-label">用户ID</span>
+        <input type="text" readonly="readonly" ng-model="item.userID">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">用户名</span>
+        <input type="text" ng-model="item.userName">
+      </label>
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          性别
+        </div>
+        <select>
+          <option selected>男</option>
+          <option>女</option>
+        </select>
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">出生年月</span>
+        <input type="text" ng-model="item.birth">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">身份证</span>
+        <input type="text" ng-model="item.identityCard">
+      </label>
+
+      <ion-item class="item-divider">
+        密码
+      </ion-item>
+      <label class="item item-input">
+        <span class="input-label">密码</span>
+        <input type="text" ng-model="item.password">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">确认密码</span>
+        <input type="text" ng-model="item.password2">
+      </label>
+
+      <ion-item class="item-divider">
+        联系方式
+      </ion-item>
+      <label class="item item-input">
+        <span class="input-label">手机</span>
+        <input type="text" ng-model="item.phone">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">QQ</span>
+        <input type="text" ng-model="item.QQ">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">邮箱</span>
+        <input type="text" ng-model="item.email">
+      </label>
+
+      <ion-item class="item-divider">
+        详细信息
+      </ion-item>
+      <label class="item item-input">
+        <span class="input-label">单位</span>
+        <input type="text" ng-model="item.work">
+      </label>
+      
+      <label class="item item-input item-select">
+        <div class="input-label">
+          职务
+        </div>
+        <select>
+          <option selected>书记</option>
+          <option>副书记</option>
+        </select>
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">地址</span>
+        <input type="text" ng-model="item.address">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">爱好</span>
+        <input type="text" ng-model="item.hobby">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">简介</span>
+        <input type="text" ng-model="item.brief">
+      </label>
+
+      <ion-item class="item-divider">
+        其他
+      </ion-item>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          定制空间
+        </div>
+        <select>
+          <option selected>开启</option>
+          <option>不开启</option>
+        </select>
+      </label>
+
+    </div>
+    
+
+    <button class="button button-block button-positive">
+        提交
+    </button>
+    
+  </ion-content>
+
+  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
+
+</ion-view>
+
+<!-- <script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>   -->

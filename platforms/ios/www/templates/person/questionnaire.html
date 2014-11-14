@@ -1,0 +1,63 @@
+<ion-view>
+
+  <link href="css/demo.css" rel="stylesheet">
+
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+        调查问卷
+    </h1>
+    <div class="buttons">
+      <!-- <button class="button button-clear ion-navicon-round" ng-click="openPopover($event)">
+      </button> -->
+    </div>
+  </ion-nav-bar>
+  
+  <ion-content class="has-footer">
+    <div class="list list-inset">
+        <label class="item item-input">
+          <span class="input-label">填写人员</span>
+          <input type="text" ng-model="staff">
+        </label>
+
+        <label class="item item-input">
+          <div class="input-label">
+            题目类型
+          </div>
+          <select ng-model="typeName" ng-options="type.name for type in types">
+          </select>
+        </label>
+    </div>    
+
+    <div class="card" ng-repeat="item in items">
+      <ion-item class="item-divider">
+        {{item.name}}：{{item.question}}
+      </ion-item>
+      <ion-radio ng-model="item.choice" ng-value="'1'" name="{{item.name}}">{{item.answer1}}</ion-radio>
+      <ion-radio ng-model="item.choice" ng-value="'2'" name="{{item.name}}">{{item.answer2}}</ion-radio>
+      <ion-radio ng-model="item.choice" ng-value="'3'" name="{{item.name}}">{{item.answer3}}</ion-radio>
+      <ion-radio ng-model="item.choice" ng-value="'4'" name="{{item.name}}">{{item.answer4}}</ion-radio>
+    </div>
+    <button class="button button-block button-positive">
+        提交
+    </button>
+  </ion-content>
+
+  <ng-include src="'templates/common/footer.html'"></ng-include>
+
+</ion-view>
+
+<!-- <script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>   -->
