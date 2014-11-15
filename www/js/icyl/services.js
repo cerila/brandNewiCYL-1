@@ -178,9 +178,19 @@ angular.module('icyl.services', ['ngResource'])
                     },
                     {
                       loadarticle: {method:'JSONP', timeout: 3000},
-                      loadcomments: {method:'JSONP', timeout: 3000}
+                      loadcomments: {method:'JSONP', timeout: 3000},
+                      submitcomment: {method:'JSONP', timeout: 3000}
                     }),
     articleList: $resource('http://17f.go5le.net/mall/index/app_news.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'},
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      loadlist: {method:'JSONP', timeout: 3000}
+                    }),
+    activityList: $resource('http://17f.go5le.net/mall/index/app_hd.asp',
                     {
                       // baseurl:'localhost',
                       // path:'good'},
@@ -197,6 +207,15 @@ angular.module('icyl.services', ['ngResource'])
                     },
                     {
                       loadcomments: {method:'JSONP', timeout: 3000}
+                    }),
+    Comment: $resource('http://17f.go5le.net/99_tj/991/news1_app.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      submitcomment: {method:'JSONP', timeout: 3000}
                     }),
 
 
@@ -241,7 +260,8 @@ angular.module('icyl.services', ['ngResource'])
         //console.log("#18----------"+$scope.$id);  //=====================test
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/common/login.html', {
-          scope: $scope
+          scope: $scope,
+          animation: 'slide-in-up'
           //,animation: 'no-animation'
         }).then(function(modal) {
           $scope.loginmodal = modal;
@@ -325,7 +345,8 @@ angular.module('icyl.services', ['ngResource'])
 
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/common/register.html', {
-          scope: $scope
+          scope: $scope,
+          animation: 'slide-in-up'
           //,animation: 'no-animation'
         }).then(function(modal) {
           $scope.registermodal = modal;

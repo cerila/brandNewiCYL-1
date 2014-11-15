@@ -1,18 +1,8 @@
 <!--#include file="../../inc/conn.asp"-->
 <%Response.Charset = "gbk"%>
 <%
-Dim fblx,id1,maxnum,myarry
-fblx=request.querystring("tabcode")
-If fblx<>"" Then 
-sql="select * from a_type where id='"&fblx&"'"
-Set rs=conn.execute(sql)
-If Not rs.eof Then 
-fblx=rs(1)
-End If
-Else
-fblx=""
-End If 
-
+Dim fblx,id1,maxnum,myarry,id2
+id2=request.querystring("articleid")
 id1=request.querystring("lastid")
 maxnum=request.querystring("requestno")
 
@@ -21,13 +11,12 @@ shopid=request("shopid")
 End If 
 set rs=server.CreateObject("ADODB.RecordSet")
 
-sql2="Select id,zt,tp1,fbsj,fblx,js_sts,ckcs,staff_id From web_xxfb_nr where 1=1 and staff_id like '91%'"
-
-If fblx<>"" Then 
-sql2=sql2&" and fblx='"&fblx&"'"
-End If 
+sql2="Select id,zt,ztid,looktime,lookcard,lookman,lookcard,remark,looknum From a_1_log where 1=1"
 If id1>19 Then 
 sql2=sql2&" and id<"&id1
+End If 
+If id2<>"" Then 
+sql2=sql2&" and ztid='"&id2&"'"
 End If 
 If shopid2<>"" Then 
 sql2=sql2&" and staff_id like '"&shopid2&"'"
@@ -82,10 +71,14 @@ For col = 0 To UBound(MyArry, 1)
 'If Trim(myarry(col,row))="" Then 
 'myarry(col,row)="0"
 'End If 
-If col=7 Then 
+If col=8 Then 
 abc=abc&""""&myarry(col,row)&""""
 Else
+If col=7 Then 
+abc=abc&""""&replace(replace(myarry(col,row),"""","\"""),vbcrlf,"")&""""&","
+else
 abc=abc&""""&myarry(col,row)&""""&","
+End If 
 End If 
 'Response.write "<td>"&myarry(col,row)&"<td>"
 

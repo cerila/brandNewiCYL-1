@@ -5,14 +5,16 @@ dim ip,intRsnum,value1,value2
 ip=request.servervariables("remote_addr")
 lb=request.form("lb")
 
-password = request("password")
-name = request("username")
+password = request.querystring("password")
+name = request.querystring("username")
 value1=name
 value2=password
 'k1 = request.form("k1")
 
 if value1="" then
-response.write "<script LANGUAGE='javascript'>alert('用户名为空！');</script>"
+callback1=request("callback")
+response1= callback1&"({err_code:1, err_msg:""用户名为空"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:"""&z_card&"""}})"
+Response.Write response1 
 else
 Set rs = Server.CreateObject("ADODB.Connection")
 sql="select * from a_fh_staff where card_no1='" & name & "' and password='" & password & "'"
@@ -59,7 +61,7 @@ lt=request("lt")
 
 callback1=request("callback")
 
-response1= callback1&"({err_code:0, err_msg:""success"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:""whatever""}})"
+response1= callback1&"({err_code:0, err_msg:""success"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:"""&z_card&"""}})"
 
 Response.Write response1 
 	else
@@ -67,7 +69,7 @@ Response.Write response1
 
 callback1=request("callback")
 
-response1= callback1&"({err_code:1, err_msg:""需要审核"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:""whatever""}})"
+response1= callback1&"({err_code:1, err_msg:""需要审核"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""",token:"""&z_card&"""}})"
 
 Response.Write response1 
 
@@ -77,7 +79,7 @@ Else
  
 callback1=request("callback")
 
-response1= callback1&"({err_code:1, err_msg:""您输入了错误的帐号或口令"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:""whatever""}})"
+response1= callback1&"({err_code:1, err_msg:""您输入了错误的帐号或口令"", data:{username:"""&VALUE1&""",password:"""&VALUE2&""", token:"""&z_card&"""}})"
 
 Response.Write response1 
 

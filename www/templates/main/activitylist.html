@@ -6,62 +6,24 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-      日用品
+      活动超市
     </h1>
-    <ion-nav-buttons side="right">
-      <button class="button button-outline button-positive" ng-click="openModal($event)">
-        筛选
-      </button>
-    </ion-nav-buttons>
+    <div class="buttons">
+      <a class="button button-icon icon ion-ios7-search" href="#/simple/search">
+      </a>
+    </div>
   </ion-nav-bar>
-  
+
   <ion-content>
     <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
     </ion-refresher>
-
-    <div class="list list-inset">
-      <label class="item item-input">
-        <span class="input-label">名称</span>
-        <input type="text" ng-model="itemName">
-      </label>
-      <label class="item item-input item-select">
-        <div class="input-label">
-          地域
-        </div>
-        <select>
-          <option ng-repeat="item in regions">{{item.region}}
-          </option>
-        </select>
-      </label>
-    </div>
-
-    <div class="padding">
-      <button class="button button-block button-positive">
-        查找
-      </button>
-    </div>
-
-    <div class="list card" ng-repeat="item in items">
-      <ion-item class="item-avatar item-text-wrap">
-        <img ng-src="{{item.imageUrl}}">
-        <h2><b>{{item.name}}</b><span class="p-right">提供：{{item.provider}}</span></h2>
-        <p>参考价：￥{{item.price}}元</p>
-      </ion-item>
-
-      <ion-item class="tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="">
-          {{item.region}}
-        </a>
-        <a class="tab-item" href="">
-          <i class="icon ion-chatbox"></i>
-          {{item.commentNum}}
-        </a>
-        <a class="tab-item" href="">
-          分类{{item.category}}
-        </a>
-      </ion-item>
-    </div>
-
+    <ion-list>
+      <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="#/simple/article/{{item[0]}}">
+        <img ng-src="{{item[2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + item[2] || 'http://17f.go5le.net/99_tj/img/m2.png'}}">
+        <h2><b>【{{item[4]}}】{{item[1]}}</b></h2>
+        <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
+      </a>
+    </ion-list>
     <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
     </ion-infinite-scroll>
   </ion-content>
@@ -69,38 +31,3 @@
   <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
 
 </ion-view>
-
-<script id="commodityModal.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title">My Modal title</h1>
-      <div class="buttons" side="right">
-        <button class="button button-clear button-positive" ng-click="closeModal($event)">取消</button>
-      </div>
-    </ion-header-bar>
-    <ion-content>
-      <ion-list>
-        <ion-item class="item-divider">
-          价格
-        </ion-item>
-        <ion-radio ng-model="priceRegion"  ng-repeat="item in priceRegions" ng-value="'{{item.priceRegion}}'">
-          {{item.priceRegion}}
-        </ion-radio>
-      </ion-list>
-
-      <ion-list>
-        <ion-item class="item-divider">
-          类型
-        </ion-item>
-        <ion-radio ng-model="category" ng-repeat="item in categoryList" ng-value="'{{item.catgoryName}}'">
-          {{item.categoryName}}
-        </ion-radio>
-      </ion-list>
-    </ion-content>
-  </ion-modal-view>
-  <ion-footer-bar class="bar-energized">
-    <h1 class="title">
-     <a class="button button-clear button-block" ng-click="closeModal($event)">完成</a>
-    </h1>
-  </ion-footer-bar>
-</script>

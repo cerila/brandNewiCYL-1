@@ -19,7 +19,7 @@
     </ion-refresher>
     <ion-list>
       <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="#/simple/article/{{item[0]}}">
-        <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+        <img ng-src="{{item[2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + item[2] || 'http://17f.go5le.net/99_tj/img/m2.png'}}">
         <h2><b>【{{item[4]}}】{{item[1]}}</b></h2>
         <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
       </a>

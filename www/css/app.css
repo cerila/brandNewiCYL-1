@@ -11,6 +11,7 @@
 	background-color: red;*/
 }
 .img-responsive,
+.responsive-content img,
 .thumbnail > img,
 .thumbnail a > img,
 .carousel-inner > .item > img,
@@ -59,10 +60,16 @@
 	padding-top: 0;
 	padding-bottom: 0;
 }
+.padding-lr {
+	padding-left: 5px;
+	padding-right: 5px;
+}
 .slider-pager {
 	display: none;
 }
-
+.less-margin {
+	margin: 5px;
+}
 
 .background-clear, .button.background-clear.active, .button.background-clear.activated {
 	background-color: transparent;
@@ -182,6 +189,9 @@ div.margin-top{
 {
 	border-radius: 50%;
 	border: 1px solid #ef4e3a;
+}
+a.round-button.button, a.round-button-2.button {
+	min-width: 47px;
 }
 
 .round-avatar

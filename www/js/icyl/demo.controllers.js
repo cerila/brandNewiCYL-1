@@ -820,6 +820,11 @@ angular.module('demo.controllers', [])
 
 }])
 
+//服务导航
+.controller('simpleNavService', ['$scope', function($scope) {
+
+}])
+
 //搜索
 .controller('simpleSearch', ['$scope', function($scope) {
   
@@ -916,13 +921,28 @@ angular.module('demo.controllers', [])
 
 }])
 
-.controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
+//文章内容及评价
+.controller('simpleArticle', ['$scope', '$stateParams', 'Data', 'Identification', "User", "Storage", function($scope, $stateParams, Data, Identification, User, Storage) {
+  $scope.submit = {
+    Comment: ''
+  }; //必须这样ng-model才是双向的two-way
   var pageParams = 
   {
     articleId: $stateParams.articleId,
     loaded: 0,
     lastID: 0,
     requestNO: 20
+  };
+  var replyParams = 
+  {
+    username: Storage.kget('username'),
+    // password: Storage.kget('password'),
+    content: $scope.submit.Comment,
+    id: $stateParams.articleId,
+    act: 'dd',
+    ztid: '',
+    zt: '',
+    shopid: ''
   };
   
   $scope.article = {};
@@ -934,6 +954,7 @@ angular.module('demo.controllers', [])
     // console.log($scope.article);
 
     $scope.newsTitle = $scope.article[0][1];
+    $scope.imageUrl = $scope.article[0][2];
     $scope.newsDate = $scope.article[0][3];
     $scope.newsSource = $scope.article[0][9];
     $scope.newsContent = $scope.article[0][8];
@@ -943,17 +964,39 @@ angular.module('demo.controllers', [])
     // console.log($scope.newsContent);
     // console.log('loadarticle:' + moreData);
     // moreData = true;
-    Data.Comments.loadcomments(pageParams, function(data){
+    replyParams.ztid = $scope.article[0][0];
+    replyParams.zt = $scope.article[0][1];
+    replyParams.shopid = $scope.article[0][7];
+    Data.Comments.loadcomments(pageParams, function (data) {
       $scope.comments = data.data.items;
       // console.log('comments:' + moreData);
       moreData = true;
     });
   });
-  
 
-
-  $scope.userComment = '';
-  $scope.items = [];
+  $scope.submit = function () {
+    // console.log($scope.userComment);
+    Identification.checkToken().then( function (data) {
+      if (data.err_code === 0) {
+        //console.log(data.data); //=====================test
+        replyParams.content = $scope.submit.Comment && $scope.submit.Comment || "已阅";
+        Data.Comment.submitcomment(replyParams, function (data) {
+          $scope.doRefresh();
+          $scope.submit.Comment = '';
+        });
+        // console.log(replyParams);
+      }
+      else {
+        //console.log(data); //=====================test
+        $scope.actions = {};
+        User.userLogin($scope);
+        User.userRegister($scope);
+      }
+    }, function (err) {
+      console.log('错误：Identification.checkToken()' + err);
+      Alert('请检查网络！');
+    });
+  };
 
   //下拉刷新
   $scope.doRefresh = function() {
@@ -964,6 +1007,7 @@ angular.module('demo.controllers', [])
       // console.log($scope.article);
 
       $scope.newsTitle = $scope.article[0][1];
+      $scope.imageUrl = $scope.article[0][2];
       $scope.newsDate = $scope.article[0][3];
       $scope.newsSource = $scope.article[0][9];
       $scope.newsContent = $scope.article[0][8];
@@ -986,9 +1030,18 @@ angular.module('demo.controllers', [])
   $scope.loadMoreData = function() {
     // console.log(moreData);
     Data.Comments.loadcomments(pageParams, function(data){
-      $scope.comments = $scope.comments.concat(data.data.items);
+      // console.log($scope.comments);
+      // if ($scope.comments === {}) {
+      //   console.log('$scope.comments');
+      //   $scope.comments = data.data.items;
+      // }
+      // else {
+      //   console.log('else');
+        $scope.comments.concat(data.data.items);
+      // }
+      // console.log($scope.comments);
       pageParams.loaded = $scope.comments.length;
-      pageParams.lastID = $scope.comments[$scope.comments.length - 1][0];
+      pageParams.lastID = $scope.comments[$scope.comments.length - 1] && $scope.comments[$scope.comments.length - 1][0] || 0;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
 
@@ -1012,7 +1065,71 @@ angular.module('demo.controllers', [])
 }])
 
 //活动列表
-.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', '$ionicModal', function($scope, Data, $stateParams, $ionicModal) {
+.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
+  var pageParams = 
+  {
+    tabCode: $stateParams.tabCode,
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  };
+  
+  $scope.articleLists = {};
+  var moreData = false;
+    
+  Data.articleList.loadlist(pageParams, function(data){
+    $scope.articleLists = data.data.items;
+    pageParams.loaded = $scope.articleLists.length;
+    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    moreData = true;
+  });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.articleList.loadlist(pageParams, function(data){
+      $scope.articleLists = data.data.items;
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    Data.articleList.loadlist(pageParams, function(data){
+      $scope.articleLists = $scope.articleLists.concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.articleList.loadlist(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
+
+}])
+
+//服务列表
+.controller('simpleServiceList', ['$scope', 'Data', '$stateParams', '$ionicModal', function($scope, Data, $stateParams, $ionicModal) {
   var pageParams = 
   {
     tabCode: $stateParams.tabCode,

@@ -59,3 +59,7 @@ p.word-right {
     height: 180px;
     width: 100%;
 }
+
+/* 文章页 */
+article .content{padding:10px 0;word-wrap:break-word;overflow:hidden;}
+article .content p{margin-bottom:10px;line-height:1.8em;text-align:left;}

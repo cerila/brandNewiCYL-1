@@ -14,11 +14,11 @@
 
   <ion-content>
     <div>
-      <p>时间：{{newsDate}}&nbsp;来源：{{newsSource}}</p>  
-      <h1 class="text-center">{{newsTitle}}</h1>
-      <!-- <img ng-src="{{imageUrl}}"> -->
+      <p>时间：{{newsDate}}<br>来源：{{newsSource}}</p>  
+      <h3 class="text-center">{{newsTitle}}</h3>
+      <img ng-if="imageUrl != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{imageUrl}}" class="img-responsive center-block">
       <!-- <div>{{newsContent}}</div> -->
-      <div ng-bind-html="newsContent"></div>
+      <div ng-bind-html="newsContent" class="responsive-content"></div>
     </div> 
     
     <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
@@ -29,9 +29,9 @@
       </ion-item>
       <ion-item class="item-input-inset">
         <label class="item-input-wrapper">
-          <textarea type="text" placeholder="已阅" ng-model="userComment"></textarea>
+          <textarea type="text" placeholder="已阅" ng-model="submit.Comment"></textarea>
         </label>
-        <button class="button button-small">
+        <button class="button button-small" ng-click="submit()">
           确认阅读
         </button>
       </ion-item>
@@ -39,10 +39,10 @@
       <ion-item class="item-divider">
         活动评价
       </ion-item>
-      <ion-item ng-repeat="item in items">
-        <p>[{{item.company}}]{{item.user}}<span class="p-right">{{item.date}}</span></p>
-        <p>{{item.comment}}</p>
-        <p class="text-right">赞成：{{item.times}}</p>
+      <ion-item ng-repeat="item in comments">
+        <p>{{item[5]}}<span class="p-right">{{item[3]}}</span></p>
+        <p>{{item[7]}}</p>
+        <p class="text-right">赞成：{{item[8]}}</p>
       </ion-item>
     </ion-list>
     <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
