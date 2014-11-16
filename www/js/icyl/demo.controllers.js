@@ -873,7 +873,7 @@ angular.module('demo.controllers', [])
   Data.articleList.loadlist(pageParams, function(data){
     $scope.articleLists = data.data.items;
     pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
     moreData = true;
   });
 
@@ -884,7 +884,7 @@ angular.module('demo.controllers', [])
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
       pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.refreshComplete');
     });
     
@@ -896,7 +896,7 @@ angular.module('demo.controllers', [])
       $scope.articleLists = $scope.articleLists.concat(data.data.items);
       // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
       pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
 
@@ -1065,7 +1065,7 @@ angular.module('demo.controllers', [])
 }])
 
 //活动列表
-.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
+.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', 'Storage', function($scope, Data, $stateParams, Storage) {
   var pageParams = 
   {
     tabCode: $stateParams.tabCode,
@@ -1074,13 +1074,14 @@ angular.module('demo.controllers', [])
     requestNO: 20
   };
   
-  $scope.articleLists = {};
+  $scope.activityList = {};
+  $scope.username = Storage.kget('username');
   var moreData = false;
     
-  Data.articleList.loadlist(pageParams, function(data){
-    $scope.articleLists = data.data.items;
-    pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+  Data.activityList.loadlist(pageParams, function(data){
+    $scope.activityLists = data.data.items;
+    pageParams.loaded = $scope.activityLists.length;
+    pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
     moreData = true;
   });
 
@@ -1088,10 +1089,10 @@ angular.module('demo.controllers', [])
   $scope.doRefresh = function() {
     pageParams.lastID = 0;
     pageParams.requestNO = pageParams.loaded;
-    Data.articleList.loadlist(pageParams, function(data){
-      $scope.articleLists = data.data.items;
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.activityLists = data.data.items;
+      pageParams.loaded = $scope.activityLists.length;
+      pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.refreshComplete');
     });
     
@@ -1099,15 +1100,15 @@ angular.module('demo.controllers', [])
 
   //上拉加载
   $scope.loadMoreData = function() {
-    Data.articleList.loadlist(pageParams, function(data){
-      $scope.articleLists = $scope.articleLists.concat(data.data.items);
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.activityLists = $scope.activityLists.concat(data.data.items);
       // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      pageParams.loaded = $scope.activityLists.length;
+      pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
 
-    Data.articleList.loadlist(pageParams, function(data){
+    Data.activityList.loadlist(pageParams, function(data){
       if(data.data.items.length < 1) {
         moreData = false;
       }
@@ -1129,7 +1130,7 @@ angular.module('demo.controllers', [])
 }])
 
 //服务列表
-.controller('simpleServiceList', ['$scope', 'Data', '$stateParams', '$ionicModal', function($scope, Data, $stateParams, $ionicModal) {
+.controller('simpleServiceList', ['$scope', 'Data', '$stateParams', '$ionicModal', 'Storage', function($scope, Data, $stateParams, $ionicModal, Storage) {
   var pageParams = 
   {
     tabCode: $stateParams.tabCode,
@@ -1138,8 +1139,59 @@ angular.module('demo.controllers', [])
     requestNO: 20
   };
   
-  $scope.activityLists = {};
+  $scope.serviceLists = {};
+  $scope.username = Storage.kget('username');
   var moreData = false;
+
+  Data.activityList.loadlist(pageParams, function(data){
+    $scope.serviceLists = data.data.items;
+    // console.log(data.data.items); //==================test
+    pageParams.loaded = $scope.serviceLists.length;
+    pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+    moreData = true;
+  });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.serviceLists = data.data.items;
+      pageParams.loaded = $scope.serviceLists.length;
+      pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.serviceLists = $scope.serviceLists.concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams.loaded = $scope.serviceLists.length;
+      pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.activityList.loadlist(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
 
   $scope.priceRegions = [
     {'priceRegion': "0-100"},
@@ -1217,26 +1269,6 @@ angular.module('demo.controllers', [])
   // Execute action on remove modal
   $scope.$on('modal.removed', function() {
     // Execute action
-  });
-
-   //下拉刷新
-  $scope.doRefresh = function() {
-
-    $scope.$broadcast('scroll.refreshComplete');
-  };
-
-  //上拉加载更多评论
-  $scope.loadMoreData = function() {
-    
-    $scope.$broadcast('scroll.infiniteScrollComplete');
-
-  };
-  $scope.moreDataCanBeLoaded = function() {
-    return moreData;
-  };
-
-  $scope.$on('stateChangeSuccess', function() {
-    $scope.loadMoreData();
   });
 }])
 

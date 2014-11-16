@@ -6,7 +6,7 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-      日用品
+      服务列表
     </h1>
     <ion-nav-buttons side="right">
       <button class="button button-outline button-positive" ng-click="openModal($event)">
@@ -19,7 +19,7 @@
     <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
     </ion-refresher>
 
-    <div class="list list-inset less-margin">
+    <!-- <div class="list list-inset less-margin">
       <label class="item item-input">
         <span class="input-label">名称</span>
         <input type="text" ng-model="itemName">
@@ -39,9 +39,9 @@
       <button class="button button-block button-positive">
         查找
       </button>
-    </div>
+    </div> -->
 
-    <div class="list card less-margin" ng-repeat="item in items">
+    <div class="list card less-margin" ng-repeat="item in serviceLists">
       <ion-item class="item-avatar item-text-wrap">
         <img ng-src="{{item.imageUrl}}">
         <h2><b>{{item.name}}</b><span class="p-right">提供：{{item.provider}}</span></h2>
