@@ -245,3 +245,9 @@ a.round-button.button, a.round-button-2.button {
 .tabs-top.tabs-striped .tabs-secondary .tab-item.activated, .tabs-top.tabs-striped .tabs-secondary .tab-item.active, .tabs-top.tabs-striped .tabs-secondary .tab-item.tab-item-active {
 	opacity: 1;
 }
+
+/*
+.chat{ border:#666666 1px solid; display:block; margin-left:5px; margin-right:5px; height:680px; padding:10px; overflow-y:scroll;}
+.chat .username span{font-style:italic;}
+.caht .messtext{font-size:20px; background-color:#CC66FF;margin-top:15px; height:30px; line-height:30px; display:block;}*/
+
