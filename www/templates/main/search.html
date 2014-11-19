@@ -14,14 +14,19 @@
       
     </ion-nav-buttons>
   </ion-nav-bar>
-  
-  <!-- <ion-content class="has-footer"> -->
+
   <ion-content>
-    <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
-      </label>
+    <div class="list">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" placeholder="查找..." ng-model="search">
+        </label>
+        <button ng-if="search.length"
+          class="button button-icon ion-android-close input-button"
+          ng-click="clearSearch()">
+        </button>
+      </div>
     </div>
 
     <div class="padding">
@@ -30,7 +35,4 @@
       </button>
     </div>
   </ion-content>
-
-  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
-
 </ion-view>

@@ -827,7 +827,10 @@ angular.module('demo.controllers', [])
 
 //搜索
 .controller('simpleSearch', ['$scope', function($scope) {
-  
+  var dd = $scope.search;
+  $scope.clearSearch = function() {
+    $scope.search = "";
+  };
 }])
 
 //发布
@@ -1279,9 +1282,9 @@ angular.module('demo.controllers', [])
   };
   
   $scope.items = [
-  ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132074', '记忆能力测试', ''],
-    ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132073', '个人能力测试', ''],
-  ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132072', '测试你的焦虑程度', '']
+  ['132074', '记忆能力测试', ''],
+  ['132073', '个人能力测试', ''],
+  ['132072', '测试你的焦虑程度', '']
   ];
   var moreData = false;
     
@@ -1330,6 +1333,11 @@ angular.module('demo.controllers', [])
     $scope.loadMoreData();
   });
 
+}])
+
+//心理1解1链接
+.controller('simplePsychologyLink', ['$scope', '$stateParams', '$sce', function($scope, $stateParams, $sce) {
+  $scope.pUrl = $sce.trustAsResourceUrl("http://17f.go5le.net/99_tj/991/news1_2.asp?id=" + $stateParams.qid);
 }])
 
 //我的

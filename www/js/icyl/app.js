@@ -138,7 +138,7 @@ angular.module('icyl', dependencies)
     { 
       txt="There was an error on this page.\n\n"; 
       txt+="Error description: " + err.message + "\n\n"; 
-      console.log(txt); 
+      // console.log(txt); 
     } 
     
   });
@@ -951,6 +951,18 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/activity/psychology.html',
           controller: 'simplePsychology'
+        }
+      }
+    })
+
+    //心理1解1链接
+    .state('simple.psychologyLink', {
+      url:'/psychologyLink/:qid',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/activity/psychologyLink.html',
+          controller: 'simplePsychologyLink'
         }
       }
     })
