@@ -178,9 +178,19 @@ angular.module('icyl.services', ['ngResource'])
                     },
                     {
                       loadarticle: {method:'JSONP', timeout: 3000},
-                      loadcomments: {method:'JSONP', timeout: 3000}
+                      loadcomments: {method:'JSONP', timeout: 3000},
+                      submitcomment: {method:'JSONP', timeout: 3000}
                     }),
     articleList: $resource('http://17f.go5le.net/mall/index/app_news.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'},
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      loadlist: {method:'JSONP', timeout: 3000}
+                    }),
+    activityList: $resource('http://17f.go5le.net/mall/index/app_hd.asp',
                     {
                       // baseurl:'localhost',
                       // path:'good'},
@@ -197,6 +207,15 @@ angular.module('icyl.services', ['ngResource'])
                     },
                     {
                       loadcomments: {method:'JSONP', timeout: 3000}
+                    }),
+    Comment: $resource('http://17f.go5le.net/99_tj/991/news1_app.asp',
+                    {
+                      // baseurl:'localhost',
+                      // path:'good'
+                      callback: 'JSON_CALLBACK' //jsonp_flag
+                    },
+                    {
+                      submitcomment: {method:'JSONP', timeout: 3000}
                     }),
 
 
@@ -241,7 +260,8 @@ angular.module('icyl.services', ['ngResource'])
         //console.log("#18----------"+$scope.$id);  //=====================test
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/common/login.html', {
-          scope: $scope
+          scope: $scope,
+          animation: 'slide-in-up'
           //,animation: 'no-animation'
         }).then(function(modal) {
           $scope.loginmodal = modal;
@@ -325,7 +345,8 @@ angular.module('icyl.services', ['ngResource'])
 
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/common/register.html', {
-          scope: $scope
+          scope: $scope,
+          animation: 'slide-in-up'
           //,animation: 'no-animation'
         }).then(function(modal) {
           $scope.registermodal = modal;
@@ -598,4 +619,89 @@ angular.module('icyl.services', ['ngResource'])
     };
 }])
 
+//chat.js
+.factory('Chat', ['$window', '$timeout', function($window, $timeout) {
+  return {
+    // 通过封装getAjax()方法创建XMLHTTPRequest对象
+    getAjax: function() {
+      var ajax=false;
+      try{
+          ajax = new ActiveXObject("Msxml2.XMLHTTP");
+      }catch(e){
+          try{
+              ajax = new ActiveXObject("Microsoft.XMLHTTP");
+          }catch(E){
+              ajax = false;
+          }
+      }
+      if(!ajax && typeof XMLHttpRequest!='undefined'){
+          ajax = new XMLHttpRequest();
+      }
+      return ajax;
+    },
+
+    //发送消息的方法
+    sendMess: function(lastID, mGetTime, sendMessReq) {
+      //如果消息为空给出提示并返回
+      if(document.getElementById("mess").value==""){
+          alert("You have not entered a message!");
+          document.getElementById("mess").focus();//把焦点设置到消息输入框
+          return;
+      }
+      //alert("");
+      var d = new Date();
+      //判断上次发送消息的状态,4:已发送,0:未发送
+      if(sendMessReq.readyState==4 || sendMessReq.readyState == 0){
+          //发送消息的服务器端地址
+          var sendUrl = "http://17f.go5le.net/941/chat3/send.asp?username="+escape(document.getElementById("username").value)+"&mess="+escape(document.getElementById("mess").value) +"&d="+d.getTime();
+          sendMessReq.open("POST",sendUrl,true);//建立请求连接
+          sendMessReq.onreadystatechange = function(){//发送状态改变后调用的方法
+              clearTimeout(mGetTime);//停止自动获取消息
+              Chat.getMess(lastID, mGetTime, getMessReq);//获取消息
+          }
+          sendMessReq.send(null);//发送请求
+          document.getElementById("mess").value = "";//设置消息框为空
+          document.getElementById("mess").focus();//把焦点设置到消息输入框
+      }
+    },
+
+    //获取消息
+    getMess: function(lastID, mGetTime, getMessReq) {
+      var d = new Date();
+      if(getMessReq.readyState==4 || getMessReq.readyState == 0){
+          var getUrl = "http://17f.go5le.net/941/chat3/getmess.asp?lastid="+lastID + "&d="+d.getTime();//从服务器返回消息的地址
+          getMessReq.open("POST",getUrl,true);//建立请求连接
+          getMessReq.onreadystatechange = function(){
+              if(getMessReq.readyState==4&&getMessReq.status==200){
+                  var chatEL = document.getElementById("chat");
+                  var messXML = getMessReq.responseXML;//获得返回后的XML
+                  var messNodes = messXML.getElementsByTagName("message");
+                  var messCount = messNodes.length;
+                  for(var i = 0 ; i < messCount ; i++){
+                      var userNode = messNodes[i].getElementsByTagName("user");
+                      var textNode = messNodes[i].getElementsByTagName("text");
+                      var dateNode = messNodes[i].getElementsByTagName("date");
+                      var uddNode = messNodes[i].getElementsByTagName("udd");
+                      var fxxNode = messNodes[i].getElementsByTagName("fx");
+                      //<a href="chat_save.asp?id='+uddNode[0].firstChild.nodeValue+'" >赞</a>
+                      chatEL.innerHTML += '<div class="username" align="'+fxxNode[0].firstChild.nodeValue+'"  ><img src="images/l1.png"><span>' + userNode[0].firstChild.nodeValue  + '</span> ( <span>' + dateNode[0].firstChild.nodeValue + '</span>)</div>';
+                      chatEL.innerHTML += '<div align="'+fxxNode[0].firstChild.nodeValue+'">' + textNode[0].firstChild.nodeValue + '</div>';
+                      lastID = messNodes[i].getAttribute("id");//上次消息的ID
+                      chatEL.scrollTop = chatEL.scrollHeight;//滚动到最后一条消息
+                  }
+                  mGetTime = $timeout(function()
+                  {
+                    Chat.getMess(lastID, mGetTime, getMessReq);
+                  },2000);//每隔两秒从服务返回最新消息
+              }
+          }
+          getMessReq.send(null);
+      }
+      return;
+    }
+
+
+
+  };
+}])
 ;

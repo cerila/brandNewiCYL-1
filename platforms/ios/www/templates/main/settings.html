@@ -4,7 +4,8 @@
       <!-- <button class="button button-clear" custom-go-back>
         <i class="icon ion-ios7-arrow-back"></i>
       </button> -->
-      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <button menu-toggle="left" class="button button-icon icon ion-navicon">
+      </button>
     </ion-nav-buttons>
     <h1 class="title">
       设置
@@ -23,46 +24,40 @@
     </ion-list>
 
     <ion-list>
-      <a class="item" href="">
-        消息提醒
-        <span class="item-note">
-          <i class="icon ion-ios7-arrow-right"></i>
-        </span>
-      </a>
-      <a class="item" href="">
+      <div class="item" ng-click="ClearCache()">
         清理缓存
         <span class="item-note">
           <i class="icon ion-ios7-arrow-right"></i>
         </span>
-      </a>
+      </div>
     </ion-list>
 
     <ion-list>
-      <a class="item" href="">
-        新版本检测
-        <span class="item-note">
-          <i class="icon ion-ios7-arrow-right"></i>
-        </span>
-      </a>
-      <a class="item" href="">
+      <a class="item" href="#/simple/feedback">
         意见与反馈
         <span class="item-note">
           <i class="icon ion-ios7-arrow-right"></i>
         </span>
       </a>
-      <a class="item" href="">
+      <a class="item" href="#/simple/ours">
         认识我们
         <span class="item-note">
           <i class="icon ion-ios7-arrow-right"></i>
         </span>
       </a>
-      <a class="item" href="">
+      <a class="item" href="#/simple/agreement">
         用户协议
         <span class="item-note">
           <i class="icon ion-ios7-arrow-right"></i>
         </span>
       </a>
     </ion-list>
+
+    <div class="padding">
+      <button class="button button-block button-assertive">
+        退出登录
+      </button>
+    </div>
   </ion-content>
   <ng-include src="'templates/common/footer.html'"></ng-include>
 </ion-view>

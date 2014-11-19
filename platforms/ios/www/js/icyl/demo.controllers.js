@@ -820,6 +820,11 @@ angular.module('demo.controllers', [])
 
 }])
 
+//服务导航
+.controller('simpleNavService', ['$scope', function($scope) {
+
+}])
+
 //搜索
 .controller('simpleSearch', ['$scope', function($scope) {
   
@@ -868,7 +873,7 @@ angular.module('demo.controllers', [])
   Data.articleList.loadlist(pageParams, function(data){
     $scope.articleLists = data.data.items;
     pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
     moreData = true;
   });
 
@@ -879,7 +884,7 @@ angular.module('demo.controllers', [])
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
       pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.refreshComplete');
     });
     
@@ -891,7 +896,7 @@ angular.module('demo.controllers', [])
       $scope.articleLists = $scope.articleLists.concat(data.data.items);
       // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
       pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
 
@@ -916,13 +921,28 @@ angular.module('demo.controllers', [])
 
 }])
 
-.controller('simpleArticle', ['$scope', '$stateParams', 'Data', function($scope, $stateParams, Data) {
+//文章内容及评价
+.controller('simpleArticle', ['$scope', '$stateParams', 'Data', 'Identification', "User", "Storage", function($scope, $stateParams, Data, Identification, User, Storage) {
+  $scope.submit = {
+    Comment: ''
+  }; //必须这样ng-model才是双向的two-way
   var pageParams = 
   {
     articleId: $stateParams.articleId,
     loaded: 0,
     lastID: 0,
     requestNO: 20
+  };
+  var replyParams = 
+  {
+    username: Storage.kget('username'),
+    // password: Storage.kget('password'),
+    content: $scope.submit.Comment,
+    id: $stateParams.articleId,
+    act: 'dd',
+    ztid: '',
+    zt: '',
+    shopid: ''
   };
   
   $scope.article = {};
@@ -934,6 +954,7 @@ angular.module('demo.controllers', [])
     // console.log($scope.article);
 
     $scope.newsTitle = $scope.article[0][1];
+    $scope.imageUrl = $scope.article[0][2];
     $scope.newsDate = $scope.article[0][3];
     $scope.newsSource = $scope.article[0][9];
     $scope.newsContent = $scope.article[0][8];
@@ -943,17 +964,39 @@ angular.module('demo.controllers', [])
     // console.log($scope.newsContent);
     // console.log('loadarticle:' + moreData);
     // moreData = true;
-    Data.Comments.loadcomments(pageParams, function(data){
+    replyParams.ztid = $scope.article[0][0];
+    replyParams.zt = $scope.article[0][1];
+    replyParams.shopid = $scope.article[0][7];
+    Data.Comments.loadcomments(pageParams, function (data) {
       $scope.comments = data.data.items;
       // console.log('comments:' + moreData);
       moreData = true;
     });
   });
-  
 
-
-  $scope.userComment = '';
-  $scope.items = [];
+  $scope.submit = function () {
+    // console.log($scope.userComment);
+    Identification.checkToken().then( function (data) {
+      if (data.err_code === 0) {
+        //console.log(data.data); //=====================test
+        replyParams.content = $scope.submit.Comment && $scope.submit.Comment || "已阅";
+        Data.Comment.submitcomment(replyParams, function (data) {
+          $scope.doRefresh();
+          $scope.submit.Comment = '';
+        });
+        // console.log(replyParams);
+      }
+      else {
+        //console.log(data); //=====================test
+        $scope.actions = {};
+        User.userLogin($scope);
+        User.userRegister($scope);
+      }
+    }, function (err) {
+      console.log('错误：Identification.checkToken()' + err);
+      Alert('请检查网络！');
+    });
+  };
 
   //下拉刷新
   $scope.doRefresh = function() {
@@ -964,6 +1007,7 @@ angular.module('demo.controllers', [])
       // console.log($scope.article);
 
       $scope.newsTitle = $scope.article[0][1];
+      $scope.imageUrl = $scope.article[0][2];
       $scope.newsDate = $scope.article[0][3];
       $scope.newsSource = $scope.article[0][9];
       $scope.newsContent = $scope.article[0][8];
@@ -986,9 +1030,18 @@ angular.module('demo.controllers', [])
   $scope.loadMoreData = function() {
     // console.log(moreData);
     Data.Comments.loadcomments(pageParams, function(data){
-      $scope.comments = $scope.comments.concat(data.data.items);
+      // console.log($scope.comments);
+      // if ($scope.comments === {}) {
+      //   console.log('$scope.comments');
+      //   $scope.comments = data.data.items;
+      // }
+      // else {
+      //   console.log('else');
+        $scope.comments.concat(data.data.items);
+      // }
+      // console.log($scope.comments);
       pageParams.loaded = $scope.comments.length;
-      pageParams.lastID = $scope.comments[$scope.comments.length - 1][0];
+      pageParams.lastID = $scope.comments[$scope.comments.length - 1] && $scope.comments[$scope.comments.length - 1][0] || 0;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
 
@@ -1012,7 +1065,7 @@ angular.module('demo.controllers', [])
 }])
 
 //活动列表
-.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', '$ionicModal', function($scope, Data, $stateParams, $ionicModal) {
+.controller('simpleActivityList', ['$scope', 'Data', '$stateParams', 'Storage', function($scope, Data, $stateParams, Storage) {
   var pageParams = 
   {
     tabCode: $stateParams.tabCode,
@@ -1021,8 +1074,124 @@ angular.module('demo.controllers', [])
     requestNO: 20
   };
   
-  $scope.activityLists = {};
+  $scope.activityList = {};
+  $scope.username = Storage.kget('username');
   var moreData = false;
+    
+  Data.activityList.loadlist(pageParams, function(data){
+    $scope.activityLists = data.data.items;
+    pageParams.loaded = $scope.activityLists.length;
+    pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
+    moreData = true;
+  });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.activityLists = data.data.items;
+      pageParams.loaded = $scope.activityLists.length;
+      pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.activityLists = $scope.activityLists.concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams.loaded = $scope.activityLists.length;
+      pageParams.lastID = $scope.activityLists[$scope.activityLists.length - 1] && $scope.activityLists[$scope.activityLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.activityList.loadlist(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
+
+}])
+
+//服务列表
+.controller('simpleServiceList', ['$scope', 'Data', '$stateParams', '$ionicModal', 'Storage', function($scope, Data, $stateParams, $ionicModal, Storage) {
+  var pageParams = 
+  {
+    tabCode: $stateParams.tabCode,
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  };
+  
+  $scope.serviceLists = {};
+  $scope.username = Storage.kget('username');
+  var moreData = false;
+
+  Data.activityList.loadlist(pageParams, function(data){
+    $scope.serviceLists = data.data.items;
+    // console.log(data.data.items); //==================test
+    pageParams.loaded = $scope.serviceLists.length;
+    pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+    moreData = true;
+  });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    pageParams.lastID = 0;
+    pageParams.requestNO = pageParams.loaded;
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.serviceLists = data.data.items;
+      pageParams.loaded = $scope.serviceLists.length;
+      pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    Data.activityList.loadlist(pageParams, function(data){
+      $scope.serviceLists = $scope.serviceLists.concat(data.data.items);
+      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+      pageParams.loaded = $scope.serviceLists.length;
+      pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+
+    Data.activityList.loadlist(pageParams, function(data){
+      if(data.data.items.length < 1) {
+        moreData = false;
+      }
+      else {
+        moreData = true;
+      }
+      // console.log(moreData);
+    });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
 
   $scope.priceRegions = [
     {'priceRegion': "0-100"},
@@ -1101,18 +1270,57 @@ angular.module('demo.controllers', [])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+}])
 
-   //下拉刷新
+//心理1解1
+.controller('simplePsychology', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
+  var pageParams = 
+  {
+  };
+  
+  $scope.items = [
+  ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132074', '记忆能力测试', ''],
+    ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132073', '个人能力测试', ''],
+  ['http://17f.go5le.net/99_tj/991/news1_2.asp?id=132072', '测试你的焦虑程度', '']
+  ];
+  var moreData = false;
+    
+  // Data.articleList.loadlist(pageParams, function(data){
+  //   $scope.items = data.data.items;
+
+    moreData = true;
+  // });
+
+  //下拉刷新
   $scope.doRefresh = function() {
-
-    $scope.$broadcast('scroll.refreshComplete');
+    
+    // Data.articleList.loadlist(pageParams, function(data){
+    //   $scope.articleLists = data.data.items;
+    //   pageParams.loaded = $scope.articleLists.length;
+    //   pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.refreshComplete');
+    // });
+    
   };
 
-  //上拉加载更多评论
+  //上拉加载
   $scope.loadMoreData = function() {
-    
-    $scope.$broadcast('scroll.infiniteScrollComplete');
+    // Data.articleList.loadlist(pageParams, function(data){
+      // $scope.articleLists = $scope.articleLists.concat(data.data.items);
+      // pageParams.loaded = $scope.articleLists.length;
+      // pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    // });
 
+    // Data.articleList.loadlist(pageParams, function(data){
+    //   if(data.data.items.length < 1) {
+    //     moreData = false;
+    //   }
+    //   else {
+    //     moreData = true;
+    //   }
+    // });
+    
   };
   $scope.moreDataCanBeLoaded = function() {
     return moreData;
@@ -1121,6 +1329,7 @@ angular.module('demo.controllers', [])
   $scope.$on('stateChangeSuccess', function() {
     $scope.loadMoreData();
   });
+
 }])
 
 //我的
@@ -1168,6 +1377,149 @@ angular.module('demo.controllers', [])
 .controller('simpleSettings', ['$scope', function($scope) {
   $scope.userName = "王林";
   $scope.signature = "";
+
+  $scope.ClearCache = function() {
+    navigator.app.clearCache();
+  };
+}])
+
+.controller('simpleAgreement', ['$scope', function($scope) {
+  $scope.content1 = "";
+  $scope.content2 = "";
+  $scope.content3 = "";
+  $scope.content4 = "";
+}])
+
+.controller('simpleOurs', ['$scope', function($scope) {
+
+}])
+
+.controller('simpleFeedback', ['$scope', function($scope) {
+
+}])
+
+//个人资料
+.controller('simplePersonalInfo', ['$scope', function($scope) {
+  $scope.item = {'userName':'王成',
+    'userID':'2014082911423',
+    'birth':'1978-5-12',
+    'identityCard':'000000000000000', 
+
+    'password':'123',
+    'password2':'123',
+    'phone':'13732255555',
+    'QQ':'113456789',
+    'email':'123@qq.com',
+
+    'work':'省直机关团工委',
+    'address':'浙江省杭州市',
+    'hobby':'读书',
+    'brief':'无'};
+
+}])
+
+//通讯录
+.controller('simplePersonAddressBook', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
+  $scope.items = [
+    {'name': '王成',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '省经信委',
+     'address':'',
+     'phone':'87052438',
+     'cellphone':'15057188887'},
+    {'name': '戴丽娟',
+     'imageUrl': "img/defaultAvatar.png",
+     'phone':'87052438',
+     'cellphone':'15057188887',
+     'work': '浙江长征职业技术学院',
+     'address':'留和路525号'},
+    {'name': '叶林伟',
+     'imageUrl': "img/defaultAvatar.png",
+     'work': '杭州市某自动化技术有限公司',
+     'address':'杭州市拱墅区舟山东路66号',
+     'phone':'',
+     'cellphone':'15057188887'}
+  ];
+
+    var pageParams = 
+  {
+    tabCode: $stateParams.tabCode,
+    loaded: 0,
+    lastID: 0,
+    requestNO: 20
+  };
+  
+  // var moreData = false;
+
+  // Data.activityList.loadlist(pageParams, function(data){
+  //   $scope.serviceLists = data.data.items;
+  //   // console.log(data.data.items); //==================test
+  //   pageParams.loaded = $scope.serviceLists.length;
+  //   pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+  //   moreData = true;
+  // });
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    // pageParams.lastID = 0;
+    // pageParams.requestNO = pageParams.loaded;
+    // Data.activityList.loadlist(pageParams, function(data){
+    //   $scope.serviceLists = data.data.items;
+    //   pageParams.loaded = $scope.serviceLists.length;
+    //   pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.refreshComplete');
+    // });
+    
+  };
+
+  //上拉加载
+  $scope.loadMoreData = function() {
+    // Data.activityList.loadlist(pageParams, function(data){
+    //   $scope.serviceLists = $scope.serviceLists.concat(data.data.items);
+    //   // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+    //   pageParams.loaded = $scope.serviceLists.length;
+    //   pageParams.lastID = $scope.serviceLists[$scope.serviceLists.length - 1] && $scope.serviceLists[$scope.serviceLists.length - 1][0] || 0;
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    // });
+
+    // Data.activityList.loadlist(pageParams, function(data){
+    //   if(data.data.items.length < 1) {
+    //     moreData = false;
+    //   }
+    //   else {
+    //     moreData = true;
+    //   }
+    //   // console.log(moreData);
+    // });
+    
+  };
+  $scope.moreDataCanBeLoaded = function() {
+    return moreData;
+  };
+
+  $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
+}])
+
+//聊天室
+.controller('simpleChatroom', ['$scope', 'Chat', function($scope, Chat) {
+  var lastID = "";//声明上次取回的消息的ID
+  var mGetTime;//设置setTimeout的返回值
+  var getMessReq = Chat.getAjax();//获取消息的XMLHTTPRequest对象
+  var sendMessReq = Chat.getAjax();//发送消息的XMLHTTPRequest对象
+  Chat.getMess(lastID, mGetTime, getMessReq);
+  document.getElementById("mess").focus();//把焦点设置到消息输入框
+
+  $scope.getMessage = function() {
+    return;
+  };
+
+  $scope.sendMessage = function() {
+    Chat.sendMess(lastID, mGetTime, sendMessReq);
+    return;
+  };
+
 }])
 
 .controller('mainTestC', ['$scope', '$ionicPopover', function($scope, $ionicPopover) {
@@ -1194,26 +1546,6 @@ angular.module('demo.controllers', [])
   $scope.$on('popover.removed', function() {
     // Execute action
   });
-}])
-
-//个人资料
-.controller('simplePersonalInfo', ['$scope', function($scope) {
-  $scope.item = {'userName':'王成',
-    'userID':'2014082911423',
-    'birth':'1978-5-12',
-    'identityCard':'000000000000000',
-
-    'password':'123',
-    'password2':'123',
-    'phone':'13732255555',
-    'QQ':'113456789',
-    'email':'123@qq.com',
-
-    'work':'省直机关团工委',
-    'address':'浙江省杭州市',
-    'hobby':'读书',
-    'brief':'无'};
-
 }])
 
 .controller('mainTestP', ['$scope', '$ionicPopover', '$ionicPopup', '$ionicBackdrop', '$timeout', '$ionicPosition', function($scope, $ionicPopover, $ionicPopup, $ionicBackdrop, $timeout, $ionicPosition) {

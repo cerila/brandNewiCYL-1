@@ -6,7 +6,7 @@
       </button>
     </ion-nav-buttons>
     <h1 class="title">
-      活动超市
+      心理1解1
     </h1>
     <div class="buttons">
       <a class="button button-icon icon ion-ios7-search" href="#/simple/search">
@@ -18,16 +18,11 @@
     <ion-refresher pulling-text="释放刷新..." on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list>
-      <a class="item item-avatar" ng-repeat="item in activityLists" ng-href="{{'http://17f.go5le.net/mall/index/pro_show_dj3.asp?id=' + item[0] + '&no=' + item[7] + '&po=' + username}}">
-        <img ng-src="{{item[2] && 'http://17f.go5le.net/mall/' + item[2] || 'http://17f.go5le.net/99_tj/img/m2.png'}}">
-        <h2><b>{{item[1]}}</b></h2>
-        <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
+      <a class="item" ng-repeat="item in items" ng-href="{{item[0]}}">
+        <h2><b>{{item[1]}}</b><span class="p-right">日期：{{item[2]}}</span></h2>
       </a>
     </ion-list>
     <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" on-infinite="loadMoreData()" distance="0%">
     </ion-infinite-scroll>
   </ion-content>
-
-  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
-
 </ion-view>
