@@ -1,0 +1,29 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" custom-go-back>
+        <i class="icon ion-ios7-arrow-back"></i>
+      </button>
+    </ion-nav-buttons>
+    <h1 class="title">
+      聊天室
+    </h1>
+    <div class="buttons">
+    </div>
+  </ion-nav-bar>
+
+  <ion-content>
+    <div id="chat" class="chat">
+        <!-- 显示聊天信息 -->
+    </div>
+    <form id="frmSend" name="frmSend">
+<!--     <form id="frmSend" name="frmSend" on-submit="sendMessage()"> -->
+      <input name="username" type="text" id="username" value="aaa">
+      <input name="mess" type="text" id="mess">
+      <!-- <input type="submit" value="发送" id="submitsend" name="submitsend"> -->
+      <button class="button button-block button-positive" ng-click="sendMessage()">
+        发送
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

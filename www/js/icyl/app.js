@@ -943,6 +943,18 @@ angular.module('icyl', dependencies)
       }
     })
 
+    //心理1解1
+    .state('simple.psychology', {
+      url:'/psychology',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/activity/psychology.html',
+          controller: 'simplePsychology'
+        }
+      }
+    })
+
     //搜索
     .state('simple.search', {
       url:'/search',
@@ -999,6 +1011,42 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/main/settings.html',
           controller: 'simpleSettings'
+        }
+      }
+    })
+
+    //认识我们
+    .state('simple.ours', {
+      url:'/ours',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/ours.html',
+          controller: 'simpleOurs'
+        }
+      }
+    })
+
+    //用户协议
+    .state('simple.agreement', {
+      url:'/agreement',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/agreement.html',
+          controller: 'simpleAgreement'
+        }
+      }
+    })
+
+    //意见与反馈
+    .state('simple.feedback', {
+      url:'/feedback',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/feedback.html',
+          controller: 'simpleFeedback'
         }
       }
     })
@@ -1078,6 +1126,30 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/person/warn.html',
           controller: 'mainPersonWarn'
+        }
+      }
+    })
+
+    //通讯录
+    .state('simple.personAddressBook', {
+      url:'/personAddressBook',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/addressBook.html',
+          controller: 'simplePersonAddressBook'
+        }
+      }
+    })
+
+    //聊天室
+    .state('simple.chatroom', {
+      url:'/chatroom',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/chatroom.html',
+          controller: 'simpleChatroom'
         }
       }
     })
