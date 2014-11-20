@@ -21,6 +21,21 @@ angular.module('icyl.directives', [])
     };
 }])
 
+.directive( "buttonClearInput", function () {
+    return {
+        restrict: "AE",
+        scope: false,
+        template:"<button ng-if='item.searchContent.length' class='button button-icon ion-android-close input-button padding-right'></button>",
+        link: function (scope, element, attrs) {
+            element.bind( "click", function () {
+                scope.$apply(function () {
+                    scope.item.searchContent = '';
+                });
+            });
+        }
+    };
+})
+
 //获取并保存当前元素位置
 .directive( "elemPosition", ['$ionicPosition', '$window', '$timeout', function ($ionicPosition, $window, $timeout) {
     return {

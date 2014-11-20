@@ -16,16 +16,15 @@
   </ion-nav-bar>
 
   <ion-content>
-    <div class="list">
+    <div class="list list-inset">
       <div class="item item-input-inset">
-        <label class="item-input-wrapper">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input type="search" placeholder="查找..." ng-model="search">
-        </label>
-        <button ng-if="search.length"
-          class="button button-icon ion-android-close input-button"
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="查找..." ng-model="item.searchContent">
+        <button-clear-input></button-clear-input>
+       <!--  <button ng-if="item.searchContent.length"
+          class="button button-icon ion-android-close input-button padding-right"
           ng-click="clearSearch()">
-        </button>
+        </button> -->
       </div>
     </div>
 

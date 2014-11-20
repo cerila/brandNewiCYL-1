@@ -827,10 +827,10 @@ angular.module('demo.controllers', [])
 
 //搜索
 .controller('simpleSearch', ['$scope', function($scope) {
-  var dd = $scope.search;
-  $scope.clearSearch = function() {
-    $scope.search = "";
-  };
+  // $scope.item = {searchContent: ''};
+  // $scope.clearSearch = function() {
+  //   $scope.item.searchContent = '';
+  // };
 }])
 
 //发布
