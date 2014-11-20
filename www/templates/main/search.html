@@ -18,11 +18,23 @@
   <!-- <ion-content class="has-footer"> -->
   <ion-content>
     <div class="list list-inset">
-      <label class="item item-input">
+      <div class="item item-input-inset">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
-      </label>
+        <input type="text" placeholder="查找..." ng-model="item.searchContent">
+        <button-clear-input input="item.searchContent"></button-clear-input>
+        <!-- <button ng-if="item.searchContent.length"
+          class="button button-icon ion-android-close input-button padding-right"
+          ng-click="clearSearch()">
+        </button> -->
+      </div>
     </div>
+    <!-- <div class="list list-inset">
+      <div class="item item-input-inset">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="查找..." ng-model="item.forTest">
+        <button-clear-input input="item.forTest"></button-clear-input>
+      </div>
+    </div> -->
 
     <div class="padding">
       <button class="button button-block button-positive">
