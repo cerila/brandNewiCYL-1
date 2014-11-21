@@ -221,6 +221,31 @@ angular.module('icyl', dependencies)
     // console.log(CustomNav.histories);
   });
 
+  // console.log("online:" + navigator.onLine);
+ 
+  $rootScope.online = navigator.onLine ? 'online' : 'offline';
+  $rootScope.$apply();
+ 
+  if (window.addEventListener) {
+    window.addEventListener("online", function() {
+      $rootScope.online = "online";
+      $rootScope.$apply();
+    }, true);
+    window.addEventListener("offline", function() {
+      $rootScope.online = "offline";
+      $rootScope.$apply();
+    }, true);
+  } else {
+    document.body.ononline = function() {
+      $rootScope.online = "online";
+      $rootScope.$apply();
+    };
+    document.body.onoffline = function() {
+      $rootScope.online = "offline";
+      $rootScope.$apply();
+    };
+  }
+
 }])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {

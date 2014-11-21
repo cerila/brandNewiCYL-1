@@ -727,18 +727,8 @@ angular.module('demo.controllers', [])
 
 //简版
 //首页
-.controller('simpleHomepage', ['$scope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', 'Storage', function($scope, $ionicActionSheet, $location, Data, CustomNav, Storage) {
+.controller('simpleHomepage', ['$scope', '$rootScope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', 'Storage', function($scope, $rootScope, $ionicActionSheet, $location, Data, CustomNav, Storage) {
   var localData;
-  // var ImgCache = require("imgcache");
-  // ImgCache.init(function(){
-  //   alert('ImgCache init: success!');
-
-  //   // from within this function you're now able to call other ImgCache methods
-  //   // or you can wait for the ImgCacheReady event
-
-  // }, function(){
-  //   alert('ImgCache init: error! Check the log for errors');
-  // });
 
   var pageParams = 
   {
@@ -754,7 +744,18 @@ angular.module('demo.controllers', [])
   var myDate = new Date();
   var currentTime = myDate.getTime();
   var lastTime = Storage.kget('simpleHomepage_time');
-  if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
+  if($rootScope.online == "offline")
+  {
+    localData = JSON.parse(Storage.kget('simpleHomepage_data'));
+    $scope.articleLists = localData; 
+    if(localData != null)
+    {
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    }
+    moreData = false;
+  }
+  else if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
   {
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
@@ -764,22 +765,20 @@ angular.module('demo.controllers', [])
       localData = JSON.stringify($scope.articleLists);
       Storage.kset("simpleHomepage_time", currentTime);
       Storage.kset("simpleHomepage_data", localData);
-      // for(var i = 0; i < pageParams.loaded; i++)
-      // {
-      //   ImgCache.cacheFile('http://17f.go5le.net/admin_manage/upload_tp1/' + $scope.articleLists[i][2]);  
-      // }
+      moreData = true;
     });     
   }
   else
   {
     localData = JSON.parse(Storage.kget('simpleHomepage_data'));
     $scope.articleLists = localData; 
-    pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    if(localData != null)
+    {
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+    }
     moreData = true;
   }
-  
-
 
   // Triggered on a button click, or some other target
   $scope.show = function() {
@@ -805,38 +804,45 @@ angular.module('demo.controllers', [])
 
   //下拉刷新
   $scope.doRefresh = function() {
-    pageParams.lastID = 0;
-    pageParams.requestNO = pageParams.loaded;
-    Data.articleList.loadlist(pageParams, function(data){
-      $scope.articleLists = data.data.items;
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-      $scope.$broadcast('scroll.refreshComplete');
-      Storage.kset("simpleHomepage_data", $scope.articleLists);
-    });
-    
+    if($rootScope.online == "online"){
+      pageParams.lastID = 0;
+      pageParams.requestNO = pageParams.loaded;
+      Data.articleList.loadlist(pageParams, function(data){
+        $scope.articleLists = data.data.items;
+        pageParams.loaded = $scope.articleLists.length;
+        pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+        Storage.kset("simpleHomepage_data", $scope.articleLists);
+      });
+    }
+    $scope.$broadcast('scroll.refreshComplete');
   };
 
   //上拉加载
   $scope.loadMoreData = function() {
-    Data.articleList.loadlist(pageParams, function(data){
-      $scope.articleLists = $scope.articleLists.concat(data.data.items);
-      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-      Storage.kset("simpleHomepage_data", $scope.articleLists);
-    });
+    if($rootScope.online == "online"){
+      Data.articleList.loadlist(pageParams, function(data){
+        $scope.articleLists = $scope.articleLists.concat(data.data.items);
+        // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+        pageParams.loaded = $scope.articleLists.length;
+        pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+        Storage.kset("simpleHomepage_data", $scope.articleLists);
+      });
 
-    Data.articleList.loadlist(pageParams, function(data){
-      if(data.data.items.length < 1) {
-        moreData = false;
-      }
-      else {
-        moreData = true;
-      }
-      // console.log(moreData);
-    });
+      Data.articleList.loadlist(pageParams, function(data){
+        if(data.data.items.length < 1) {
+          moreData = false;
+        }
+        else {
+          moreData = true;
+        }
+        // console.log(moreData);
+      });
+    }
+    else{
+      moreData = false;
+    }
+
+    $scope.$broadcast('scroll.infiniteScrollComplete');
     
   };
   $scope.moreDataCanBeLoaded = function() {
@@ -898,7 +904,9 @@ angular.module('demo.controllers', [])
 }])
 
 //文章列表
-.controller('simpleArticleList', ['$scope', 'Data', '$stateParams', function($scope, Data, $stateParams) {
+.controller('simpleArticleList', ['$scope', '$rootScope', 'Data', '$stateParams', 'Storage', function($scope, $rootScope, Data, $stateParams, Storage) {
+  var localData;
+  var articleType = $stateParams.tabCode;
   var pageParams = 
   {
     tabCode: $stateParams.tabCode,
@@ -909,46 +917,89 @@ angular.module('demo.controllers', [])
   
   $scope.articleLists = {};
   var moreData = false;
-    
-  Data.articleList.loadlist(pageParams, function(data){
-    $scope.articleLists = data.data.items;
-    pageParams.loaded = $scope.articleLists.length;
-    pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
-    moreData = true;
-  });
+  
+  var myDate = new Date();
+  var currentTime = myDate.getTime();
+  var lastTime = Storage.kget('simpleArticleList_A' + articleType + '_time');
 
-  //下拉刷新
-  $scope.doRefresh = function() {
-    pageParams.lastID = 0;
-    pageParams.requestNO = pageParams.loaded;
+  if($rootScope.online == "offline")
+  {
+    localData = JSON.parse(Storage.kget('simpleArticleList_A' + articleType + '_data'));
+    $scope.articleLists = localData; 
+    if(localData != null)
+    {
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+    }
+    moreData = false;
+  }
+  else if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
+  {
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
-      $scope.$broadcast('scroll.refreshComplete');
-    });
+      moreData = true;
+      localData = JSON.stringify($scope.articleLists);
+      Storage.kset('simpleArticleList_A' + articleType + '_time', currentTime);
+      Storage.kset('simpleArticleList_A' + articleType + '_data', localData);
+      moreData = true;
+    });     
+  }
+  else
+  {
+    localData = JSON.parse(Storage.kget('simpleArticleList_A' + articleType + '_data'));
+    $scope.articleLists = localData; 
+    if(localData != null)
+    {
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+    }
+    moreData = true;
+  }
+
+  //下拉刷新
+  $scope.doRefresh = function() {
+    if($rootScope.online == "online"){
+      pageParams.lastID = 0;
+      pageParams.requestNO = pageParams.loaded;
+      Data.articleList.loadlist(pageParams, function(data){
+        $scope.articleLists = data.data.items;
+        pageParams.loaded = $scope.articleLists.length;
+        pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+        Storage.kset('simpleArticleList_A' + articleType + '_data', localData);     
+      });
+    }
+    $scope.$broadcast('scroll.refreshComplete');
     
   };
 
   //上拉加载
   $scope.loadMoreData = function() {
-    Data.articleList.loadlist(pageParams, function(data){
-      $scope.articleLists = $scope.articleLists.concat(data.data.items);
-      // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-    });
+    if($rootScope.online == "online"){
+      Data.articleList.loadlist(pageParams, function(data){
+        $scope.articleLists = $scope.articleLists.concat(data.data.items);
+        // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
+        pageParams.loaded = $scope.articleLists.length;
+        pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+        Storage.kset('simpleArticleList_A' + articleType + '_data', localData); 
+      });
 
-    Data.articleList.loadlist(pageParams, function(data){
-      if(data.data.items.length < 1) {
-        moreData = false;
-      }
-      else {
-        moreData = true;
-      }
-      // console.log(moreData);
-    });
+      Data.articleList.loadlist(pageParams, function(data){
+        if(data.data.items.length < 1) {
+          moreData = false;
+        }
+        else {
+          moreData = true;
+        }
+        // console.log(moreData);
+      });
+    }
+    else{
+      moreData = false;
+    }
+
+    $scope.$broadcast('scroll.infiniteScrollComplete');
     
   };
   $scope.moreDataCanBeLoaded = function() {
