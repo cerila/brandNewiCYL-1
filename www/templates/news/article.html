@@ -16,8 +16,8 @@
     <div>
       <p>时间：{{newsDate}}<br>来源：{{newsSource}}</p>  
       <h3 class="text-center">{{newsTitle}}</h3>
-      <img ng-if="imageUrl != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{imageUrl}}" class="img-responsive center-block">
-      <!-- <div>{{newsContent}}</div> -->
+      <img ng-if="imageUrl != ''" ng-src="{{imageUrl && 'http://17f.go5le.net/admin_manage/upload_tp1/' + imageUrl || ''}}" class="img-responsive center-block" />
+      <!-- <div ng-if="imageUrl != ''">==={{imageUrl}}===</div> -->
       <div ng-bind-html="newsContent" class="responsive-content"></div>
     </div> 
     

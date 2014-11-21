@@ -120,26 +120,34 @@ angular.module('icyl', dependencies)
     //window.ionic.Platform.showStatusBar(false)
     //window.ionic.Platform.fullScreen(true,false);
     
-    // // console.log(window.plugins);
-    // if (window.plugins && window.plugins.pushNotification) {
-    //   pushNotification = window.plugins.pushNotification;
-    // }
-    try 
-    { 
-      pushNotification = window.plugins.pushNotification;
-      if (device.platform == 'android' || device.platform == 'Android' || device.platform == 'amazon-fireos' ) {
-        pushNotification.register(successHandler, errorHandler, {"senderID":"642769024933","ecb":"onNotification"});    // required!
-      } 
-      else {
-        pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
+    // console.log(window.plugins);
+    if (window.plugins && window.plugins.pushNotification) {
+      try 
+      { 
+        pushNotification = window.plugins.pushNotification;
+        if (device.platform == 'android' || device.platform == 'Android' || device.platform == 'amazon-fireos' ) {
+          pushNotification.register(successHandler, errorHandler, {"senderID":"642769024933","ecb":"onNotification"});    // required!
+        } 
+        else {
+          pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
+        }
       }
+      catch(err) 
+      { 
+        txt="\nThere was an error on this page.\n"; 
+        txt+="Error description: " + err.message + "\n"; 
+        console.log(txt); 
+      } 
     }
+<<<<<<< HEAD
     catch(err) 
     { 
       txt="There was an error on this page.\n\n"; 
       txt+="Error description: " + err.message + "\n\n"; 
       // console.log(txt); 
     } 
+=======
+>>>>>>> upstream/Fat20141116
     
   });
 

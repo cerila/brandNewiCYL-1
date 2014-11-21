@@ -23,7 +23,7 @@
       <ion-slide>
         <div class="box">
           <a ng-href="#/simple/article/{{articleLists[0][0]}}">
-            <img ng-src="{{articleLists[0][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[0][2] || ''}}" class="img-responsive center-block">
+            <img ng-src="{{articleLists[0][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[0][2] || 'http://17f.go5le.net/99_tj/img/m1.png'}}" class="img-responsive center-block">
           </a>
           <!-- <div elem-position></div> -->
           <!-- <div class="word-front center-block">
@@ -35,7 +35,7 @@
       <ion-slide>
         <div class="box">
           <a ng-href="#/simple/article/{{articleLists[1][0]}}">
-            <img ng-src="{{articleLists[1][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[1][2] || ''}}" class="img-responsive center-block">
+            <img ng-src="{{articleLists[1][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[1][2] || 'http://17f.go5le.net/99_tj/img/m1.png'}}" class="img-responsive center-block">
           </a>
           <!-- <div class="word-front center-block">
             <h3>建设美丽浙江 创造美好生活</h3>
@@ -46,7 +46,7 @@
       <ion-slide>
         <div class="box">
           <a ng-href="#/simple/article/{{articleLists[2][0]}}">
-            <img ng-src="{{articleLists[2][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[2][2] || ''}}" class="img-responsive center-block">
+            <img ng-src="{{articleLists[2][2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + articleLists[2][2] || 'http://17f.go5le.net/99_tj/img/m1.png'}}" class="img-responsive center-block">
           </a>
           <!-- <div class="word-front center-block">
             <h3>建设美丽浙江 创造美好 生活</h3>
@@ -59,17 +59,17 @@
     <div class="row no-padding">
       <div class="col text-center">
         <a class="button button-outline round-button-2 icon button-assertive ion-document-text"  href="#/simple/articleList/"></a>
-        <p class="text-center-2"><b>文章</b></p>
+        <p class="text-center-2"><b>资讯</b></p>
       </div>
 
       <div class="col text-center">
-        <a class="button button-outline round-button-2 icon button-assertive ion-ios7-people" href="#/simple/activityList/301">
+        <a class="button button-outline round-button-2 icon button-assertive ion-ios7-people" href="#/simple/activityList/">
         </a>
         <p class="text-center-2"><b>活动</b></p>
       </div>
 
       <div class="col text-center">
-        <a class="button button-outline round-button-2 icon button-assertive ion-coffee" href="#">
+        <a class="button button-outline round-button-2 icon button-assertive ion-coffee" href="#/simple/serviceList/fw001">
         </a>
         <p class="text-center-2"><b>服务</b></p>
       </div>
@@ -79,7 +79,7 @@
     </ion-refresher>
     <ion-list>
       <a class="item item-avatar" ng-repeat="item in articleLists" ng-href="#/simple/article/{{item[0]}}">
-        <img ng-if="item[2] != ''" ng-src="http://17f.go5le.net/admin_manage/upload_tp1/{{item[2]}}">
+        <img ng-src="{{item[2] && 'http://17f.go5le.net/admin_manage/upload_tp1/' + item[2] || 'http://17f.go5le.net/99_tj/img/m2.png'}}">
         <h2><b>【{{item[4]}}】{{item[1]}}</b></h2>
         <p>浏览{{item[6]}}次<span class="p-right">{{item[3]}}</span></p>
       </a>

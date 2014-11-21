@@ -43,6 +43,11 @@
         </select>
       </label>
 
+      <!-- <label class="item item-input"> -->
+        <input type="file" capture="camera" accept="image/*" id="takePictureField" name="filetest">
+      <!-- </label> -->
+      <img id="yourimage">
+
       <label class="item item-input">
         <span class="input-label">出生年月</span>
         <input type="text" ng-model="item.birth">
@@ -131,9 +136,11 @@
     </div>
     
 
-    <button class="button button-block button-positive">
+    <div class="padding">
+      <button class="button button-block button-positive">
         提交
-    </button>
+      </button>
+    </div>
     
   </ion-content>
 
@@ -151,3 +158,33 @@
     </ion-content>
   </ion-popover-view>
 </script>   -->
+
+<script type="text/javascript">
+  var desiredWidth;
+  $(document).ready(function() {
+    console.log('onReady');
+    $("#takePictureField").on("change",gotPic);
+    $("#yourimage").load(getSwatches);
+    desiredWidth = window.innerWidth;
+    
+    if(!("url" in window) && ("webkitURL" in window)) {
+        window.URL = window.webkitURL;   
+    }
+    
+  });
+
+  function getSwatches(){
+    var colorArr = createPalette($("#yourimage"), 5);
+    for (var i = 0; i < Math.min(5, colorArr.length); i++) {
+      $("#swatch"+i).css("background-color","rgb("+colorArr[i][0]+","+colorArr[i][1]+","+colorArr[i][2]+")");
+      console.log($("#swatch"+i).css("background-color"));
+    }
+  } 
+
+  function gotPic(event) {
+        if(event.target.files.length == 1 && 
+           event.target.files[0].type.indexOf("image/") == 0) {
+            $("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
+        }
+  }     
+</script>

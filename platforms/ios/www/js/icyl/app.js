@@ -17,9 +17,97 @@ var dependencies = ['ionic',
 angular.module('icyl', dependencies)
 
 .run(['$ionicPlatform', function ($ionicPlatform) {
+
+  var pushNotification;
+
+  // handle APNS notifications for iOS
+  function onNotificationAPN(e) {
+    if (e.alert) {
+      $("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+       // showing an alert also requires the org.apache.cordova.dialogs plugin
+       navigator.notification.alert(e.alert);
+    }
+        
+    if (e.sound) {
+      // playing a sound also requires the org.apache.cordova.media plugin
+      var snd = new Media(e.sound);
+      snd.play();
+    }
+    
+    if (e.badge) {
+      pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+    }
+  }
+  
+  // handle GCM notifications for Android
+  function onNotification(e) {
+    $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+    switch( e.event ) {
+      case 'registered':
+        if ( e.regid.length > 0 )
+        {
+          $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+          // Your GCM push server needs to know the regID before it can push to this device
+          // here is where you might want to send it the regID for later use.
+          console.log("regID = " + e.regid);
+        }
+      break;
+          
+      case 'message':
+        // if this flag is set, this notification happened while we were in the foreground.
+        // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+        if (e.foreground)
+        {
+          $("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+          // on Android soundname is outside the payload. 
+          // On Amazon FireOS all custom attributes are contained within payload
+          var soundfile = e.soundname || e.payload.sound;
+          // if the notification contains a soundname, play it.
+          // playing a sound also requires the org.apache.cordova.media plugin
+          var my_media = new Media("/android_asset/www/"+ soundfile);
+          my_media.play();
+        }
+        else
+        { // otherwise we were launched because the user touched a notification in the notification tray.
+          if (e.coldstart)
+            $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+          else
+            $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+        }
+    
+        $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+        //android only
+        $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+        //amazon-fireos only
+        $("#app-status-ul").append('<li>MESSAGE -> TIMESTAMP: ' + e.payload.timeStamp + '</li>');
+      break;
+          
+      case 'error':
+        $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+      break;
+          
+      default:
+        $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+      break;
+    }
+  }
+  
+  function tokenHandler (result) {
+    $("#app-status-ul").append('<li>token: '+ result +'</li>');
+    // Your iOS push server needs to know the token before it can push to this device
+    // here is where you might want to send it the token for later use.
+  }
+
+  function successHandler (result) {
+    $("#app-status-ul").append('<li>success:'+ result +'</li>');
+  }
+  
+  function errorHandler (error) {
+    $("#app-status-ul").append('<li>error:'+ error +'</li>');
+  }
+
   $ionicPlatform.ready( function () {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -31,6 +119,35 @@ angular.module('icyl', dependencies)
     }
     //window.ionic.Platform.showStatusBar(false)
     //window.ionic.Platform.fullScreen(true,false);
+    
+    // // console.log(window.plugins);
+    // if (window.plugins && window.plugins.pushNotification) {
+    //   pushNotification = window.plugins.pushNotification;
+    // }
+    try 
+    { 
+      pushNotification = window.plugins.pushNotification;
+      if (device.platform == 'android' || device.platform == 'Android' || device.platform == 'amazon-fireos' ) {
+        pushNotification.register(successHandler, errorHandler, {"senderID":"642769024933","ecb":"onNotification"});    // required!
+      } 
+      else {
+        pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
+      }
+    }
+    catch(err) 
+    { 
+      txt="There was an error on this page.\n\n"; 
+      txt+="Error description: " + err.message + "\n\n"; 
+      console.log(txt); 
+    } 
+    
+  });
+
+  $ionicPlatform.on('online', function () {
+
+  });
+  $ionicPlatform.on('offline', function () {
+
   });
 }])
 
@@ -767,6 +884,18 @@ angular.module('icyl', dependencies)
       }
     })
 
+    //服务导航
+    .state('simple.service', {
+      url:'/service',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/navigation/service.html',
+          controller: 'simpleNavService'
+        }
+      }
+    })
+
     //文章列表
     .state('simple.articleList', {
       url:'/articleList/:tabCode',
@@ -791,6 +920,18 @@ angular.module('icyl', dependencies)
       }
     })
 
+    //服务列表
+    .state('simple.serviceList', {
+      url:'/serviceList/:tabCode',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/servicelist.html',
+          controller: 'simpleServiceList'
+        }
+      }
+    })
+
     .state('simple.article', {
       url:'/article/:articleId',
       access: { authenticate: false },
@@ -798,6 +939,18 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/news/article.html',
           controller: 'simpleArticle'
+        }
+      }
+    })
+
+    //心理1解1
+    .state('simple.psychology', {
+      url:'/psychology',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/activity/psychology.html',
+          controller: 'simplePsychology'
         }
       }
     })
@@ -858,6 +1011,42 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/main/settings.html',
           controller: 'simpleSettings'
+        }
+      }
+    })
+
+    //认识我们
+    .state('simple.ours', {
+      url:'/ours',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/ours.html',
+          controller: 'simpleOurs'
+        }
+      }
+    })
+
+    //用户协议
+    .state('simple.agreement', {
+      url:'/agreement',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/agreement.html',
+          controller: 'simpleAgreement'
+        }
+      }
+    })
+
+    //意见与反馈
+    .state('simple.feedback', {
+      url:'/feedback',
+      access: { authenticate: true },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/settings/feedback.html',
+          controller: 'simpleFeedback'
         }
       }
     })
@@ -937,6 +1126,30 @@ angular.module('icyl', dependencies)
         'main-container': {
           templateUrl: 'templates/person/warn.html',
           controller: 'mainPersonWarn'
+        }
+      }
+    })
+
+    //通讯录
+    .state('simple.personAddressBook', {
+      url:'/personAddressBook',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/person/addressBook.html',
+          controller: 'simplePersonAddressBook'
+        }
+      }
+    })
+
+    //聊天室
+    .state('simple.chatroom', {
+      url:'/chatroom',
+      access: { authenticate: false },
+      views: {
+        'main-container': {
+          templateUrl: 'templates/main/chatroom.html',
+          controller: 'simpleChatroom'
         }
       }
     })

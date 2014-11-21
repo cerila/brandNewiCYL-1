@@ -4,33 +4,27 @@
       <button class="button button-clear" custom-go-back>
         <i class="icon ion-ios7-arrow-back"></i>
       </button>
-      <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon">
-      </button> -->
     </ion-nav-buttons>
     <h1 class="title">
-      搜索
+      意见与反馈
     </h1>
-    <ion-nav-buttons side="right">
-      
-    </ion-nav-buttons>
+    <div class="buttons">
+    </div>
   </ion-nav-bar>
-  
-  <!-- <ion-content class="has-footer"> -->
+
   <ion-content>
     <div class="list list-inset">
       <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
+        <textarea name="advice" ng-model="advice" placeholder="请提出您的宝贵意见"></textarea>
+      </label>
+      <label class="item item-input">
+        <input type="text" ng-model="contact" placeholder="您的联系方式">
       </label>
     </div>
-
     <div class="padding">
       <button class="button button-block button-positive">
-        查找
+        提交
       </button>
     </div>
   </ion-content>
-
-  <!-- <ng-include src="'templates/common/footer.html'"></ng-include> -->
-
 </ion-view>
