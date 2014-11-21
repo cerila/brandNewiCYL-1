@@ -211,8 +211,9 @@ a.round-button.button, a.round-button-2.button {
 }*/
 
 /*ionic.css源代码里面找.bar-header, ios平台有专门针对bar-header的css语句, 将bar-header下移了20px, 因此对没有has-header的ion-content统一下移20px*/
-.platform-ios.platform-cordova:not(.fullscreen) ion-content.scroll-content:not(.has-header) {
-  top: 20px; }
+/*.platform-ios.platform-cordova:not(.fullscreen) ion-content.scroll-content:not(.has-header) {
+  top: 20px; 
+}*/
 
 
 
