@@ -727,7 +727,19 @@ angular.module('demo.controllers', [])
 
 //简版
 //首页
-.controller('simpleHomepage', ['$scope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', function($scope, $ionicActionSheet, $location, Data, CustomNav) {
+.controller('simpleHomepage', ['$scope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', 'Storage', function($scope, $ionicActionSheet, $location, Data, CustomNav, Storage) {
+  var localData;
+  var ImgCache = require("imgcache");
+  ImgCache.init(function(){
+    alert('ImgCache init: success!');
+
+    // from within this function you're now able to call other ImgCache methods
+    // or you can wait for the ImgCacheReady event
+
+  }, function(){
+    alert('ImgCache init: error! Check the log for errors');
+  });
+
   var pageParams = 
   {
     tabCode: '',
@@ -738,13 +750,36 @@ angular.module('demo.controllers', [])
   $scope.showNavBack = !!CustomNav.histories.length;
   $scope.articleLists = {};
   var moreData = false;
-    
-  Data.articleList.loadlist(pageParams, function(data){
-    $scope.articleLists = data.data.items;
+
+  var myDate = new Date();
+  var currentTime = myDate.getTime();
+  var lastTime = Storage.kget('simpleHomepage_time');
+  if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
+  {
+    Data.articleList.loadlist(pageParams, function(data){
+      $scope.articleLists = data.data.items;
+      pageParams.loaded = $scope.articleLists.length;
+      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
+      moreData = true;
+      localData = JSON.stringify($scope.articleLists);
+      Storage.kset("simpleHomepage_time", currentTime);
+      Storage.kset("simpleHomepage_data", localData);
+      for(var i = 0; i < pageParams.loaded; i++)
+      {
+        ImgCache.cacheFile('http://17f.go5le.net/admin_manage/upload_tp1/' + $scope.articleLists[i][2]);  
+      }
+    });     
+  }
+  else
+  {
+    localData = JSON.parse(Storage.kget('simpleHomepage_data'));
+    $scope.articleLists = localData; 
     pageParams.loaded = $scope.articleLists.length;
     pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
     moreData = true;
-  });
+  }
+  
+
 
   // Triggered on a button click, or some other target
   $scope.show = function() {
@@ -777,6 +812,7 @@ angular.module('demo.controllers', [])
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
       $scope.$broadcast('scroll.refreshComplete');
+      Storage.kset("simpleHomepage_data", $scope.articleLists);
     });
     
   };
@@ -789,6 +825,7 @@ angular.module('demo.controllers', [])
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
       $scope.$broadcast('scroll.infiniteScrollComplete');
+      Storage.kset("simpleHomepage_data", $scope.articleLists);
     });
 
     Data.articleList.loadlist(pageParams, function(data){
