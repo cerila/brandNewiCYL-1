@@ -138,17 +138,7 @@ angular.module('icyl', dependencies)
         txt+="Error description: " + err.message + "\n"; 
         console.log(txt); 
       } 
-    }
-<<<<<<< HEAD
-    catch(err) 
-    { 
-      txt="There was an error on this page.\n\n"; 
-      txt+="Error description: " + err.message + "\n\n"; 
-      // console.log(txt); 
-    } 
-=======
->>>>>>> upstream/Fat20141116
-    
+    }   
   });
 
   $ionicPlatform.on('online', function () {

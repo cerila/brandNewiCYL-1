@@ -729,16 +729,16 @@ angular.module('demo.controllers', [])
 //首页
 .controller('simpleHomepage', ['$scope', '$ionicActionSheet', '$location', 'Data', 'CustomNav', 'Storage', function($scope, $ionicActionSheet, $location, Data, CustomNav, Storage) {
   var localData;
-  var ImgCache = require("imgcache");
-  ImgCache.init(function(){
-    alert('ImgCache init: success!');
+  // var ImgCache = require("imgcache");
+  // ImgCache.init(function(){
+  //   alert('ImgCache init: success!');
 
-    // from within this function you're now able to call other ImgCache methods
-    // or you can wait for the ImgCacheReady event
+  //   // from within this function you're now able to call other ImgCache methods
+  //   // or you can wait for the ImgCacheReady event
 
-  }, function(){
-    alert('ImgCache init: error! Check the log for errors');
-  });
+  // }, function(){
+  //   alert('ImgCache init: error! Check the log for errors');
+  // });
 
   var pageParams = 
   {
@@ -764,10 +764,10 @@ angular.module('demo.controllers', [])
       localData = JSON.stringify($scope.articleLists);
       Storage.kset("simpleHomepage_time", currentTime);
       Storage.kset("simpleHomepage_data", localData);
-      for(var i = 0; i < pageParams.loaded; i++)
-      {
-        ImgCache.cacheFile('http://17f.go5le.net/admin_manage/upload_tp1/' + $scope.articleLists[i][2]);  
-      }
+      // for(var i = 0; i < pageParams.loaded; i++)
+      // {
+      //   ImgCache.cacheFile('http://17f.go5le.net/admin_manage/upload_tp1/' + $scope.articleLists[i][2]);  
+      // }
     });     
   }
   else
