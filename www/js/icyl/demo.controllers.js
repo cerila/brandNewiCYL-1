@@ -744,24 +744,13 @@ angular.module('demo.controllers', [])
   var myDate = new Date();
   var currentTime = myDate.getTime();
   var lastTime = Storage.kget('simpleHomepage_time');
-  if($rootScope.online == "offline")
-  {
-    localData = JSON.parse(Storage.kget('simpleHomepage_data'));
-    $scope.articleLists = localData; 
-    if(localData != null)
-    {
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-    }
-    moreData = false;
-  }
-  else if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
+
+  if($rootScope.online == "online" && (lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1))
   {
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-      moreData = true;
       localData = JSON.stringify($scope.articleLists);
       Storage.kset("simpleHomepage_time", currentTime);
       Storage.kset("simpleHomepage_data", localData);
@@ -777,7 +766,14 @@ angular.module('demo.controllers', [])
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
     }
-    moreData = true;
+    if($rootScope.online == "offline")
+    {
+      moreData = false;
+    }
+    else
+    {
+      moreData = true;
+    }
   }
 
   // Triggered on a button click, or some other target
@@ -811,7 +807,8 @@ angular.module('demo.controllers', [])
         $scope.articleLists = data.data.items;
         pageParams.loaded = $scope.articleLists.length;
         pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-        Storage.kset("simpleHomepage_data", $scope.articleLists);
+        localData = JSON.stringify($scope.articleLists);
+        Storage.kset("simpleHomepage_data", localData);
       });
     }
     $scope.$broadcast('scroll.refreshComplete');
@@ -825,7 +822,8 @@ angular.module('demo.controllers', [])
         // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
         pageParams.loaded = $scope.articleLists.length;
         pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1][0];
-        Storage.kset("simpleHomepage_data", $scope.articleLists);
+        localData = JSON.stringify($scope.articleLists);
+        Storage.kset("simpleHomepage_data", localData);
       });
 
       Data.articleList.loadlist(pageParams, function(data){
@@ -922,24 +920,12 @@ angular.module('demo.controllers', [])
   var currentTime = myDate.getTime();
   var lastTime = Storage.kget('simpleArticleList_A' + articleType + '_time');
 
-  if($rootScope.online == "offline")
-  {
-    localData = JSON.parse(Storage.kget('simpleArticleList_A' + articleType + '_data'));
-    $scope.articleLists = localData; 
-    if(localData != null)
-    {
-      pageParams.loaded = $scope.articleLists.length;
-      pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
-    }
-    moreData = false;
-  }
-  else if(lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1)
+  if($rootScope.online == "online" && (lastTime == "" || parseInt((currentTime - lastTime)/3600000) > 1))
   {
     Data.articleList.loadlist(pageParams, function(data){
       $scope.articleLists = data.data.items;
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
-      moreData = true;
       localData = JSON.stringify($scope.articleLists);
       Storage.kset('simpleArticleList_A' + articleType + '_time', currentTime);
       Storage.kset('simpleArticleList_A' + articleType + '_data', localData);
@@ -955,7 +941,14 @@ angular.module('demo.controllers', [])
       pageParams.loaded = $scope.articleLists.length;
       pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
     }
-    moreData = true;
+    if($rootScope.online == "offline")
+    {
+      moreData = false;
+    }
+    else
+    {
+      moreData = true;
+    }
   }
 
   //下拉刷新
@@ -967,6 +960,7 @@ angular.module('demo.controllers', [])
         $scope.articleLists = data.data.items;
         pageParams.loaded = $scope.articleLists.length;
         pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+        localData = JSON.stringify($scope.articleLists);
         Storage.kset('simpleArticleList_A' + articleType + '_data', localData);     
       });
     }
@@ -982,6 +976,7 @@ angular.module('demo.controllers', [])
         // Storage.kset(pageParams[index].tabCode, $scope.articleLists[index].length);
         pageParams.loaded = $scope.articleLists.length;
         pageParams.lastID = $scope.articleLists[$scope.articleLists.length - 1] && $scope.articleLists[$scope.articleLists.length - 1][0] || 0;
+        localData = JSON.stringify($scope.articleLists);
         Storage.kset('simpleArticleList_A' + articleType + '_data', localData); 
       });
 
